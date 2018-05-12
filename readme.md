@@ -1,3 +1,6 @@
+Yêu cầu: 
+* Eclipse 4.7.0.
+* Git: link download: https://git-scm.com/downloads.
 Sau khi code xong phần của mình mà muốn lưu thì:
 * Bước 1: Bật git bash ở project folder.
 * Bước 2: git add . để add tất cả những code đã làm lên stage.
