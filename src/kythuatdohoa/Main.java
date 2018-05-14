@@ -23,7 +23,7 @@ public class Main {
 	private static int DUONG_TRON = 3;
 	private static int ELLIPSE = 4;
 	private static int RECTANGLE = 5;
-//	private static int SQUARE = 6;
+	private static int SQUARE = 6;
 	private Point point;
 	private JFrame frame;
 	public static Color color;
@@ -112,13 +112,13 @@ public class Main {
 					refreshDrawPlace(rect.getImage());
 					System.out.println(e.getX() + " - " + e.getY());
 				}
-//				if(e.getButton() == MouseEvent.NOBUTTON && status == SQUARE) {
-//					imageClone.setData(image.getRaster());
-//					Square sq = new Square(imageClone, point, new Point(e.getX(), e.getY()));
-//					sq.paint();
-//					refreshDrawPlace(sq.getImage());
-//					System.out.println(e.getX() + " - " + e.getY());
-//				}
+				if(e.getButton() == MouseEvent.NOBUTTON && status == SQUARE) {
+					imageClone.setData(image.getRaster());
+					Square sq = new Square(imageClone, point, new Point(e.getX(), e.getY()));
+					sq.paint();
+					refreshDrawPlace(sq.getImage());
+					System.out.println(e.getX() + " - " + e.getY());
+				}
 			}
 			
 		});
@@ -162,14 +162,14 @@ public class Main {
 					System.out.println("released");
 					status = 0;
 				}
-//				if(e.getButton() == MouseEvent.BUTTON1 && status == SQUARE) {
-//					Square sq = new Square(image, point, new Point(e.getX(), e.getY()));
-//					sq.paint();
-//					image = sq.getImage();
-//					refreshDrawPlace(image);
-//					System.out.println("released");
-//					status = 0;
-//				}
+				if(e.getButton() == MouseEvent.BUTTON1 && status == SQUARE) {
+					Square sq = new Square(image, point, new Point(e.getX(), e.getY()));
+					sq.paint();
+					image = sq.getImage();
+					refreshDrawPlace(image);
+					System.out.println("released");
+					status = 0;
+				}
 			}
 			
 			@Override
@@ -183,10 +183,10 @@ public class Main {
 						point.setX(arg0.getX());
 						point.setY(arg0.getY());
 					}
-//					if(status == SQUARE) {
-//						point.setX(arg0.getX());
-//						point.setY(arg0.getY());
-//					}
+					if(status == SQUARE) {
+						point.setX(arg0.getX());
+						point.setY(arg0.getY());
+					}
 				}
 			}
 		});
@@ -221,17 +221,17 @@ public class Main {
 		btnRect.setBounds(196, 11, 83, 23);
 		frame.getContentPane().add(btnRect);
 		
-//		JButton btnSquare = new JButton("Square");
-//		btnSquare.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO Auto-generated method stub
-//				status = SQUARE;
-//			}
-//		});
-//		btnSquare.setBounds(289, 11, 83, 23);
-//		frame.getContentPane().add(btnSquare);
+		JButton btnSquare = new JButton("Square");
+		btnSquare.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				status = SQUARE;
+			}
+		});
+		btnSquare.setBounds(289, 11, 83, 23);
+		frame.getContentPane().add(btnSquare);
 		
 		JButton btnDuongtron = new JButton("DuongTron");
 		btnDuongtron.addActionListener(new ActionListener() {
@@ -239,7 +239,7 @@ public class Main {
 				status = DUONG_TRON;
 			}
 		});
-		btnDuongtron.setBounds(199, 11, 89, 23);
+		btnDuongtron.setBounds(372, 11, 83, 23);
 		frame.getContentPane().add(btnDuongtron);
 		
 		btnElip = new JButton("elip");
@@ -248,7 +248,7 @@ public class Main {
 				status = ELLIPSE;
 			}
 		});
-		btnElip.setBounds(296, 11, 89, 23);
+		btnElip.setBounds(475, 11, 83, 23);
 		frame.getContentPane().add(btnElip);
 	}
 	
