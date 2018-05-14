@@ -20,8 +20,10 @@ public class Main {
 	public static int SCR_WIDTH = 480;
 	private static int POINT = 1;
 	private static int LINE = 2;
-	private static int RECTANGLE = 3;
-	private static int SQUARE = 4;
+	private static int DUONG_TRON = 3;
+	private static int ELLIPSE = 4;
+	private static int RECTANGLE = 5;
+//	private static int SQUARE = 6;
 	private Point point;
 	private JFrame frame;
 	public static Color color;
@@ -32,14 +34,14 @@ public class Main {
 	private JLabel drawPlace;
 	private int status;
 	private BufferedImage imageClone;
+	private JButton btnElip;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-<<<<<<< HEAD
 		// TODO Auto-generated method stub
 		System.out.println("Hello!");
-=======
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -57,7 +59,6 @@ public class Main {
 	 */
 	public Main() {
 		initialize();
->>>>>>> 28f50e885aa30da05f27f57b24671fc697d1f1f1
 	}
 
 	/**
@@ -75,7 +76,28 @@ public class Main {
 		drawContainer.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				if(e.getButton() == MouseEvent.NOBUTTON && status == LINE){
+				if(e.getButton() == MouseEvent.NOBUTTON ){
+					if(status == LINE) {
+						imageClone.setData(image.getRaster());
+						Line line = new Line(imageClone, point, new Point(e.getX(), e.getY()));
+						line.Bres_Line();
+						refreshDrawPlace(line.getImage());
+						System.out.println("draw");
+					}
+					if(status == DUONG_TRON) {
+						imageClone.setData(image.getRaster());
+						DuongTron dTron = new DuongTron(imageClone);
+						dTron.duongtronBre(new Point(e.getX(), e.getY()), 40);
+						refreshDrawPlace(dTron.getImage());
+						System.out.println("draw");
+					}
+					if(status == ELLIPSE) {
+						imageClone.setData(image.getRaster());
+						Ellipse elip = new Ellipse(imageClone);
+						elip.ellipseBre(new Point(e.getX(), e.getY()), 30, 40);
+						refreshDrawPlace(elip.getImage());
+						System.out.println("draw");
+					}
 					
 					imageClone.setData(image.getRaster());
 					BresenhamLine breLine = new BresenhamLine(imageClone, point, new Point(e.getX(), e.getY()));
@@ -149,6 +171,7 @@ public class Main {
 //					status = 0;
 //				}
 			}
+			
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				if(arg0.getButton() == MouseEvent.BUTTON1){
@@ -160,10 +183,10 @@ public class Main {
 						point.setX(arg0.getX());
 						point.setY(arg0.getY());
 					}
-					if(status == SQUARE) {
-						point.setX(arg0.getX());
-						point.setY(arg0.getY());
-					}
+//					if(status == SQUARE) {
+//						point.setX(arg0.getX());
+//						point.setY(arg0.getY());
+//					}
 				}
 			}
 		});
@@ -198,17 +221,35 @@ public class Main {
 		btnRect.setBounds(196, 11, 83, 23);
 		frame.getContentPane().add(btnRect);
 		
-		JButton btnSquare = new JButton("Square");
-		btnSquare.addActionListener(new ActionListener() {
-			
-			@Override
+//		JButton btnSquare = new JButton("Square");
+//		btnSquare.addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// TODO Auto-generated method stub
+//				status = SQUARE;
+//			}
+//		});
+//		btnSquare.setBounds(289, 11, 83, 23);
+//		frame.getContentPane().add(btnSquare);
+		
+		JButton btnDuongtron = new JButton("DuongTron");
+		btnDuongtron.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				status = SQUARE;
+				status = DUONG_TRON;
 			}
 		});
-		btnSquare.setBounds(289, 11, 83, 23);
-		frame.getContentPane().add(btnSquare);
+		btnDuongtron.setBounds(199, 11, 89, 23);
+		frame.getContentPane().add(btnDuongtron);
+		
+		btnElip = new JButton("elip");
+		btnElip.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				status = ELLIPSE;
+			}
+		});
+		btnElip.setBounds(296, 11, 89, 23);
+		frame.getContentPane().add(btnElip);
 	}
 	
 	public static void drawPoint(Point point, BufferedImage image){
