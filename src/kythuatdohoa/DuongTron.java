@@ -5,10 +5,10 @@ import java.awt.image.BufferedImage;
 import kythuatdohoa.Point;
 
 public class DuongTron {
-	BufferedImage iImage;
+	private BufferedImage image;
 
-	public DuongTron(BufferedImage iImage) {
-		this.iImage = iImage;
+	public DuongTron(BufferedImage image) {
+		this.image = image;
 	}
 
 	public void Doixung(Point P, int x, int y) {
@@ -16,28 +16,28 @@ public class DuongTron {
 
 		D = new Point(P.getX() + x, P.getY() + y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
-			D.paint(iImage, "BIEN");
+			Main.drawPoint(D, image);
 		D = new Point(P.getX() - x, P.getY() + y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
-			D.paint(iImage, "BIEN");
+			Main.drawPoint(D, image);
 		D = new Point(P.getX() + x, P.getY() - y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
-			D.paint(iImage, "BIEN");
+			Main.drawPoint(D, image);
 		D = new Point(P.getX() - x, P.getY() - y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
-			D.paint(iImage, "BIEN");
+			Main.drawPoint(D, image);
 		D = new Point(P.getX() + y, P.getY() + x);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
-			D.paint(iImage, "BIEN");
+			Main.drawPoint(D, image);
 		D = new Point(P.getX() - y, P.getY() + x);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
-			D.paint(iImage, "BIEN");
+			Main.drawPoint(D, image);
 		D = new Point(P.getX() + y, P.getY() - x);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
-			D.paint(iImage, "BIEN");
+			Main.drawPoint(D, image);
 		D = new Point(P.getX() - y, P.getY() - x);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
-			D.paint(iImage, "BIEN");
+			Main.drawPoint(D, image);
 
 	}
 
@@ -65,6 +65,14 @@ public class DuongTron {
 			x = x + 1;
 		}
 	}
-	
 
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
+	
+	
 }
