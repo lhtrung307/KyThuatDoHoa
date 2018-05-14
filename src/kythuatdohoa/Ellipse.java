@@ -25,7 +25,7 @@ public class Ellipse {
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
 			Main.drawPoint(D, image);
 	}
-	public void ellipseMidPoint(Point P, int a, int b) {
+	public void ellipseBre(Point P, int a, int b) {
 		int x, y, dx, dy, rx, ry, p;
 		rx = a * a;
 		ry = b * b;

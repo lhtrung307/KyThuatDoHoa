@@ -90,7 +90,7 @@ public class Main {
 					if(status == ELLIPSE) {
 						imageClone.setData(image.getRaster());
 						Ellipse elip = new Ellipse(imageClone);
-						elip.ellipseMidPoint(new Point(e.getX(), e.getY()), 30, 40);
+						elip.ellipseBre(new Point(e.getX(), e.getY()), 30, 40);
 						refreshDrawPlace(elip.getImage());
 						System.out.println("draw");
 					}
