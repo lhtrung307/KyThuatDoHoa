@@ -21,13 +21,23 @@ public class Square {
 		Point d3, d4;
 		int dx, dy;
 
-		dx = Math.abs(d2.getX() - d1.getX());
-		dy = Math.abs(d2.getY() - d1.getY());
+		dx = d2.getX() - d1.getX();
+		dy = d2.getY() - d1.getY();
 
-		int min = Math.min(dx, dy);
-		d3 = new Point(d1.getX() + min, d1.getY());
-		d4 = new Point(d1.getX(), d1.getY() + min);
-
+		int min = Math.min(Math.abs(dx), Math.abs(dy));
+		if (dx < 0) {
+			d3 = new Point(d1.getX() - min, d1.getY());
+			d4 = new Point(d1.getX(), d1.getY() + min);
+			if (dy < 0) {
+				d4 = new Point(d1.getX(), d1.getY() - min);
+			}
+		} else {
+			d3 = new Point(d1.getX() + min, d1.getY());
+			d4 = new Point(d1.getX(), d1.getY() + min);
+			if (dy < 0) {
+				d4 = new Point(d1.getX(), d1.getY() - min);
+			}
+		}
 		d2.setX(d3.getX());
 		d2.setY(d4.getY());
 
