@@ -99,11 +99,6 @@ public class Main {
 						System.out.println("draw");
 					}
 					
-					imageClone.setData(image.getRaster());
-					BresenhamLine breLine = new BresenhamLine(imageClone, point, new Point(e.getX(), e.getY()));
-					breLine.BresenhamLine();
-					refreshDrawPlace(breLine.getImage());
-					System.out.println("draw");
 				}
 				if(e.getButton() == MouseEvent.NOBUTTON && status == RECTANGLE) {
 					imageClone.setData(image.getRaster());
@@ -239,7 +234,7 @@ public class Main {
 				status = DUONG_TRON;
 			}
 		});
-		btnDuongtron.setBounds(372, 11, 83, 23);
+		btnDuongtron.setBounds(382, 11, 83, 23);
 		frame.getContentPane().add(btnDuongtron);
 		
 		btnElip = new JButton("elip");
