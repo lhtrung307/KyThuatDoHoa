@@ -12,6 +12,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
+
+
 import javax.swing.JLabel;
 import java.awt.event.MouseMotionAdapter;
 
@@ -35,6 +37,7 @@ public class Main {
 	private int status;
 	private BufferedImage imageClone;
 	private JButton btnElip;
+
 	/**
 	 * Launch the application.
 	 */
@@ -71,48 +74,49 @@ public class Main {
 		frame.setBounds(100, 100, SCR_HEIGHT, SCR_WIDTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		drawContainer = new JPanel();
 		drawContainer.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				if(e.getButton() == MouseEvent.NOBUTTON ){
-					if(status == LINE) {
+				if (e.getButton() == MouseEvent.NOBUTTON) {
+					if (status == LINE) {
 						imageClone.setData(image.getRaster());
 						Line line = new Line(imageClone, point, new Point(e.getX(), e.getY()));
 						line.Bres_Line();
 						refreshDrawPlace(line.getImage());
 						System.out.println("draw");
 					}
-					if(status == DUONG_TRON) {
+					if (status == DUONG_TRON) {
 						imageClone.setData(image.getRaster());
 						DuongTron dTron = new DuongTron(imageClone);
 						dTron.duongtronBre(new Point(e.getX(), e.getY()), 40);
 						refreshDrawPlace(dTron.getImage());
 						System.out.println("draw");
 					}
-					if(status == ELLIPSE) {
+					if (status == ELLIPSE) {
 						imageClone.setData(image.getRaster());
 						Ellipse elip = new Ellipse(imageClone);
 						elip.ellipseBre(new Point(e.getX(), e.getY()), 30, 40);
 						refreshDrawPlace(elip.getImage());
 						System.out.println("draw");
 					}
-					
-					imageClone.setData(image.getRaster());
-					BresenhamLine breLine = new BresenhamLine(imageClone, point, new Point(e.getX(), e.getY()));
-					breLine.BresenhamLine();
-					refreshDrawPlace(breLine.getImage());
-					System.out.println("draw");
+
+					// imageClone.setData(image.getRaster());
+					// BresenhamLine breLine = new BresenhamLine(imageClone, point, new
+					// Point(e.getX(), e.getY()));
+					// breLine.BresenhamLine();
+					// refreshDrawPlace(breLine.getImage());
+					// System.out.println("draw");
 				}
-				if(e.getButton() == MouseEvent.NOBUTTON && status == RECTANGLE) {
+				if (e.getButton() == MouseEvent.NOBUTTON && status == RECTANGLE) {
 					imageClone.setData(image.getRaster());
 					Rectangle rect = new Rectangle(imageClone, point, new Point(e.getX(), e.getY()));
 					rect.paint();
 					refreshDrawPlace(rect.getImage());
 					System.out.println(e.getX() + " - " + e.getY());
 				}
-				if(e.getButton() == MouseEvent.NOBUTTON && status == SQUARE) {
+				if (e.getButton() == MouseEvent.NOBUTTON && status == SQUARE) {
 					imageClone.setData(image.getRaster());
 					Square sq = new Square(imageClone, point, new Point(e.getX(), e.getY()));
 					sq.paint();
@@ -120,23 +124,22 @@ public class Main {
 					System.out.println(e.getX() + " - " + e.getY());
 				}
 			}
-			
+
 		});
 		drawContainer.setBounds(10, 45, SCR_HEIGHT, SCR_WIDTH);
 		frame.getContentPane().add(drawContainer);
 		drawContainer.setLayout(null);
-		
+
 		drawPlace = new JLabel("");
 		drawPlace.setBounds(0, 0, SCR_HEIGHT, SCR_WIDTH);
 		drawContainer.add(drawPlace);
-		
+
 		createDrawPlace();
-		imageClone = new BufferedImage(image.getWidth(),
-				image.getHeight(), image.getType());
+		imageClone = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
 		drawContainer.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if(arg0.getButton() == MouseEvent.BUTTON1 && status == POINT){
+				if (arg0.getButton() == MouseEvent.BUTTON1 && status == POINT) {
 					point.setX(arg0.getX());
 					point.setY(arg0.getY());
 					drawPoint(point, image);
@@ -144,9 +147,10 @@ public class Main {
 					status = 0;
 				}
 			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if(e.getButton() == MouseEvent.BUTTON1 && status == LINE){
+				if (e.getButton() == MouseEvent.BUTTON1 && status == LINE) {
 					BresenhamLine breLine = new BresenhamLine(image, point, new Point(e.getX(), e.getY()));
 					breLine.BresenhamLine();
 					image = breLine.getImage();
@@ -154,7 +158,7 @@ public class Main {
 					System.out.println("released");
 					status = 0;
 				}
-				if(e.getButton() == MouseEvent.BUTTON1 && status == RECTANGLE) {
+				if (e.getButton() == MouseEvent.BUTTON1 && status == RECTANGLE) {
 					Rectangle rect = new Rectangle(image, point, new Point(e.getX(), e.getY()));
 					rect.paint();
 					image = rect.getImage();
@@ -162,7 +166,7 @@ public class Main {
 					System.out.println("released");
 					status = 0;
 				}
-				if(e.getButton() == MouseEvent.BUTTON1 && status == SQUARE) {
+				if (e.getButton() == MouseEvent.BUTTON1 && status == SQUARE) {
 					Square sq = new Square(image, point, new Point(e.getX(), e.getY()));
 					sq.paint();
 					image = sq.getImage();
@@ -171,26 +175,36 @@ public class Main {
 					status = 0;
 				}
 			}
-			
+
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				if(arg0.getButton() == MouseEvent.BUTTON1){
-					if(status == LINE){
+				if (arg0.getButton() == MouseEvent.BUTTON1) {
+					if (status == LINE) {
 						point.setX(arg0.getX());
 						point.setY(arg0.getY());
 					}
-					if(status == RECTANGLE) {
+					if (status == RECTANGLE) {
 						point.setX(arg0.getX());
 						point.setY(arg0.getY());
 					}
-					if(status == SQUARE) {
+					if (status == SQUARE) {
 						point.setX(arg0.getX());
 						point.setY(arg0.getY());
 					}
+
+					if (status == DUONG_TRON) {
+						point.setX(arg0.getX());
+						point.setY(arg0.getY());
+					}
+					if (status == ELLIPSE) {
+						point.setX(arg0.getX());
+						point.setY(arg0.getY());
+					}
+
 				}
 			}
 		});
-		
+
 		btnPoint = new JButton("Point");
 		btnPoint.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -199,7 +213,7 @@ public class Main {
 		});
 		btnPoint.setBounds(10, 11, 83, 23);
 		frame.getContentPane().add(btnPoint);
-		
+
 		JButton btnLine = new JButton("Line");
 		btnLine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -208,10 +222,10 @@ public class Main {
 		});
 		btnLine.setBounds(103, 11, 83, 23);
 		frame.getContentPane().add(btnLine);
-		
+
 		JButton btnRect = new JButton("Rectangle");
 		btnRect.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -220,10 +234,10 @@ public class Main {
 		});
 		btnRect.setBounds(196, 11, 83, 23);
 		frame.getContentPane().add(btnRect);
-		
+
 		JButton btnSquare = new JButton("Square");
 		btnSquare.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -232,7 +246,7 @@ public class Main {
 		});
 		btnSquare.setBounds(289, 11, 83, 23);
 		frame.getContentPane().add(btnSquare);
-		
+
 		JButton btnDuongtron = new JButton("DuongTron");
 		btnDuongtron.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -241,7 +255,7 @@ public class Main {
 		});
 		btnDuongtron.setBounds(372, 11, 83, 23);
 		frame.getContentPane().add(btnDuongtron);
-		
+
 		btnElip = new JButton("elip");
 		btnElip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -251,19 +265,34 @@ public class Main {
 		btnElip.setBounds(475, 11, 83, 23);
 		frame.getContentPane().add(btnElip);
 	}
-	
-	public static void drawPoint(Point point, BufferedImage image){
+
+	public static void drawPoint(Point point, BufferedImage image) {
 		image.setRGB(point.getX(), point.getY(), color.getRGB());
 	}
-	
-	private void createDrawPlace(){
+
+	private void createDrawPlace() {
 		int type = BufferedImage.TYPE_INT_ARGB;
 		image = new BufferedImage(SCR_HEIGHT, SCR_WIDTH, type);
 		drawPlaceBG = new ImageIcon(image);
 	}
-	
-	private void refreshDrawPlace(BufferedImage image){
+
+	private void refreshDrawPlace(BufferedImage image) {
 		drawPlace.setIcon(new ImageIcon(image));
 	}
-}
 
+//	public void veToaDo(BufferedImage iImage) {
+//		Point abc = new Point();
+//		for (int i = 0; i < 480; i++) {
+//			abc = new Point(320, i);
+//			abc.paint(iImage, "OXY");
+//		}
+//		for (int j = 0; j < 640; j++) {
+//
+//			abc = new Point(j, 240);
+//			abc.paint(iImage, "OXY");
+//
+//		}
+//
+//		refreshDrawPlace(iImage);
+//	}
+}
