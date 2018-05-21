@@ -45,14 +45,6 @@ public class DuongTron {
 
 	}
 
-	// public void veduongtron(Point tam, int R) {
-	// int x;
-	// int y;
-	// for (x = 0; x <= Math.round(R * Math.sqrt(2) / 2); x++) {
-	// y = (int) Math.round(Math.sqrt(R * R - x * x));
-	// Doixung(tam, x, y);
-	// }
-	// }
 	public void duongtronMid() {
 		int x, y, d;
 		x = 0;
