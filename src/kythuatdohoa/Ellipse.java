@@ -1,12 +1,14 @@
 package kythuatdohoa;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Ellipse {
 	private BufferedImage image;
 	private Point tam = new Point();
 	private int bankinhNho;
 	private int bankinhLon;
+	public ArrayList<Point> points;
 
 	public Ellipse(BufferedImage image, Point tam, int bankinhNho, int bankinhLon) {
 	
@@ -14,6 +16,7 @@ public class Ellipse {
 		this.tam = tam;
 		this.bankinhNho = bankinhNho;
 		this.bankinhLon = bankinhLon;
+		points = new ArrayList<>();
 	}
 
 
@@ -21,58 +24,28 @@ public class Ellipse {
 		Point D;
 
 		D = new Point(P.getX() + x, P.getY() + y);
-		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
+		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480) {
+			points.add(D);
 			Main.drawPoint(D, image);
+		}
 		D = new Point(P.getX() - x, P.getY() + y);
-		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
+		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480) {
+			points.add(D);
 			Main.drawPoint(D, image);
+		}
 		D = new Point(P.getX() + x, P.getY() - y);
-		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
+		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480) {
+			points.add(D);
 			Main.drawPoint(D, image);
+		}
 		D = new Point(P.getX() - x, P.getY() - y);
-		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
+		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480) {
+			points.add(D);
 			Main.drawPoint(D, image);
+		}
 	}
 
-	// public void ellipseMid(Point P, int a, int b) {
-	// int x, y, fx, fy, a2, b2, p;
-	// x = 0;
-	// y = b;
-	// a2 = a * a;
-	// b2 = b * b;
-	// fx = 0;
-	// fy = 2 * a2 * y;
-	// Doixung(P, x, y);
-	// p = (int) Math.round(b2 - (a2 * b) + (0.25 * a));
-	// while (fx < fy) {
-	// x++;
-	// fx += 2 * b2;
-	// if (p < 0) {
-	// p += b2 * (2 * x + 3);
-	// } else {
-	// y--;
-	// p += b2 * (2 * x + 3) + a2 * (-2 * y + 2);
-	// fy -= 2 * a2;
-	// }
-	// Doixung(P, x, y);
-	//
-	// }
-	// p = (int) Math.round(b2*(x + 0.5)*(x+0.5)+a2*(y-1)-a2*b2);
-	// while(y>0) {
-	// y--;
-	// fy -= 2*a2;
-	// if(p>=0) {
-	// p+= a2*(3-2*y);
-	// }else {
-	// x++;
-	// fx += 2*b2;
-	// p+= b2*(2*x+2)+a2*(-2*y +3);
-	// }
-	// Doixung(P, x, y);
-	// }
-	//
-	// }
-
+	
 	public void ellipseBre() {
 		int x, y, dx, dy, rx, ry, p;
 		rx = bankinhNho * bankinhNho;
@@ -122,5 +95,9 @@ public class Ellipse {
 
 	public void setImage(BufferedImage image) {
 		this.image = image;
+	}
+	
+	public ArrayList<Point> getPoints(){
+		return points;
 	}
 }
