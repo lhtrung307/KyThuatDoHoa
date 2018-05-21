@@ -51,4 +51,20 @@ public class Square {
 		line3.BresenhamLine();
 		line4.BresenhamLine();
 	}
+	
+	public void doiXung(Point p) {
+		int trx1, trx2, try1, try2;
+		trx1 = (p.getX() - d1.getX());
+		try1 = (p.getY() - d1.getY());
+		trx2 = (p.getX() - d2.getX());
+		try2 = (p.getY() - d2.getY());
+
+		d1.setX(d1.getX() + 2 * trx1);
+		d1.setY(d1.getY() + 2 * try1);
+		d2.setX(d2.getX() + 2 * trx2);
+		d2.setY(d2.getY() + 2 * try2);
+
+		Square sq = new Square(image, d1, d2);
+		sq.paint();
+	}
 }

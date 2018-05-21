@@ -6,9 +6,13 @@ import kythuatdohoa.Point;
 
 public class DuongTron {
 	private BufferedImage image;
+	private Point tam = new Point();
+	private int R;
 
-	public DuongTron(BufferedImage image) {
+	public DuongTron(BufferedImage image, Point tam, int r) {
 		this.image = image;
+		this.tam = tam;
+		R = r;
 	}
 
 	public void Doixung(Point P, int x, int y) {
@@ -41,25 +45,25 @@ public class DuongTron {
 
 	}
 
-	public void veduongtron(Point P, int R) {
-		int x;
-		int y;
-		for (x = 0; x <= Math.round(R * Math.sqrt(2) / 2); x++) {
-			y = (int) Math.round(Math.sqrt(R * R - x * x));
-			Doixung(P, x, y);
-		}
-	}
-	public void duongtronBre(Point P, int R) {
-		int x, y, p;
+	// public void veduongtron(Point P, int R) {
+	// int x;
+	// int y;
+	// for (x = 0; x <= Math.round(R * Math.sqrt(2) / 2); x++) {
+	// y = (int) Math.round(Math.sqrt(R * R - x * x));
+	// Doixung(P, x, y);
+	// }
+	// }
+	public void duongtronMid() {
+		int x, y, d;
 		x = 0;
 		y = R;
-		p = 3-2*R;
-		while (x<=y) {
-			Doixung(P, x, y);
-			if (p < 0)
-				p = p + 4 * x + 6;
+		d = 1 - R;
+		while (x <= y) {
+			Doixung(tam, x, y);
+			if (d < 0)
+				d += 2 * x + 3;
 			else {
-				p = p + 4 * (x - y) + 10;
+				d += 2 * (x - y) + 5;
 				y = y - 1;
 			}
 			x = x + 1;
@@ -73,6 +77,5 @@ public class DuongTron {
 	public void setImage(BufferedImage image) {
 		this.image = image;
 	}
-	
-	
+
 }

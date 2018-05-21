@@ -13,7 +13,6 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
-
 import javax.swing.JLabel;
 import java.awt.event.MouseMotionAdapter;
 
@@ -89,31 +88,34 @@ public class Main {
 					}
 					if (status == DUONG_TRON) {
 						imageClone.setData(image.getRaster());
-						DuongTron dTron = new DuongTron(imageClone);
-						dTron.duongtronBre(new Point(e.getX(), e.getY()), 40);
+						int R = Point.distance(point, new Point(e.getX(), e.getY()));
+
+						DuongTron dTron = new DuongTron(imageClone, point, R);
+						dTron.duongtronMid();
+
 						refreshDrawPlace(dTron.getImage());
-						System.out.println("draw");
+						System.out.println(e.getX() + " - " + e.getY());
+
 					}
 					if (status == ELLIPSE) {
 						imageClone.setData(image.getRaster());
-						Ellipse elip = new Ellipse(imageClone);
-						elip.ellipseBre(new Point(e.getX(), e.getY()), 30, 40);
+						int bankinhNho = Point.distance(point, new Point(e.getX(), point.getY()));
+						int bankinhLon = Point.distance(point, new Point(point.getX(), e.getY()));
+						Ellipse elip = new Ellipse(imageClone, point, bankinhNho, bankinhLon);
+						elip.ellipseBre();
+
 						refreshDrawPlace(elip.getImage());
-						System.out.println("draw");
+						System.out.println(e.getX() + "-" + e.getY());
 					}
 
-					// imageClone.setData(image.getRaster());
-					// BresenhamLine breLine = new BresenhamLine(imageClone, point, new
-					// Point(e.getX(), e.getY()));
-					// breLine.BresenhamLine();
-					// refreshDrawPlace(breLine.getImage());
-					// System.out.println("draw");
 				}
 				if (e.getButton() == MouseEvent.NOBUTTON && status == RECTANGLE) {
 					imageClone.setData(image.getRaster());
 					Rectangle rect = new Rectangle(imageClone, point, new Point(e.getX(), e.getY()));
 					rect.paint();
+				
 					refreshDrawPlace(rect.getImage());
+					
 					System.out.println(e.getX() + " - " + e.getY());
 				}
 				if (e.getButton() == MouseEvent.NOBUTTON && status == SQUARE) {
@@ -165,6 +167,7 @@ public class Main {
 					refreshDrawPlace(image);
 					System.out.println("released");
 					status = 0;
+					rect.doiXung(point);
 				}
 				if (e.getButton() == MouseEvent.BUTTON1 && status == SQUARE) {
 					Square sq = new Square(image, point, new Point(e.getX(), e.getY()));
@@ -174,6 +177,32 @@ public class Main {
 					System.out.println("released");
 					status = 0;
 				}
+
+				if (e.getButton() == MouseEvent.BUTTON1 && status == DUONG_TRON) {
+
+					int R = Point.distance(point, new Point(e.getX(), e.getY()));
+
+					DuongTron dTron = new DuongTron(image, point, R);
+					dTron.duongtronMid();
+					System.out.println(e.getX() + " - " + e.getY());
+					image = dTron.getImage();
+					refreshDrawPlace(image);
+					System.out.println("released");
+					status = 0;
+				}
+				if (e.getButton() == MouseEvent.BUTTON1 && status == ELLIPSE) {
+
+					int bankinhNho = Point.distance(point, new Point(e.getX(), point.getY()));
+					int bankinhLon = Point.distance(point, new Point(point.getX(), e.getY()));
+					Ellipse elip = new Ellipse(image, point, bankinhNho, bankinhLon);
+					elip.ellipseBre();
+					System.out.println(e.getX() + "-" + e.getY());
+					image = elip.getImage();
+					refreshDrawPlace(image);
+					System.out.println("released");
+					status = 0;
+				}
+
 			}
 
 			@Override
@@ -253,7 +282,7 @@ public class Main {
 				status = DUONG_TRON;
 			}
 		});
-		btnDuongtron.setBounds(372, 11, 83, 23);
+		btnDuongtron.setBounds(382, 11, 83, 23);
 		frame.getContentPane().add(btnDuongtron);
 
 		btnElip = new JButton("elip");
@@ -280,19 +309,4 @@ public class Main {
 		drawPlace.setIcon(new ImageIcon(image));
 	}
 
-//	public void veToaDo(BufferedImage iImage) {
-//		Point abc = new Point();
-//		for (int i = 0; i < 480; i++) {
-//			abc = new Point(320, i);
-//			abc.paint(iImage, "OXY");
-//		}
-//		for (int j = 0; j < 640; j++) {
-//
-//			abc = new Point(j, 240);
-//			abc.paint(iImage, "OXY");
-//
-//		}
-//
-//		refreshDrawPlace(iImage);
-//	}
 }
