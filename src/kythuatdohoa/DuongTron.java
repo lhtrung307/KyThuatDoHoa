@@ -15,37 +15,36 @@ public class DuongTron {
 		R = r;
 	}
 
-	public void Doixung(Point P, int x, int y) {
+	public void Doixung(Point tam, int x, int y) {
 		Point D;
 
-		D = new Point(P.getX() + x, P.getY() + y);
+		D = new Point(tam.getX() + x, tam.getY() + y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
 			Main.drawPoint(D, image);
-		D = new Point(P.getX() - x, P.getY() + y);
+		D = new Point(tam.getX() - x, tam.getY() + y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
 			Main.drawPoint(D, image);
-		D = new Point(P.getX() + x, P.getY() - y);
+		D = new Point(tam.getX() + x, tam.getY() - y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
 			Main.drawPoint(D, image);
-		D = new Point(P.getX() - x, P.getY() - y);
+		D = new Point(tam.getX() - x, tam.getY() - y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
 			Main.drawPoint(D, image);
-		D = new Point(P.getX() + y, P.getY() + x);
+		D = new Point(tam.getX() + y, tam.getY() + x);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
 			Main.drawPoint(D, image);
-		D = new Point(P.getX() - y, P.getY() + x);
+		D = new Point(tam.getX() - y, tam.getY() + x);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
 			Main.drawPoint(D, image);
-		D = new Point(P.getX() + y, P.getY() - x);
+		D = new Point(tam.getX() + y, tam.getY() - x);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
 			Main.drawPoint(D, image);
-		D = new Point(P.getX() - y, P.getY() - x);
+		D = new Point(tam.getX() - y, tam.getY() - x);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
 			Main.drawPoint(D, image);
 
 	}
 
-	
 	public void duongtronMid() {
 		int x, y, d;
 		x = 0;
@@ -69,6 +68,18 @@ public class DuongTron {
 
 	public void setImage(BufferedImage image) {
 		this.image = image;
+	}
+	
+	public void doiXung(Point p) {
+		int trx1, try1;
+		trx1 = (tam.getX() - p.getX());
+		try1 = (tam.getY() - p.getY());
+
+		p.setX(p.getX() -  trx1);
+		p.setY(p.getY() -  try1);
+
+		DuongTron dt = new DuongTron(image, p, R);
+		dt.duongtronMid();
 	}
 
 }
