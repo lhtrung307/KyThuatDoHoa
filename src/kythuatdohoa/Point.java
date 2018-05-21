@@ -49,6 +49,9 @@ public class Point {
 		return x + " " + y;
 	}
 	
+	public static int distance(Point p1, Point p2) {
+		return (int) Math.sqrt((p2.getX()  - p1.getX()) * (p2.getX()  - p1.getX()) + (p2.getY() - p1.getY()) * (p2.getY() - p1.getY()));
+	}
 	
 	public void paint(BufferedImage iImage,String mau){
 		Color c;

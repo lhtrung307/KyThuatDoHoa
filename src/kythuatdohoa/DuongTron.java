@@ -6,60 +6,64 @@ import kythuatdohoa.Point;
 
 public class DuongTron {
 	private BufferedImage image;
+	private Point tam = new Point();
+	private int R;
 
-	public DuongTron(BufferedImage image) {
+	public DuongTron(BufferedImage image, Point tam, int r) {
 		this.image = image;
+		this.tam = tam;
+		R = r;
 	}
 
-	public void Doixung(Point P, int x, int y) {
+	public void Doixung(Point tam, int x, int y) {
 		Point D;
 
-		D = new Point(P.getX() + x, P.getY() + y);
+		D = new Point(tam.getX() + x, tam.getY() + y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
 			Main.drawPoint(D, image);
-		D = new Point(P.getX() - x, P.getY() + y);
+		D = new Point(tam.getX() - x, tam.getY() + y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
 			Main.drawPoint(D, image);
-		D = new Point(P.getX() + x, P.getY() - y);
+		D = new Point(tam.getX() + x, tam.getY() - y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
 			Main.drawPoint(D, image);
-		D = new Point(P.getX() - x, P.getY() - y);
+		D = new Point(tam.getX() - x, tam.getY() - y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
 			Main.drawPoint(D, image);
-		D = new Point(P.getX() + y, P.getY() + x);
+		D = new Point(tam.getX() + y, tam.getY() + x);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
 			Main.drawPoint(D, image);
-		D = new Point(P.getX() - y, P.getY() + x);
+		D = new Point(tam.getX() - y, tam.getY() + x);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
 			Main.drawPoint(D, image);
-		D = new Point(P.getX() + y, P.getY() - x);
+		D = new Point(tam.getX() + y, tam.getY() - x);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
 			Main.drawPoint(D, image);
-		D = new Point(P.getX() - y, P.getY() - x);
+		D = new Point(tam.getX() - y, tam.getY() - x);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480)
 			Main.drawPoint(D, image);
 
 	}
 
-	public void veduongtron(Point P, int R) {
-		int x;
-		int y;
-		for (x = 0; x <= Math.round(R * Math.sqrt(2) / 2); x++) {
-			y = (int) Math.round(Math.sqrt(R * R - x * x));
-			Doixung(P, x, y);
-		}
-	}
-	public void duongtronBre(Point P, int R) {
-		int x, y, p;
+	// public void veduongtron(Point tam, int R) {
+	// int x;
+	// int y;
+	// for (x = 0; x <= Math.round(R * Math.sqrt(2) / 2); x++) {
+	// y = (int) Math.round(Math.sqrt(R * R - x * x));
+	// Doixung(tam, x, y);
+	// }
+	// }
+	public void duongtronMid() {
+		int x, y, d;
 		x = 0;
 		y = R;
-		p = 3-2*R;
-		while (x<=y) {
-			Doixung(P, x, y);
-			if (p < 0)
-				p = p + 4 * x + 6;
+		d = 1 - R;
+		while (x <= y) {
+			Doixung(tam, x, y);
+			if (d < 0)
+				d += 2 * x + 3;
 			else {
-				p = p + 4 * (x - y) + 10;
+				d += 2 * (x - y) + 5;
 				y = y - 1;
 			}
 			x = x + 1;
@@ -74,15 +78,16 @@ public class DuongTron {
 		this.image = image;
 	}
 	
-	public void doiXung(Point p, Point P, int R) {
+	public void doiXung(Point tam) {
 		int trx1, try1;
-		trx1 = (p.getX() - P.getX());
-		try1 = (p.getY() - P.getY());
+		trx1 = (tam.getX() - tam.getX());
+		try1 = (tam.getY() - tam.getY());
 
-		P.setX(P.getX() - 2 * trx1);
-		P.setY(P.getY() - 2 * try1);
+		tam.setX(tam.getX() - 2 * trx1);
+		tam.setY(tam.getY() - 2 * try1);
 
-		DuongTron dt = new DuongTron(image);
-		dt.duongtronBre(P, R);
+		DuongTron dt = new DuongTron(image, tam, R);
+		dt.duongtronMid();
 	}
+
 }
