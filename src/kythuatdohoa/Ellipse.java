@@ -46,7 +46,7 @@ public class Ellipse {
 
 
 	public void ellipseBre() {
-		int x, y, dx, dy, rx, ry, tam;
+		int x, y, dx, dy, rx, ry, p;
 		rx = bankinhNho * bankinhNho;
 		ry = bankinhLon * bankinhLon;
 		x = 0;
@@ -54,30 +54,30 @@ public class Ellipse {
 		dx = 0;
 		dy = (rx << 1) * y;
 		Doixung(this.tam, x, y);
-		tam = (int) Math.round(ry - (rx * bankinhLon) + (0.25 * rx));
+		p = (int) Math.round(ry - (rx * bankinhLon) + (0.25 * rx));
 		while (dx < dy) {
 			x++;
 			dx += ry << 1;
-			if (tam < 0) {
-				tam += dx + ry;
+			if (p < 0) {
+				p += dx + ry;
 
 			} else {
 				y--;
 				dy -= rx << 1;
-				tam += ry + dx - dy;
+				p += ry + dx - dy;
 			}
 			Doixung(this.tam, x, y);
 		}
-		tam = (int) Math.round(ry * (x + 0.5) * (x + 0.5) + rx * (y - 1) * (y - 1) - rx * ry);
+		p = (int) Math.round(ry * (x + 0.5) * (x + 0.5) + rx * (y - 1) * (y - 1) - rx * ry);
 		while (y > 0) {
 			y--;
 			dy -= rx << 1;
-			if (tam > 0)
-				tam += rx - dy;
+			if (p > 0)
+				p += rx - dy;
 			else {
 				x++;
 				dx += ry << 1;
-				tam += dx + rx - dy;
+				p += dx + rx - dy;
 			}
 			Doixung(this.tam, x, y);
 		}
