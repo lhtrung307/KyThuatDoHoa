@@ -74,5 +74,15 @@ public class DuongTron {
 		this.image = image;
 	}
 	
-	
+	public void doiXung(Point p, Point P, int R) {
+		int trx1, try1;
+		trx1 = (p.getX() - P.getX());
+		try1 = (p.getY() - P.getY());
+
+		P.setX(P.getX() - 2 * trx1);
+		P.setY(P.getY() - 2 * try1);
+
+		DuongTron dt = new DuongTron(image);
+		dt.duongtronBre(P, R);
+	}
 }

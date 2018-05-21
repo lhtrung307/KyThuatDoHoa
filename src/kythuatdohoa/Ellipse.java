@@ -70,4 +70,16 @@ public class Ellipse {
 	public void setImage(BufferedImage image) {
 		this.image = image;
 	}
+	
+	public void doiXung(Point p, Point P, int a, int b) {
+		int trx1, try1;
+		trx1 = (p.getX() - P.getX());
+		try1 = (p.getY() - P.getY());
+
+		P.setX(P.getX() - 2 * trx1);
+		P.setY(P.getY() - 2 * try1);
+
+		Ellipse e = new Ellipse(image);
+		e.ellipseBre(P, a, b);
+	}
 }
