@@ -28,6 +28,7 @@ public class Main {
 	private static int RECTANGLE = 5;
 	private static int SQUARE = 6;
 	private static int SCALE = 7;
+
 	private Point point;
 	private JFrame frame;
 	public static Color color;
@@ -170,7 +171,7 @@ public class Main {
 					refreshDrawPlace(image);
 					System.out.println("released");
 					status = 0;
-					rect.doiXung(point);
+//					rect.doiXung(point);
 				}
 				if (e.getButton() == MouseEvent.BUTTON1 && status == SQUARE) {
 					Square sq = new Square(image, point, new Point(e.getX(), e.getY()));
@@ -179,6 +180,7 @@ public class Main {
 					refreshDrawPlace(image);
 					System.out.println("released");
 					status = 0;
+//					sq.doiXung(point);
 				}
 
 				if (e.getButton() == MouseEvent.BUTTON1 && status == DUONG_TRON) {
@@ -188,10 +190,12 @@ public class Main {
 					DuongTron dTron = new DuongTron(image, point, R);
 					dTron.duongtronMid();
 					System.out.println(e.getX() + " - " + e.getY());
+//					dTron.doiXung(new Point(e.getX(), e.getY()));
 					image = dTron.getImage();
 					refreshDrawPlace(image);
 					System.out.println("released");
 					status = 0;
+					
 				}
 				if (e.getButton() == MouseEvent.BUTTON1 && status == ELLIPSE) {
 
@@ -201,10 +205,13 @@ public class Main {
 					elip.ellipseBre();
 					ellipse = elip;
 					System.out.println(e.getX() + "-" + e.getY());
+//					elip.doiXung(new Point(e.getX(), point.getY()));
 					image = elip.getImage();
 					refreshDrawPlace(image); 
 					System.out.println("released");
 					status = 0;
+					
+					
 
 				}
 				if (e.getButton() == MouseEvent.BUTTON1 && status == SCALE) {
@@ -212,10 +219,13 @@ public class Main {
 						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scale(p, 0.5, 0.5));
 						Main.drawPoint(temp, image);
 					}
+					
+
 					refreshDrawPlace(image);
 					System.out.println("scale");
 					
 				}
+				
 
 			}
 
@@ -254,7 +264,7 @@ public class Main {
 				status = POINT;
 			}
 		});
-		btnPoint.setBounds(10, 11, 62, 23);
+		btnPoint.setBounds(10, 11, 50, 23);
 		frame.getContentPane().add(btnPoint);
 
 		JButton btnLine = new JButton("Line");
@@ -263,7 +273,7 @@ public class Main {
 				status = LINE;
 			}
 		});
-		btnLine.setBounds(82, 11, 62, 23);
+		btnLine.setBounds(66, 11, 62, 23);
 		frame.getContentPane().add(btnLine);
 
 		JButton btnRect = new JButton("Rectangle");
@@ -275,7 +285,7 @@ public class Main {
 				status = RECTANGLE;
 			}
 		});
-		btnRect.setBounds(155, 11, 62, 23);
+		btnRect.setBounds(138, 11, 62, 23);
 		frame.getContentPane().add(btnRect);
 
 		JButton btnSquare = new JButton("Square");
@@ -287,7 +297,7 @@ public class Main {
 				status = SQUARE;
 			}
 		});
-		btnSquare.setBounds(227, 11, 83, 23);
+		btnSquare.setBounds(203, 11, 72, 23);
 		frame.getContentPane().add(btnSquare);
 
 		JButton btnDuongtron = new JButton("DuongTron");
@@ -296,7 +306,7 @@ public class Main {
 				status = DUONG_TRON;
 			}
 		});
-		btnDuongtron.setBounds(320, 11, 83, 23);
+		btnDuongtron.setBounds(281, 11, 62, 23);
 		frame.getContentPane().add(btnDuongtron);
 
 		btnElip = new JButton("elip");
@@ -305,7 +315,7 @@ public class Main {
 				status = ELLIPSE;
 			}
 		});
-		btnElip.setBounds(413, 11, 83, 23);
+		btnElip.setBounds(346, 11, 62, 23);
 		frame.getContentPane().add(btnElip);
 
 		JButton btnScale = new JButton("Scale");
@@ -314,10 +324,11 @@ public class Main {
 				status = SCALE;
 			}
 		});
-		btnScale.setBounds(500, 11, 89, 23);
+		btnScale.setBounds(412, 11, 62, 23);
 		frame.getContentPane().add(btnScale);
 	}
-
+		
+	
 	public static void drawPoint(Point point, BufferedImage image) {
 		image.setRGB(point.getX(), point.getY(), color.getRGB());
 	}

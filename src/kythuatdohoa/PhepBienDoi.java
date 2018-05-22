@@ -25,6 +25,7 @@ public class PhepBienDoi {
 		return multiMatrix(matP, mat);
 	}
 	
+	
 	public static Point getPointFromMatrix (double matrix[][]) {
 		return new Point((int)matrix[0][0], (int)matrix[0][1]);
 	}
