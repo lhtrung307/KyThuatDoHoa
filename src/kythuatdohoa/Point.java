@@ -80,5 +80,4 @@ public class Point {
 	     if(r==0 && g ==0 & b==255) return ("BLUE");
 	     return "t";
 	 }
-	
 }

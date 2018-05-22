@@ -1,16 +1,19 @@
 package kythuatdohoa;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class BresenhamLine {
 	private Point d1 = new Point();
 	private Point d2 = new Point();
 	private BufferedImage image;
+	private ArrayList<Point> line;
 
 	public BresenhamLine(BufferedImage image, Point d1, Point d2) {
 		this.image = image;
 		this.d1 = d1;
 		this.d2 = d2;
+		line = new ArrayList<>();
 	}
 	
 	public BresenhamLine(Point d1, Point d2) {
@@ -51,6 +54,7 @@ public class BresenhamLine {
 						y++;
 				}
 				Point dv = new Point(x, y);
+				line.add(dv);
 				Main.drawPoint(dv, image);
 			}
 		}else {
@@ -79,8 +83,35 @@ public class BresenhamLine {
 					p = p + 2*(dy-dx);
 				}
 				Point dv = new Point(x, y);
+				line.add(dv);
 				Main.drawPoint(dv, image);
 			}
 		}
 	}
+
+	public Point getD1() {
+		return d1;
+	}
+
+	public void setD1(Point d1) {
+		this.d1 = d1;
+	}
+
+	public Point getD2() {
+		return d2;
+	}
+
+	public void setD2(Point d2) {
+		this.d2 = d2;
+	}
+
+	public ArrayList<Point> getLine() {
+		return line;
+	}
+
+	public void setLine(ArrayList<Point> line) {
+		this.line = line;
+	}
+	
+	
 }

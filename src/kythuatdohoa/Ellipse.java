@@ -8,7 +8,7 @@ public class Ellipse {
 	private Point tam = new Point();
 	private int bankinhNho;
 	private int bankinhLon;
-	public ArrayList<Point> points;
+	public ArrayList<Point> ellipse;
 
 	public Ellipse(BufferedImage image, Point tam, int bankinhNho, int bankinhLon) {
 	
@@ -16,7 +16,8 @@ public class Ellipse {
 		this.tam = tam;
 		this.bankinhNho = bankinhNho;
 		this.bankinhLon = bankinhLon;
-		points = new ArrayList<>();
+		ellipse = new ArrayList<>();
+
 	}
 
 
@@ -24,22 +25,22 @@ public class Ellipse {
 		Point D;
 		D = new Point(tam.getX() + x, tam.getY() + y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480) {
-			points.add(D);
+			ellipse.add(D);
 			Main.drawPoint(D, image);
 		}
 		D = new Point(tam.getX() - x, tam.getY() + y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480) {
-			points.add(D);
+			ellipse.add(D);
 			Main.drawPoint(D, image);
 		}
 		D = new Point(tam.getX() + x, tam.getY() - y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480) {
-			points.add(D);
+			ellipse.add(D);
 			Main.drawPoint(D, image);
 		}
 		D = new Point(tam.getX() - x, tam.getY() - y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480) {
-			points.add(D);
+			ellipse.add(D);
 			Main.drawPoint(D, image);
 		}
 	}
@@ -53,6 +54,7 @@ public class Ellipse {
 		y = bankinhLon;
 		dx = 0;
 		dy = (rx << 1) * y;
+		Doixung(tam, x, y);
 		Doixung(this.tam, x, y);
 		p = (int) Math.round(ry - (rx * bankinhLon) + (0.25 * rx));
 		while (dx < dy) {
@@ -66,7 +68,7 @@ public class Ellipse {
 				dy -= rx << 1;
 				p += ry + dx - dy;
 			}
-			Doixung(this.tam, x, y);
+			Doixung(tam, x, y);
 		}
 		p = (int) Math.round(ry * (x + 0.5) * (x + 0.5) + rx * (y - 1) * (y - 1) - rx * ry);
 		while (y > 0) {
@@ -79,7 +81,7 @@ public class Ellipse {
 				dx += ry << 1;
 				p += dx + rx - dy;
 			}
-			Doixung(this.tam, x, y);
+			Doixung(tam, x, y);
 		}
 
 	}
@@ -96,8 +98,8 @@ public class Ellipse {
 		this.image = image;
 	}
 	
-	public ArrayList<Point> getPoints(){
-		return points;
+	public ArrayList<Point> getEllipse(){
+		return ellipse;
 	}
 	public void doiXung(Point p) {
 		int trx1, try1;
