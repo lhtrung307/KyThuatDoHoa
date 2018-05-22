@@ -1,13 +1,23 @@
 package kythuatdohoa;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.BorderFactory;
+import javax.swing.JColorChooser;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class DrawContainer extends JPanel implements MouseMotionListener, MouseListener {
 	/**
@@ -21,6 +31,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	public static int RECTANGLE = 5;
 	public static int SQUARE = 6;
 	public static int SCALE = 7;
+	public static int COLOR =8;
 	private int status;
 	private Point point;
 	// private BufferedImage image;
@@ -36,8 +47,8 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 		status = 0;
 		drawPlace = new DrawPlace();
 		drawPlace.setBounds(0, 0, Main.SCR_HEIGHT, Main.SCR_WIDTH);
-		this.add(drawPlace);
-		// image = drawPlace.getImage();
+//		this.add(drawPlace);
+//		 image = drawPlace.getImage();
 		point = new Point();
 		imageClone = new BufferedImage(drawPlace.getImage().getWidth(), drawPlace.getImage().getHeight(),
 				drawPlace.getImage().getType());
@@ -113,7 +124,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				drawPlace.refreshDrawPlace(drawPlace.getImage());
 				System.out.println("released");
 				status = 0;
-				rect.doiXung(point);
+//				rect.doiXung(point);
 			}
 			if(status == SQUARE) {
 				Square sq = new Square(drawPlace.getImage(), point, p);
@@ -153,8 +164,17 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				drawPlace.refreshDrawPlace(drawPlace.getImage());
 				System.out.println("scale");
 			}
+			
+//			if(status == COLOR) {
+//				ColorChooser choose = new ColorChooser();
+//				choose.setBounds(0, 0, 400, 500);
+//				choose.setOpaque(true);
+//				this.add(choose);			
+//			}
 		}
 	}
+
+	
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
@@ -262,10 +282,10 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			}
 		}
 		Main.color = coorColor;
-		// g.setColor(Color.red);
-		// g.drawString("O", fixW / 2 + size / 3, fixH / 2 + 2 * size / 3);
-		// g.drawString("Y", fixW / 2 + size / 3, 15);
-		// g.drawString("X", fixW - 15, fixH / 2 - 5);
+//		 g.setColor(Color.red);
+//		 g.drawString("O", fixW / 2 + size / 3, fixH / 2 + 2 * size / 3);
+//		 g.drawString("Y", fixW / 2 + size / 3, 15);
+//		 g.drawString("X", fixW - 15, fixH / 2 - 5);
 	}
 
 	public void drawCoordinate3D(Color coorColor) {
@@ -336,3 +356,64 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 		return v - v % size;
 	}
 }
+
+//class ColorChooser extends JPanel implements ChangeListener {
+//	/**
+//		 * 
+//		 */
+//	private static final long serialVersionUID = 1L;
+//	public JColorChooser tcc;
+//	protected JLabel banner;
+//
+//	public ColorChooser() {
+//		// TODO Auto-generated constructor stub
+//		super(new BorderLayout());
+//		banner = new JLabel();
+//		banner.setForeground(Color.yellow);
+//		banner.setBackground(Color.BLUE);
+//		banner.setOpaque(true);
+//		banner.setFont(new Font("SansSerif", Font.BOLD, 24));
+//		banner.setPreferredSize(new Dimension(100, 65));
+//
+////		JPanel bannerPanel = new JPanel(new BorderLayout());
+////		bannerPanel.add(banner, BorderLayout.CENTER);
+////		bannerPanel.setBorder(BorderFactory.createTitledBorder("Banner"));
+//
+//		// Set up color chooser for setting text color
+//		tcc = new JColorChooser(banner.getForeground());
+//		tcc.getSelectionModel().addChangeListener(this);
+//		tcc.setBorder(BorderFactory.createTitledBorder("Choose Text Color"));
+//
+////		add(bannerPanel, BorderLayout.CENTER);
+//		add(tcc, BorderLayout.PAGE_END);
+//	}
+//
+//	/**
+//	 * 
+//	 */
+//
+//	@Override
+//	public void stateChanged(ChangeEvent e) {
+//		// TODO Auto-generated method stub
+//		Color newColor = tcc.getColor();
+//		banner.setForeground(newColor);
+//
+//	}
+//
+//	public static void createAndShowGUI() {
+//		// Create and set up the window.
+//		JFrame frame = new JFrame("ColorChooserDemo");
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//		// Create and set up the content pane.
+//		JComponent newContentPane = new ColorChooser();
+//		newContentPane.setOpaque(true); // content panes must be opaque
+//		frame.setContentPane(newContentPane);
+//
+//		// Display the window.
+//		frame.pack();
+//		frame.setVisible(true);
+//	}
+//
+//}
+
