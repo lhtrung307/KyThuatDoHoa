@@ -17,6 +17,7 @@ public class Ellipse {
 		this.bankinhNho = bankinhNho;
 		this.bankinhLon = bankinhLon;
 		ellipse = new ArrayList<>();
+
 	}
 
 

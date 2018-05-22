@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Main {
 	public static int SCR_HEIGHT = 642;
@@ -17,12 +18,16 @@ public class Main {
 	private DrawContainer drawContainer;
 	private JButton btnPoint;
 	private JButton btnElip;
+	private BufferedImage image;
 
-
+	private Ellipse ellipse;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("Hello!");
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -48,34 +53,34 @@ public class Main {
 	private void initialize() {
 		frame = new JFrame();
 		color = new Color(0, 0, 0);
-		frame.setBounds(100, 100, 700, 600);
+		frame.setBounds(100, 100, SCR_HEIGHT, SCR_WIDTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
 		drawContainer = new DrawContainer();
 		drawContainer.setBounds(10, 45, SCR_HEIGHT, SCR_WIDTH);
 		drawContainer.drawCoordinate2D(color);
 		frame.getContentPane().add(drawContainer);
 		drawContainer.setLayout(null);	
 		
+
 		btnPoint = new JButton("Point");
 		btnPoint.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				drawContainer.setStatus(DrawContainer.POINT);
 			}
 		});
-		btnPoint.setBounds(10, 11, 83, 23);
+		btnPoint.setBounds(10, 11, 62, 23);
 		frame.getContentPane().add(btnPoint);
-		
+
 		JButton btnLine = new JButton("Line");
 		btnLine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				drawContainer.setStatus(DrawContainer.LINE);;
 			}
 		});
-		btnLine.setBounds(103, 11, 83, 23);
+		btnLine.setBounds(82, 11, 62, 23);
 		frame.getContentPane().add(btnLine);
-		
+
 		JButton btnRect = new JButton("Rectangle");
 		btnRect.addActionListener(new ActionListener() {
 
@@ -83,6 +88,7 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				drawContainer.setStatus(DrawContainer.RECTANGLE);
+
 			}
 		});
 		btnRect.setBounds(155, 11, 62, 23);
@@ -127,9 +133,8 @@ public class Main {
 		btnScale.setBounds(500, 11, 89, 23);
 		frame.getContentPane().add(btnScale);
 	}
-	
-	public static void drawPoint(Point point, BufferedImage image){
+
+	public static void drawPoint(Point point, BufferedImage image) {
 		image.setRGB(point.getX(), point.getY(), color.getRGB());
 	}
-	
 }
