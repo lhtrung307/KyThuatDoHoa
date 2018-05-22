@@ -73,8 +73,7 @@ public class Square {
 		d2.setX(d2.getX() + 2 * trx2);
 		d2.setY(d2.getY() + 2 * try2);
 
-		Square sq = new Square(image, d1, d2);
-		sq.paint();
+		paint();
 	}
 }
 
