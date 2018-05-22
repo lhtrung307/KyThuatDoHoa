@@ -3,33 +3,22 @@ package kythuatdohoa;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.event.MouseMotionAdapter;
 
 public class Main {
-	public static int SCR_HEIGHT = 640;
-	public static int SCR_WIDTH = 480;
-	private static int POINT = 1;
-	private static int LINE = 2;
-	private Point point;
+	public static int SCR_HEIGHT = 642;
+	public static int SCR_WIDTH = 482;
 	private JFrame frame;
 	public static Color color;
-	private JPanel drawContainer;
+	private DrawContainer drawContainer;
 	private JButton btnPoint;
-	private BufferedImage image;
-	private ImageIcon drawPlaceBG;
-	private JLabel drawPlace;
-	private int status;
-	private BufferedImage imageClone;
+	private JButton btnElip;
+
+
 	/**
 	 * Launch the application.
 	 */
@@ -58,75 +47,21 @@ public class Main {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		point = new Point();
 		color = new Color(0, 0, 0);
 		frame.setBounds(100, 100, 700, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		drawContainer = new JPanel();
-		drawContainer.addMouseMotionListener(new MouseMotionAdapter() {
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				if(e.getButton() == MouseEvent.NOBUTTON && status == LINE){
-					
-					imageClone.setData(image.getRaster());
-					Line line = new Line(imageClone, point, new Point(e.getX(), e.getY()));
-					line.Bres_Line();
-					refreshDrawPlace(line.getImage());
-					System.out.println("draw");
-				}
-			}
-			
-		});
+		drawContainer = new DrawContainer();
 		drawContainer.setBounds(10, 45, SCR_HEIGHT, SCR_WIDTH);
+		drawContainer.drawCoordinate2D(color);
 		frame.getContentPane().add(drawContainer);
-		drawContainer.setLayout(null);
-		
-		drawPlace = new JLabel("");
-		drawPlace.setBounds(0, 0, SCR_HEIGHT, SCR_WIDTH);
-		drawContainer.add(drawPlace);
-		
-		createDrawPlace();
-		imageClone = new BufferedImage(image.getWidth(),
-				image.getHeight(), image.getType());
-		drawContainer.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				if(arg0.getButton() == MouseEvent.BUTTON1 && status == POINT){
-					point.setX(arg0.getX());
-					point.setY(arg0.getY());
-					drawPoint(point, image);
-					refreshDrawPlace(image);
-					status = 0;
-				}
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				if(e.getButton() == MouseEvent.BUTTON1 && status == LINE){
-					Line line = new Line(image, point, new Point(e.getX(), e.getY()));
-					line.Bres_Line();
-					image = line.getImage();
-					refreshDrawPlace(image);
-					System.out.println("released");
-					status = 0;
-				}
-			}
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				if(arg0.getButton() == MouseEvent.BUTTON1){
-					if(status == LINE){
-						point.setX(arg0.getX());
-						point.setY(arg0.getY());
-					}
-				}
-			}
-		});
+		drawContainer.setLayout(null);	
 		
 		btnPoint = new JButton("Point");
 		btnPoint.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				status = POINT;
+				drawContainer.setStatus(DrawContainer.POINT);
 			}
 		});
 		btnPoint.setBounds(10, 11, 83, 23);
@@ -135,24 +70,66 @@ public class Main {
 		JButton btnLine = new JButton("Line");
 		btnLine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				status = LINE;
+				drawContainer.setStatus(DrawContainer.LINE);;
 			}
 		});
 		btnLine.setBounds(103, 11, 83, 23);
 		frame.getContentPane().add(btnLine);
+		
+		JButton btnRect = new JButton("Rectangle");
+		btnRect.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				drawContainer.setStatus(DrawContainer.RECTANGLE);
+			}
+		});
+		btnRect.setBounds(155, 11, 62, 23);
+		frame.getContentPane().add(btnRect);
+
+		JButton btnSquare = new JButton("Square");
+		btnSquare.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				drawContainer.setStatus(DrawContainer.SQUARE);
+			}
+		});
+		btnSquare.setBounds(227, 11, 83, 23);
+		frame.getContentPane().add(btnSquare);
+
+		JButton btnDuongtron = new JButton("DuongTron");
+		btnDuongtron.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawContainer.setStatus(DrawContainer.DUONG_TRON);
+			}
+		});
+		btnDuongtron.setBounds(320, 11, 83, 23);
+		frame.getContentPane().add(btnDuongtron);
+
+		btnElip = new JButton("elip");
+		btnElip.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawContainer.setStatus(DrawContainer.ELLIPSE);
+			}
+		});
+		btnElip.setBounds(413, 11, 83, 23);
+		frame.getContentPane().add(btnElip);
+
+		JButton btnScale = new JButton("Scale");
+		btnScale.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawContainer.setStatus(DrawContainer.SCALE);
+			}
+		});
+		btnScale.setBounds(500, 11, 89, 23);
+		frame.getContentPane().add(btnScale);
 	}
 	
 	public static void drawPoint(Point point, BufferedImage image){
 		image.setRGB(point.getX(), point.getY(), color.getRGB());
 	}
 	
-	private void createDrawPlace(){
-		int type = BufferedImage.TYPE_INT_ARGB;
-		image = new BufferedImage(SCR_HEIGHT, SCR_WIDTH, type);
-		drawPlaceBG = new ImageIcon(image);
-	}
-	
-	private void refreshDrawPlace(BufferedImage image){
-		drawPlace.setIcon(new ImageIcon(image));
-	}
 }
