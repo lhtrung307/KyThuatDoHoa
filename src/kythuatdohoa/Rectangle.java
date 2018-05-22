@@ -56,8 +56,7 @@ public class Rectangle {
 		d2.setX(d2.getX() + 2 * trx2);
 		d2.setY(d2.getY() + 2 * try2);
 
-		Rectangle rect = new Rectangle(image, d1, d2);
-		rect.paint();
+		paint();
 	}
 
 }
