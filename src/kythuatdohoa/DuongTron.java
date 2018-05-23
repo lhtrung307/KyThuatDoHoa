@@ -1,7 +1,6 @@
 package kythuatdohoa;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import kythuatdohoa.Point;
 
@@ -20,14 +19,6 @@ public class DuongTron extends Shape{
 
 	public void setR(int r) {
 		R = r;
-	}
-
-	public ArrayList<Point> getPoints() {
-		return points;
-	}
-
-	public void setPoints(ArrayList<Point> points) {
-		this.points = points;
 	}
 
 	public Point getTam() {

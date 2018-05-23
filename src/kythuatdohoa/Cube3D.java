@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 
-public class Cube3D {
+public class Cube3D extends Shape{
 	
 	int[] node0 = { -100, -100, -100 };
 	int[] node1 = { -100, -100, 100 };
@@ -44,6 +44,7 @@ public class Cube3D {
 			temp.translateCoordinateToReal();
 			Ellipse elip = new Ellipse(temp, this.nodeSize, this.nodeSize);
 			elip.ellipseBre();
+			points.addAll(elip.getPoints());
 		}
 		Main.color = edgeColor;
 		for (int e = 0; e < edges.length; e++) {
@@ -57,6 +58,7 @@ public class Cube3D {
 			temp1.translateCoordinateToReal();
 			BresenhamLine line = new BresenhamLine(temp, temp1);
 			line.drawLine();
+			points.addAll(line.getPoints());
 		}
 	}
 	
@@ -110,6 +112,14 @@ public class Cube3D {
 			int z = node[2];
 			node[1] = (int)(y * cosTheta - z * sinTheta);
 			node[2] = (int)(z * cosTheta + y * sinTheta);
+		}
+	}
+
+	@Override
+	public void drawShape(BufferedImage image) {
+		this.drawCube();
+		for (Point point : points) {
+			Main.drawPoint(point, image);
 		}
 	}
 	

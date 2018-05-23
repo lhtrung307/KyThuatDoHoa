@@ -1,15 +1,10 @@
 package kythuatdohoa;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-import java.math.BigInteger;
-import java.util.Queue;
-import java.util.Timer;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JPanel;
 
@@ -25,8 +20,13 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	public static int RECTANGLE = 5;
 	public static int SQUARE = 6;
 	public static int SCALE = 7;
-	public static int COLORING = 8;
-	public static int CUBE3D = 9;
+
+//	public static int COLORING = 8;
+//	public static int CUBE3D = 9;
+
+	public static int CUBE3D = 8;
+	public static int COLORING = 9;
+
 	private int status;
 	private Point point;
 	private DrawPlace drawPlace;
@@ -185,6 +185,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				Square sq = new Square(point, p);
 				sq.drawShape(imageClone);
 			}
+
 			if (status == CUBE3D) {
 				 Cube3D cube = new Cube3D();
 				 cube.rotateY3D(p.getX() - point.getX());
@@ -210,6 +211,16 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			//// System.out.println(e);
 			//// }
 			// System.out.println("wow");
+
+			if(status == CUBE3D) {
+				 Cube3D cube = new Cube3D();
+				 cube.rotateY3D(p.getX() - point.getX());
+				 cube.rotateX3D(p.getY() - point.getY());
+				 cube.drawShape(imageClone);
+			}
+			System.out.println(p.toString());
+			drawPlace.refreshDrawPlace(imageClone);
+
 		}
 	}
 
