@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class DrawContainer extends JPanel implements MouseMotionListener, MouseListener {
@@ -141,7 +142,9 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				status = 0;
 			}
 
+			// tinh tien
 			if (status == TRANSLATION) {
+
 				for (Point elipPoint : ellipse.getPoints()) {
 					elipPoint.translateRealToCoordiante();
 					try {
@@ -152,6 +155,18 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 						System.out.println(exc);
 					}
 				}
+
+				// line
+				// for (Point linePoint : line1.getPoints()) {
+				// try {
+				// Point temp =
+				// PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(linePoint, -10, -10));
+				// Main.drawPoint(temp, drawPlace.getImage());
+				// } catch (Exception exc) {
+				// System.out.println(exc);
+				// }
+				// }
+
 			}
 
 			if (status == ROTATION) {
@@ -165,47 +180,57 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 						System.out.println(exc);
 					}
 				}
+
 			}
 
 			if (status == SCALING) {
+
+				String value = JOptionPane.showInputDialog("Enter scale", "");
+				double scale = Double.parseDouble(value);
 				for (Point elipPoint : ellipse.getPoints()) {
+
 					try {
-						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(elipPoint, 1.5, 1.5));
+						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(elipPoint, scale, scale));
 						Main.drawPoint(temp, drawPlace.getImage());
 					} catch (Exception exc) {
 						System.out.println(exc);
 					}
 				}
+				status = 0;
 
-				for (Point circlePoint : circle.getPoints()) {
-					try {
-						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(circlePoint, 0.5, 0.5));
-						Main.drawPoint(temp, drawPlace.getImage());
-					} catch (Exception exc) {
-						System.out.println(exc);
-					}
-				}
+				// for (Point circlePoint : circle.getPoints()) {
+				// try {
+				// Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(circlePoint,
+				// 0.5, 0.5));
+				// Main.drawPoint(temp, drawPlace.getImage());
+				// } catch (Exception exc) {
+				// System.out.println(exc);
+				// }
+				// }
+				//
+				// for (Point RectanglePoint : rectangle.getPoints()) {
+				// try {
+				// Point temp =
+				// PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(RectanglePoint, 2, 2));
+				// Main.drawPoint(temp, drawPlace.getImage());
+				// } catch (Exception exc) {
+				// System.out.println(exc);
+				// }
+				// }
+				//
+				// for (Point LinePoint : line1.getPoints()) {
+				// try {
+				// Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(LinePoint, 2,
+				// 2));
+				// Main.drawPoint(temp, drawPlace.getImage());
+				// } catch (Exception exc) {
+				// System.out.println(exc);
+				// }
+				//
+				// drawPlace.refreshDrawPlace(drawPlace.getImage());
+				// System.out.println("scale");
+				// }
 
-				for (Point RectanglePoint : rectangle.getPoints()) {
-					try {
-						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(RectanglePoint, 2, 2));
-						Main.drawPoint(temp, drawPlace.getImage());
-					} catch (Exception exc) {
-						System.out.println(exc);
-					}
-				}
-
-				for (Point LinePoint : line1.getPoints()) {
-					try {
-						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(LinePoint, 2, 2));
-						Main.drawPoint(temp, drawPlace.getImage());
-					} catch (Exception exc) {
-						System.out.println(exc);
-					}
-
-					drawPlace.refreshDrawPlace(drawPlace.getImage());
-					System.out.println("scale");
-				}
 			}
 
 			if (status == REFLECTION) {
@@ -257,6 +282,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				Cube3D cube = new Cube3D();
 				cube.rotateY3D(p.getX() - point.getX());
 				cube.rotateX3D(p.getY() - point.getY());
+
 				imageClone.setData(drawPlace.getImage().getRaster());
 				cube.setImage(imageClone);
 				cube.drawCube();

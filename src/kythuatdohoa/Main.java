@@ -3,6 +3,8 @@ package kythuatdohoa;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import java.awt.Color;
@@ -24,7 +26,7 @@ public class Main {
 	private JButton btnElip;
 	private JButton btnScale;
 	private JButton btnCube3d;
-	private JButton btnNewButton;
+	private JButton btnTranslation;
 	private JButton btnRotation;
 	
 	/**
@@ -100,15 +102,16 @@ public class Main {
 		createBtnCube3d();
 		frame.getContentPane().add(btnCube3d);
 		{
-			btnNewButton = new JButton("Translation");
-			btnNewButton.addActionListener(new ActionListener() {
+			btnTranslation = new JButton("Translation");
+			btnTranslation.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					drawContainer.setStatus(DrawContainer.TRANSLATION);
 				}
 			});
-			btnNewButton.setBounds(667, 11, 70, 23);
-			frame.getContentPane().add(btnNewButton);
+			btnTranslation.setBounds(667, 11, 70, 23);
+			frame.getContentPane().add(btnTranslation);
 		}
+		
 		{
 			btnRotation = new JButton("Rotation");
 			btnRotation.addActionListener(new ActionListener() {
