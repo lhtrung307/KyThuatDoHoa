@@ -143,8 +143,10 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 
 			if (status == TRANSLATION) {
 				for (Point elipPoint : ellipse.getPoints()) {
+					elipPoint.translateRealToCoordiante();
 					try {
 						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(elipPoint, -10, -10));
+						temp.translateCoordinateToReal();
 						Main.drawPoint(temp, drawPlace.getImage());
 					} catch (Exception exc) {
 						System.out.println(exc);
@@ -154,8 +156,10 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 
 			if (status == ROTATION) {
 				for (Point elipPoint : ellipse.getPoints()) {
+					elipPoint.translateRealToCoordiante();
 					try {
-						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.rotation(elipPoint, 30));
+						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.rotation(elipPoint, -30));
+						temp.translateCoordinateToReal();
 						Main.drawPoint(temp, drawPlace.getImage());
 					} catch (Exception exc) {
 						System.out.println(exc);
@@ -257,7 +261,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				cube.setImage(imageClone);
 				cube.drawCube();
 				drawPlace.refreshDrawPlace(cube.getImage());
-				System.out.println("wow");
 			}
 			System.out.println(p.toString());
 			// drawPlace.refreshDrawPlace(imageClone);

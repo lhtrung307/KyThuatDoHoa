@@ -91,8 +91,9 @@ public class Cube3D extends Shape{
 	}
 
 	public void rotateY3D(int theta) {
-		double sinTheta = Math.sin(theta);
-		double cosTheta = Math.cos(theta);
+		double radians = Math.toRadians(theta);
+		double sinTheta = Math.sin(radians);
+		double cosTheta = Math.cos(radians);
 		for(int i = 0; i < nodes.length; i++) {
 			int[] node = nodes[i];
 			int x = node[0];
@@ -103,8 +104,9 @@ public class Cube3D extends Shape{
 	}
 
 	public void rotateX3D(int theta) {
-		double sinTheta = Math.sin(theta);
-		double cosTheta = Math.cos(theta);
+		double radians = Math.toRadians(theta);
+		double sinTheta = Math.sin(radians);
+		double cosTheta = Math.cos(radians);
 
 		for(int i = 0; i < nodes.length; i++) {
 			int[] node = nodes[i];
