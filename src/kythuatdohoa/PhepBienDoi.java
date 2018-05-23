@@ -25,11 +25,23 @@ public class PhepBienDoi {
 		return multiMatrix(matP, mat);
 	}
 
-//	public static double[][] reflection(Point p) {
-//		double matP[][] = { { p.getX(), p.getY(), 1 } };
-//		double mat[][] = { { sx, 0, 0 }, { 0, sy, 0 }, { 0, 0, 1 } };
-//		return multiMatrix(matP, mat);
-//	}
+	public static double[][] reflectionO(Point p) {
+		double matP[][] = { { p.getX(), p.getY(), 1 } };
+		double mat[][] = { { -1, 0, 0 }, { 0, -1, 0 }, { 0, 0, 1 } };
+		return multiMatrix(matP, mat);
+	}
+	
+	public static double[][] reflectionOx(Point p) {
+		double matP[][] = { { p.getX(), p.getY(), 1 } };
+		double mat[][] = { { 1, 0, 0 }, { 0, -1, 0 }, { 0, 0, 1 } };
+		return multiMatrix(matP, mat);
+	}
+	
+	public static double[][] reflectionOy(Point p) {
+		double matP[][] = { { p.getX(), p.getY(), 1 } };
+		double mat[][] = { { -1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 1 } };
+		return multiMatrix(matP, mat);
+	}
 
 	public static double[][] translation(Point p, int xDistance, int yDistance) {
 		double matP[][] = { { p.getX(), p.getY(), 1 } };
