@@ -1,7 +1,6 @@
 package kythuatdohoa;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 public class Ellipse extends Shape{
 	private Point tam = new Point();
@@ -80,10 +79,6 @@ public class Ellipse extends Shape{
 	
 	public Point getPoint() {
 		return tam;
-	}
-	
-	public ArrayList<Point> getPoints(){
-		return points;
 	}
 	
 	public void doiXung(Point p) {

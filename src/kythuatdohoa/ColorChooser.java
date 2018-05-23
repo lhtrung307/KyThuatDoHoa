@@ -14,7 +14,11 @@ import javax.swing.JTextField;
 
 public class ColorChooser extends JFrame {
 
-	 private JTextField txt;
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JTextField txt;
 	private JButton btn;
 	
 
