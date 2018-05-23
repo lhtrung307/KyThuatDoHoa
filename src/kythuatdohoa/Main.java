@@ -151,29 +151,33 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.LINE);;
 			}
 		});
-		btnLine.setBounds(82, 11, 62, 23);
+		btnLine.setBounds(82, 11, 49, 23);
 	}
 	
 	private void createBtnRect() {
 		btnRect = new JButton("Rectangle");
+
 		btnRect.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				drawContainer.setStatus(DrawContainer.RECTANGLE);
 			}
 		});
-		btnRect.setBounds(155, 11, 62, 23);
+
+		btnRect.setBounds(141, 11, 62, 23);
 	}
 	
 	private void createBtnSquare() {
 		btnSquare = new JButton("Square");
+
 		btnSquare.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				drawContainer.setStatus(DrawContainer.SQUARE);
 			}
 		});
-		btnSquare.setBounds(227, 11, 62, 23);
+
+		btnSquare.setBounds(213, 11, 62, 23);
 	}
 	
 	private void createBtnCircle() {
@@ -206,6 +210,7 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.SCALING);
 			}
 		});
+
 		btnScale.setBounds(464, 11, 70, 23);
 	}
 	
