@@ -20,15 +20,6 @@ public class ColorChooser extends JFrame {
 	 private JTextField txt;
 	private JButton btn;
 	
-	
-	Point Pi = new Point();
-	Vector E = new Vector();
-	BufferedImage iImage;
-	JLabel lbImage;
-	Point P;
-	String mauto;
-	String maubien;
-
 
 	public ColorChooser() {
 		// TODO Auto-generated constructor stub
@@ -49,7 +40,7 @@ public class ColorChooser extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Color color = JColorChooser.showDialog(null, "Choose Color", getBackground());
-				// txt.setForeground(color);
+				txt.setForeground(color);
 			}
 		});
 	}

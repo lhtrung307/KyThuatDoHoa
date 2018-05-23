@@ -18,30 +18,6 @@ public class DuongTron {
 		circle = new ArrayList<>();
 	}
 
-	public int getR() {
-		return R;
-	}
-
-	public void setR(int r) {
-		R = r;
-	}
-
-	public ArrayList<Point> getCircle() {
-		return circle;
-	}
-
-	public void setCircle(ArrayList<Point> circle) {
-		this.circle = circle;
-	}
-
-	public Point getTam() {
-		return tam;
-	}
-
-	public void setTam(Point tam) {
-		this.tam = tam;
-	}
-	
 	public void Doixung(Point tam, int x, int y) {
 		Point D;
 
@@ -87,7 +63,7 @@ public class DuongTron {
 		}
 
 	}
-
+	
 	public void duongtronMid() {
 		int x, y, d;
 		x = 0;
@@ -104,6 +80,31 @@ public class DuongTron {
 			x = x + 1;
 		}
 	}
+	
+	public int getR() {
+		return R;
+	}
+
+	public void setR(int r) {
+		R = r;
+	}
+
+
+	public void setCircle(ArrayList<Point> circle) {
+		this.circle = circle;
+	}
+
+	public Point getTam() {
+		return tam;
+	}
+
+	public void setTam(Point tam) {
+		this.tam = tam;
+	}
+	
+	
+
+	
 
 	public BufferedImage getImage() {
 		return image;
@@ -113,6 +114,10 @@ public class DuongTron {
 		this.image = image;
 	}
 	
+	public ArrayList<Point> getCircle(){
+		return circle;
+	}
+
 	public void doiXung(Point p) {
 		int trx1, try1;
 		trx1 = (tam.getX() - p.getX());

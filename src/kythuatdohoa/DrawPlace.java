@@ -1,22 +1,12 @@
 package kythuatdohoa;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.image.BufferedImage;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JColorChooser;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
-public class DrawPlace extends JLabel {
+public class DrawPlace extends JLabel{
 	/**
 	 * 
 	 */
@@ -30,27 +20,26 @@ public class DrawPlace extends JLabel {
 		createDrawPlace();
 		this.setIcon(drawPlaceBG);
 	}
-
-	public DrawPlace() {
+	public DrawPlace(){
 		super("");
 		createDrawPlace();
 	}
-
+	
 	public void createDrawPlace() {
 		int type = BufferedImage.TYPE_INT_ARGB;
 		image = new BufferedImage(Main.SCR_HEIGHT, Main.SCR_WIDTH, type);
 		setWhiteBG();
 		drawPlaceBG = new ImageIcon(image);
 		this.setIcon(drawPlaceBG);
-		// this.drawCoordinate();
+//		this.drawCoordinate();
 
-		// refreshDrawPlace(image);
+//		refreshDrawPlace(image);
 	}
-
-	public void refreshDrawPlace(BufferedImage image) {
+	
+	public void refreshDrawPlace(BufferedImage image){
 		this.setIcon(new ImageIcon(image));
 	}
-
+	
 	public void setWhiteBG() {
 		Color white = new Color(255, 255, 255);
 		for (int x = 0; x < Main.SCR_HEIGHT; x++) {
@@ -59,14 +48,13 @@ public class DrawPlace extends JLabel {
 			}
 		}
 	}
-
+	
 	public BufferedImage getImage() {
 		return image;
 	}
-
+	
 	public void setImage(BufferedImage image) {
 		this.image = image;
 	}
-
+		
 }
-
