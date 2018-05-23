@@ -94,59 +94,23 @@ public class Point {
 			return ("BLUE");
 		return "t";
 	}
-
-	// public void translateCoordinateToReal(Point p) {
-	// Point pTran = new Point();
-	// if(p.getX() >= Main.SCR_HEIGHT / 2) {
-	// pTran.setX(p.getX() - Main.SCR_HEIGHT / 2);
-	// }
-	// if(p.getY() >= Main.SCR_WIDTH / 2) {
-	// pTran.setY(p.getY() - Main.SCR_WIDTH / 2);
-	// }
-	// if(p.getX() < Main.SCR_HEIGHT / 2) {
-	// pTran.setX(p.getX() - Main.SCR_HEIGHT / 2);
-	// }
-	// if(p.getY() < Main.SCR_WIDTH / 2) {
-	// pTran.setY(p.getY() - Main.SCR_WIDTH / 2);
-	// }
-	//
-	// }
-
-//	public void translateCoordinateToReal(Point p) {
-//		if(p.getX()  > (Main.SCR_HEIGHT - 2) / 2) {
-//			p.setX(Main.SCR_HEIGHT - 2);
+	
+//	public void translateCoordinateToReal() {
+//		if(this.getX()  > (Main.SCR_HEIGHT - 2) / 2) {
+//			this.setX(Main.SCR_HEIGHT - 2);
 //		}
-//		else if(p.getX() < -(Main.SCR_HEIGHT - 2) / 2) {
-//			p.setX(0);
+//		else if(this.getX() < -(Main.SCR_HEIGHT - 2) / 2) {
+//			this.setX(0);
 //		}
 //		else
-//			p.setX(p.getX() + (Main.SCR_HEIGHT - 2) / 2);
-//		if(p.getY() > (Main.SCR_WIDTH - 2) / 2) {
-//			p.setY(Main.SCR_WIDTH - 2);
-//		}else if(p.getY() < -(Main.SCR_WIDTH - 2) / 2) {
-//			p.setY(0);
+//			this.setX(this.getX() + (Main.SCR_HEIGHT - 2) / 2);
+//		if(this.getY() > (Main.SCR_WIDTH - 2) / 2) {
+//			this.setY(Main.SCR_WIDTH - 2);
+//		}else if(this.getY() < -(Main.SCR_WIDTH - 2) / 2) {
+//			this.setY(0);
 //		}
 //		else
-//			p.setY(p.getY() + (Main.SCR_WIDTH - 2) / 2);
+//			this.setY(this.getY() + (Main.SCR_WIDTH - 2) / 2);
 //
 //	}
-	
-	public void translateCoordinateToReal() {
-		if(this.getX()  > (Main.SCR_HEIGHT - 2) / 2) {
-			this.setX(Main.SCR_HEIGHT - 2);
-		}
-		else if(this.getX() < -(Main.SCR_HEIGHT - 2) / 2) {
-			this.setX(0);
-		}
-		else
-			this.setX(this.getX() + (Main.SCR_HEIGHT - 2) / 2);
-		if(this.getY() > (Main.SCR_WIDTH - 2) / 2) {
-			this.setY(Main.SCR_WIDTH - 2);
-		}else if(this.getY() < -(Main.SCR_WIDTH - 2) / 2) {
-			this.setY(0);
-		}
-		else
-			this.setY(this.getY() + (Main.SCR_WIDTH - 2) / 2);
-
-	}
 }

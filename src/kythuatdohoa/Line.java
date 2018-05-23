@@ -2,21 +2,16 @@ package kythuatdohoa;
 
 import java.awt.image.BufferedImage;
 
-public class Line {
+public class Line extends Shape{
 	private Point d1 = new Point();
 	private Point d2 = new Point();
 	private Point dv = new Point();
-	private BufferedImage image;
 
-	public Line(BufferedImage image, Point d1, Point d2) {
-		this.image = image;
+	public Line(Point d1, Point d2) {
 		this.d1 = d1;
 		this.d2 = d2;
 	}
 
-	public BufferedImage getImage() {
-		return image;
-	}
 
 	void MidpointLine() {
 
@@ -32,7 +27,7 @@ public class Line {
 			}
 			int x = d1.getX();
 			int y = d1.getY();
-			Main.drawPoint(d1, image);
+//			Main.drawPoint(d1, image);
 			float D = Dy - (Dx / 2); 
 			while (x <= d2.getX()) {
 				x++;
@@ -49,7 +44,7 @@ public class Line {
 
 				}
 				dv = new Point(x, y);
-				Main.drawPoint(dv, image);
+//				Main.drawPoint(dv, image);
 			}
 		} else {
 			
@@ -61,7 +56,7 @@ public class Line {
 			
 			int x = d1.getX();
 			int y = d1.getY();
-			Main.drawPoint(d1, image);
+//			Main.drawPoint(d1, image);
 			float D = Dx - (Dy / 2); // ~ float D = Dy - Dx/2;
 			while (y <= d2.getY()) {
 				y++;
@@ -73,7 +68,7 @@ public class Line {
 						D = D + (Dx - Dy);
 				}
 				dv = new Point(x, y);
-				Main.drawPoint(dv, image);
+//				Main.drawPoint(dv, image);
 			}
 		}
 	}
@@ -91,7 +86,7 @@ public class Line {
 			}
 			int x = d1.getX();
 			int y = d1.getY();
-			Main.drawPoint(d1, image);
+//			Main.drawPoint(d1, image);
 			float D = Dy - (Dx / 2); // ~ float D = Dy - Dx/2;
 			while (x <= d2.getX()) {
 				x++;
@@ -108,7 +103,7 @@ public class Line {
 
 				}
 				dv = new Point(x, y);
-				Main.drawPoint(dv, image);
+//				Main.drawPoint(dv, image);
 			}
 		} else {
 			if (d1.getY() > d2.getY()) {
@@ -118,7 +113,7 @@ public class Line {
 			}
 			int x = d1.getX();
 			int y = d1.getY();
-			Main.drawPoint(d1, image);
+//			Main.drawPoint(d1, image);
 			float D = Dx - (Dy /2 ); // ~ float D = Dy - Dx/2;
 			while (y <= d2.getY()) {
 				y++;
@@ -132,7 +127,7 @@ public class Line {
 
 				}
 				dv = new Point(x, y);
-				Main.drawPoint(dv, image);
+//				Main.drawPoint(dv, image);
 			}
 		}
 	} 
@@ -154,8 +149,8 @@ public class Line {
 			const1 = 2 * dy;//p<0             p(i+1)= pi + 2dy - 2dx(y(i+1)-yi)
 			const2 = 2 * (dy - dx);//p>0
 			dv = new Point(x, y);
-//			DrawContainer.convertToCoordinatePoints(dv);
-			Main.drawPoint(dv, image);
+			points.add(dv);
+//			Main.drawPoint(dv, image);
 			while (x <= d2.getX()) {
 				x++;
 				if (P < 0) {
@@ -168,8 +163,8 @@ public class Line {
 					P = P + const2;
 				}
 				dv = new Point(x, y);
-//				DrawContainer.convertToCoordinatePoints(dv);
-				Main.drawPoint(dv, image);
+				points.add(dv);
+//				Main.drawPoint(dv, image);
 			}
 
 		} else {
@@ -188,8 +183,8 @@ public class Line {
 			const1 = 2 * dy;
 			const2 = 2 * (dy - dx);
 			dv = new Point(x, y);
-//			DrawContainer.convertToCoordinatePoints(dv);
-			Main.drawPoint(dv, image);
+			points.add(dv);
+//			Main.drawPoint(dv, image);
 			while (y <= d2.getY()) {
 				y++;
 				if (P < 0) {
@@ -202,8 +197,8 @@ public class Line {
 					P = P + const2;
 				}
 				dv = new Point(x, y);
-//				DrawContainer.convertToCoordinatePoints(dv);
-				Main.drawPoint(dv, image);
+				points.add(dv);
+//				Main.drawPoint(dv, image);
 			}
 		}
 	}
@@ -225,7 +220,7 @@ public class Line {
 			const1 = 2 * dy;//p<0             p(i+1)= pi + 2dy - 2dx(y(i+1)-yi)
 			const2 = 2 * (dy - dx);//p>0
 			dv = new Point(x, y);
-			Main.drawPoint(dv, image);
+//			Main.drawPoint(dv, image);
 			while (x <= d2.getX()) {
 				x++;
 				if (P < 0) {
@@ -238,7 +233,7 @@ public class Line {
 					P = P + const2;
 				}
 				dv = new Point(x, y);
-				Main.drawPoint(dv, image);
+//				Main.drawPoint(dv, image);
 			}
 
 		} else {
@@ -257,7 +252,7 @@ public class Line {
 			const1 = 2 * dy;
 			const2 = 2 * (dy - dx);
 			dv = new Point(x, y);
-			Main.drawPoint(dv, image);
+//			Main.drawPoint(dv, image);
 			while (y <= d2.getY()) {
 				y++;
 				if (P < 0) {
@@ -270,7 +265,7 @@ public class Line {
 					P = P + const2;
 				}
 				dv = new Point(x, y);
-				Main.drawPoint(dv, image);
+//				Main.drawPoint(dv, image);
 			}
 		}
 	}
@@ -291,7 +286,7 @@ public class Line {
 			const1 = 2 * dy;
 			const2 = 2 * (dy - dx);
 			dv = new Point(x, y);
-			Main.drawPoint(dv, image);
+//			Main.drawPoint(dv, image);
 			while (x <= d2.getX()) {
 				x++;
 				if (P < 0) {
@@ -304,7 +299,7 @@ public class Line {
 					P = P + const2;
 				}
 				dv = new Point(x, y);
-				Main.drawPoint(dv, image);
+//				Main.drawPoint(dv, image);
 			}
 
 		} else {
@@ -324,7 +319,7 @@ public class Line {
 			const1 = 2 * dy;
 			const2 = 2 * (dy - dx);
 			dv = new Point(x, y);
-			Main.drawPoint(dv, image);
+//			Main.drawPoint(dv, image);
 			while (y <= d2.getY()) {
 				y++;
 				if (P < 0) {
@@ -337,10 +332,19 @@ public class Line {
 					P = P + const2;
 				}
 				dv = new Point(x, y);
-				Main.drawPoint(dv, image);
+//				Main.drawPoint(dv, image);
 			}
 		}
 
+	}
+
+	@Override
+	public void drawShape(BufferedImage image) {
+		this.Bres_Line();
+		for (Point point : points) {
+			Main.drawPoint(point, image);
+		}
+		
 	}
 
 }

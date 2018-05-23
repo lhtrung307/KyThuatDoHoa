@@ -42,7 +42,7 @@ public class Cube3D {
 		for (int[] node : this.nodes) {
 			Point temp = new Point(node[0], node[1]);
 			temp.translateCoordinateToReal();
-			Ellipse elip = new Ellipse(image, temp, this.nodeSize, this.nodeSize);
+			Ellipse elip = new Ellipse(temp, this.nodeSize, this.nodeSize);
 			elip.ellipseBre();
 		}
 		Main.color = edgeColor;

@@ -3,20 +3,16 @@ package kythuatdohoa;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class Ellipse {
-	private BufferedImage image;
+public class Ellipse extends Shape{
 	private Point tam = new Point();
 	private int bankinhNho;
 	private int bankinhLon;
-	public ArrayList<Point> ellipse;
 
-	public Ellipse(BufferedImage image, Point tam, int bankinhNho, int bankinhLon) {
-	
-		this.image = image;
+	public Ellipse(Point tam, int bankinhNho, int bankinhLon) {
+		super();
 		this.tam = tam;
 		this.bankinhNho = bankinhNho;
 		this.bankinhLon = bankinhLon;
-		ellipse = new ArrayList<>();
 
 	}
 
@@ -25,23 +21,19 @@ public class Ellipse {
 		Point D;
 		D = new Point(tam.getX() + x, tam.getY() + y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480) {
-			ellipse.add(D);
-			Main.drawPoint(D, image);
+			points.add(D);
 		}
 		D = new Point(tam.getX() - x, tam.getY() + y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480) {
-			ellipse.add(D);
-			Main.drawPoint(D, image);
+			points.add(D);
 		}
 		D = new Point(tam.getX() + x, tam.getY() - y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480) {
-			ellipse.add(D);
-			Main.drawPoint(D, image);
+			points.add(D);
 		}
 		D = new Point(tam.getX() - x, tam.getY() - y);
 		if (D.getX() > 0 && D.getX() < 640 && D.getY() > 0 && D.getY() < 480) {
-			ellipse.add(D);
-			Main.drawPoint(D, image);
+			points.add(D);
 		}
 	}
 
@@ -89,18 +81,11 @@ public class Ellipse {
 	public Point getPoint() {
 		return tam;
 	}
-
-	public BufferedImage getImage() {
-		return image;
-	}
-
-	public void setImage(BufferedImage image) {
-		this.image = image;
+	
+	public ArrayList<Point> getPoints(){
+		return points;
 	}
 	
-	public ArrayList<Point> getEllipse(){
-		return ellipse;
-	}
 	public void doiXung(Point p) {
 		int trx1, try1;
 		trx1 = (tam.getX() - p.getX());
@@ -109,7 +94,15 @@ public class Ellipse {
 		p.setX(p.getX() -  trx1);
 		p.setY(p.getY() -  try1);
 
-		Ellipse e = new Ellipse(image, p, bankinhNho, bankinhLon);
+		Ellipse e = new Ellipse(p, bankinhNho, bankinhLon);
 		e.ellipseBre();
+	}
+
+	@Override
+	public void drawShape(BufferedImage image) {
+		this.ellipseBre();
+		for(Point point: points) {
+			Main.drawPoint(point, image);
+		}
 	}
 }

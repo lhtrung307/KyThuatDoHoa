@@ -34,8 +34,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	public static int size = 20;
 	public static int wCell = 20;
 	public static int hCell = 10;
-	
-	
+
 	private Ellipse ellipse;
 
 	public DrawContainer() {
@@ -49,8 +48,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				drawPlace.getImage().getType());
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
-		
-		
+
 	}
 
 	@Override
@@ -63,23 +61,23 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			drawPlace.refreshDrawPlace(drawPlace.getImage());
 			status = 0;
 		}
-//		while(true) {
-//			for(int i = 1; i < 360; i++) {
-//				Cube3D cube = new Cube3D();
-//				cube.rotateY3D(i);
-//				cube.rotateX3D(i);
-//				imageClone.setData(drawPlace.getImage().getRaster());
-//				cube.setImage(imageClone);
-//				cube.drawCube();
-//				drawPlace.refreshDrawPlace(cube.getImage());
-//				try {
-//					Thread.sleep(1000);
-//				} catch (InterruptedException e1) {
-//					System.out.println(e1);
-//				}
-//				System.out.println("wow");
-//			}
-//		}
+		// while(true) {
+		// for(int i = 1; i < 360; i++) {
+		// Cube3D cube = new Cube3D();
+		// cube.rotateY3D(i);
+		// cube.rotateX3D(i);
+		// imageClone.setData(drawPlace.getImage().getRaster());
+		// cube.setImage(imageClone);
+		// cube.drawCube();
+		// drawPlace.refreshDrawPlace(cube.getImage());
+		// try {
+		// Thread.sleep(1000);
+		// } catch (InterruptedException e1) {
+		// System.out.println(e1);
+		// }
+		// System.out.println("wow");
+		// }
+		// }
 	}
 
 	@Override
@@ -99,7 +97,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 		// TODO Auto-generated method stub
 		if (e.getButton() == MouseEvent.BUTTON1) {
 			Point p = new Point(e.getX(), e.getY());
-//			convertToCoordinatePoints(p);
+			// convertToCoordinatePoints(p);
 			if (status == LINE) {
 				point = p;
 			}
@@ -117,8 +115,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				point = p;
 			}
 			point = p;
-			
-			
+
 		}
 	}
 
@@ -127,68 +124,57 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 		if (e.getButton() == MouseEvent.BUTTON1) {
 			Point p = new Point(e.getX(), e.getY());
 			DrawContainer.convertToCoordinatePoints(p);
-			if(status == LINE) {
-				Line line = new Line(drawPlace.getImage(), point, p);
-				line.Bres_Line();
-				drawPlace.refreshDrawPlace(drawPlace.getImage());
-				System.out.println("released");
+			if (status == LINE) {
+				Line line = new Line(point, p);
+				line.drawShape(drawPlace.getImage());
 				status = 0;
 			}
-			if(status == RECTANGLE) {
+			if (status == RECTANGLE) {
 				Rectangle rect = new Rectangle(drawPlace.getImage(), point, p);
-				rect.paint();
-				drawPlace.refreshDrawPlace(drawPlace.getImage());
-				System.out.println("released");
+				rect.drawShape(drawPlace.getImage());
 				status = 0;
 				rect.doiXung(point);
 			}
-			if(status == SQUARE) {
+			if (status == SQUARE) {
 				Square sq = new Square(drawPlace.getImage(), point, p);
 				sq.paint();
 				drawPlace.refreshDrawPlace(drawPlace.getImage());
 				System.out.println("released");
 				status = 0;
 			}
-			if(status == DUONG_TRON) {
+			if (status == DUONG_TRON) {
 				int R = Point.distance(point, p);
-				
-				DuongTron dTron = new DuongTron(drawPlace.getImage(), point, R);
-				dTron.duongtronMid();
-				System.out.println(p.getX() + " - " + p.getY());
-				drawPlace.refreshDrawPlace(drawPlace.getImage());
-				System.out.println("released");
+				DuongTron dTron = new DuongTron(point, R);
+				dTron.drawShape(drawPlace.getImage());
 				status = 0;
 			}
-			if(status == ELLIPSE) {
+			if (status == ELLIPSE) {
 				int bankinhNho = Point.distance(point, new Point(p.getX(), point.getY()));
 				int bankinhLon = Point.distance(point, new Point(point.getX(), p.getY()));
-				Ellipse elip = new Ellipse(drawPlace.getImage(), point, bankinhNho, bankinhLon);
-				elip.ellipseBre();
+				Ellipse elip = new Ellipse(point, bankinhNho, bankinhLon);
+				elip.drawShape(drawPlace.getImage());
 				ellipse = elip;
-				System.out.println(p.getX() + "-" + p.getY());
-				drawPlace.refreshDrawPlace(drawPlace.getImage()); 
-				System.out.println("released");
 				status = 0;
-
 			}
-			
-			if(status == SCALE) {
-				for (Point elipPoint : ellipse.getEllipse()) {
+
+			if (status == SCALE) {
+				for (Point elipPoint : ellipse.getPoints()) {
 					try {
-					Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scale(elipPoint, 2, 2));
-					Main.drawPoint(temp, drawPlace.getImage());
-					} catch(Exception exc) {
+						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scale(elipPoint, 2, 2));
+						Main.drawPoint(temp, drawPlace.getImage());
+					} catch (Exception exc) {
 						System.out.println(exc);
 					}
 				}
 				drawPlace.refreshDrawPlace(drawPlace.getImage());
 				System.out.println("scale");
 			}
-			
-			if(status == COLORING) {
+
+			if (status == COLORING) {
 				coloring(point.getX(), point.getY(), Color.RED);
 				drawPlace.refreshDrawPlace(drawPlace.getImage());
 			}
+			drawPlace.refreshDrawPlace(drawPlace.getImage());
 		}
 	}
 
@@ -196,64 +182,49 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getButton() == MouseEvent.NOBUTTON) {
+			Point p = new Point(e.getX(), e.getY());
+			imageClone.setData(drawPlace.getImage().getRaster());
 			if (status == LINE) {
-				imageClone.setData(drawPlace.getImage().getRaster());
-				Line line = new Line(imageClone, point, new Point(e.getX(), e.getY()));
-				line.Bres_Line();
-				drawPlace.refreshDrawPlace(line.getImage());
-				System.out.println("draw");
+				Line line = new Line(point, p);
+				line.drawShape(imageClone);
+//				System.out.println("draw");
 			}
 			if (status == DUONG_TRON) {
-				imageClone.setData(drawPlace.getImage().getRaster());
-				int R = Point.distance(point, new Point(e.getX(), e.getY()));
-
-				DuongTron dTron = new DuongTron(imageClone, point, R);
-				dTron.duongtronMid();
-
-				drawPlace.refreshDrawPlace(dTron.getImage());
-				System.out.println(e.getX() + " - " + e.getY());
-
+				int R = Point.distance(point, p);
+				DuongTron dTron = new DuongTron(point, R);
+				dTron.drawShape(imageClone);
 			}
 			if (status == ELLIPSE) {
-				imageClone.setData(drawPlace.getImage().getRaster());
-				int bankinhNho = Point.distance(point, new Point(e.getX(), point.getY()));
-				int bankinhLon = Point.distance(point, new Point(point.getX(), e.getY()));
-				Ellipse elip = new Ellipse(imageClone, point, bankinhNho, bankinhLon);
-				elip.ellipseBre();
-
-				drawPlace.refreshDrawPlace(elip.getImage());
-				System.out.println(e.getX() + "-" + e.getY());
+				int bankinhNho = Point.distance(point, new Point(p.getX(), point.getY()));
+				int bankinhLon = Point.distance(point, new Point(point.getX(), p.getY()));
+				Ellipse elip = new Ellipse(point, bankinhNho, bankinhLon);
+				elip.drawShape(imageClone);
 			}
 			if (status == RECTANGLE) {
-				imageClone.setData(drawPlace.getImage().getRaster());
-				Rectangle rect = new Rectangle(imageClone, point, new Point(e.getX(), e.getY()));
-				rect.paint();
-
-				drawPlace.refreshDrawPlace(rect.getImage());
-
-				System.out.println(e.getX() + " - " + e.getY());
+				Rectangle rect = new Rectangle(point, p);
+				rect.drawShape(imageClone);
 			}
 			if (status == SQUARE) {
-				imageClone.setData(drawPlace.getImage().getRaster());
-				Square sq = new Square(imageClone, point, new Point(e.getX(), e.getY()));
+				Square sq = new Square(imageClone, point, p);
 				sq.paint();
 				drawPlace.refreshDrawPlace(sq.getImage());
-				System.out.println(e.getX() + " - " + e.getY());
 			}
-//			Cube3D cube = new Cube3D();
-//			cube.rotateY3D(e.getX() - point.getX());
-//			cube.rotateX3D(e.getY() - point.getY());
-//			imageClone.setData(drawPlace.getImage().getRaster());
-//			cube.setImage(imageClone);
-//			cube.drawCube();
-//			drawPlace.refreshDrawPlace(cube.getImage());
-////			try {
-////				Thread.sleep(100);
-////			} catch (InterruptedException e1) {
-////				// TODO Auto-generated catch block
-////				System.out.println(e);
-////			}
-//			System.out.println("wow");
+			System.out.println(p.toString());
+			drawPlace.refreshDrawPlace(imageClone);
+			// Cube3D cube = new Cube3D();
+			// cube.rotateY3D(e.getX() - point.getX());
+			// cube.rotateX3D(e.getY() - point.getY());
+			// imageClone.setData(drawPlace.getImage().getRaster());
+			// cube.setImage(imageClone);
+			// cube.drawCube();
+			// drawPlace.refreshDrawPlace(cube.getImage());
+			//// try {
+			//// Thread.sleep(100);
+			//// } catch (InterruptedException e1) {
+			//// // TODO Auto-generated catch block
+			//// System.out.println(e);
+			//// }
+			// System.out.println("wow");
 		}
 	}
 
@@ -282,14 +253,14 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				Main.color = green;
 				Point top = new Point(w, 0);
 				Point bot = new Point(w, fixH);
-				Line line = new Line(drawPlace.getImage(), top, bot);
+				Line line = new Line(top, bot);
 				line.BresLineForCoor();
 			}
 			if (w == fixW / 2) {
 				Main.color = coorColor;
 				Point top = new Point(w, 0);
 				Point bot = new Point(w, fixH);
-				Line line = new Line(drawPlace.getImage(), top, bot);
+				Line line = new Line(top, bot);
 				line.BresLineForCoor();
 				Main.color = coorColor;
 			}
@@ -299,16 +270,15 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				Main.color = green;
 				Point left = new Point(0, h);
 				Point right = new Point(fixW, h);
-				Line line = new Line(drawPlace.getImage(), left, right);
+				Line line = new Line(left, right);
 				line.BresLineForCoor();
 			}
 			if (h == fixH / 2) {
 				Main.color = coorColor;
 				Point left = new Point(0, h);
 				Point right = new Point(fixW, h);
-				Line line = new Line(drawPlace.getImage(), left, right);
+				Line line = new Line(left, right);
 				line.BresLineForCoor();
-				// Main.color = coorColor;
 			}
 		}
 		Main.color = coorColor;
@@ -327,14 +297,14 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				Main.color = green;
 				Point top = new Point(w, 0);
 				Point bot = new Point(w, fixH);
-				Line line = new Line(drawPlace.getImage(), top, bot);
+				Line line = new Line(top, bot);
 				line.BresLineForCoor();
 			}
 			if (w == fixW / 2) {
 				Main.color = coorColor;
 				Point top = new Point(w, 0);
 				Point bot = new Point(w, fixH / 2);
-				Line line = new Line(drawPlace.getImage(), top, bot);
+				Line line = new Line(top, bot);
 				line.BresLineForCoor();
 
 				int ww = fixW / 2;
@@ -350,14 +320,14 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				Main.color = green;
 				Point left = new Point(0, h);
 				Point right = new Point(fixW, h);
-				Line line = new Line(drawPlace.getImage(), left, right);
+				Line line = new Line(left, right);
 				line.BresLineForCoor();
 			}
 			if (h == fixH / 2) {
 				Main.color = coorColor;
 				Point left = new Point(fixW / 2, h);
 				Point right = new Point(fixW, h);
-				Line line = new Line(drawPlace.getImage(), left, right);
+				Line line = new Line(left, right);
 				line.BresLineForCoor();
 				Main.color = green;
 			}
@@ -385,11 +355,11 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	public static int convertOnePoint(int v) {
 		return v - v % size;
 	}
-	
+
 	public void coloring(int x, int y, Color color) {
 		int clr = drawPlace.getImage().getRGB(x, y);
 		int bgClr = DrawPlace.BGColor.getRGB();
-		if(clr ==  bgClr && clr != color.getRGB()) {
+		if (clr == bgClr && clr != color.getRGB()) {
 			System.out.println(x + " - " + y);
 			Main.color = color;
 			drawPlace.getImage().setRGB(x, y, color.getRGB());
@@ -397,11 +367,11 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			coloring(x - 1, y, color);
 			coloring(x, y + 1, color);
 			coloring(x, y - 1, color);
-//			coloring(x - 1, y + 1, color);
-//			coloring(x + 1, y + 1, color);
-//			coloring(x + 1, y - 1, color);
-//			coloring(x - 1, y - 1, color);
+			// coloring(x - 1, y + 1, color);
+			// coloring(x + 1, y + 1, color);
+			// coloring(x + 1, y - 1, color);
+			// coloring(x - 1, y - 1, color);
 		}
-//		Main.color = Color.BLACK;
+		// Main.color = Color.BLACK;
 	}
 }

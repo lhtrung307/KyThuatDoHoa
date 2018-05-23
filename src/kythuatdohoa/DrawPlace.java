@@ -2,6 +2,7 @@ package kythuatdohoa;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
@@ -60,5 +61,7 @@ public class DrawPlace extends JLabel{
 	public void setImage(BufferedImage image) {
 		this.image = image;
 	}
+	
+	
 		
 }

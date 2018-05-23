@@ -2,24 +2,18 @@ package kythuatdohoa;
 
 import java.awt.image.BufferedImage;
 
-import javax.swing.JFrame;
 
-public class Rectangle {
+public class Rectangle extends Shape{
 	private Point d1 = new Point();
 	private Point d2 = new Point();
 	private Point d3;
 	private Point d4;
-	private BufferedImage image;
 
-	public Rectangle(BufferedImage image, Point d1, Point d2) {
-		this.image = image;
+	public Rectangle(Point d1, Point d2) {
 		this.d1 = d1;
 		this.d2 = d2;
 	}
 
-	public BufferedImage getImage() {
-		return image;
-	}
 
 	public Point getDiemTren() {
 		return d3;
@@ -57,6 +51,15 @@ public class Rectangle {
 		d2.setY(d2.getY() + 2 * try2);
 
 		paint();
+	}
+
+	@Override
+	public void drawShape(BufferedImage image) {
+		this.paint();
+		for (Point point : points) {
+			Main.drawPoint(point, image);
+		}
+		
 	}
 
 }

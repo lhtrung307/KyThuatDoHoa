@@ -62,7 +62,7 @@ public class Main {
 		frame.getContentPane().setLayout(null);
 		drawContainer = new DrawContainer();
 		drawContainer.setBounds(10, 45, SCR_HEIGHT, SCR_WIDTH);
-//		drawContainer.drawCoordinate3D(color);
+//		drawContainer.drawCoordinate3D(color); // Ve Toa Do
 		frame.getContentPane().add(drawContainer);
 		drawContainer.setLayout(null);	
 		
