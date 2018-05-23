@@ -2,10 +2,8 @@ package kythuatdohoa;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-import javax.swing.JColorChooser;
 import javax.swing.JLabel;
 
 public class DrawPlace extends JLabel{

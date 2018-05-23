@@ -4,14 +4,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
-import javax.swing.JColorChooser;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import javax.swing.JLabel;
 
 public class Main {
 	public static int SCR_HEIGHT = 642;

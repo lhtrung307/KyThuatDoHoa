@@ -5,7 +5,6 @@ import java.util.Vector;
 
 import javax.swing.JLabel;
 
-import kythuatdohoa.Main;
 import kythuatdohoa.Point;
 
 public class Paint extends Thread {

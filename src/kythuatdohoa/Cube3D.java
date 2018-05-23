@@ -86,13 +86,6 @@ public class Cube3D {
 			node[0] = (int)(x * cosTheta - y * sinTheta);
 			node[1] = (int)(y * cosTheta + x * sinTheta);
 		}
-		
-//		for (int[] node : nodes) {
-//			int x = node[0];
-//			int y = node[1];
-//			node[0] = (int) (x * cosTheta + y * sinTheta);
-//			node[1] = (int) (y * cosTheta - x * sinTheta);
-//		}
 	}
 
 	public void rotateY3D(int theta) {
