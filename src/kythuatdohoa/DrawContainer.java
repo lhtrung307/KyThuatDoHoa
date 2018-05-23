@@ -28,9 +28,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	public static int COLORING = 8;
 	private int status;
 	private Point point;
-	// private BufferedImage image;
 	private DrawPlace drawPlace;
-	private BufferedImage imageClone;
 	public static int size = 20;
 	public static int wCell = 20;
 	public static int hCell = 10;
@@ -44,8 +42,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 		this.add(drawPlace);
 		// image = drawPlace.getImage();
 		point = new Point();
-		imageClone = new BufferedImage(drawPlace.getImage().getWidth(), drawPlace.getImage().getHeight(),
-				drawPlace.getImage().getType());
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
 
@@ -53,9 +49,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getButton() == MouseEvent.BUTTON1 && status == POINT) {
-			System.out.println("click");
 			Point p = new Point(e.getX(), e.getY());
 			Main.drawPoint(p, drawPlace.getImage());
 			drawPlace.refreshDrawPlace(drawPlace.getImage());
@@ -82,38 +76,19 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getButton() == MouseEvent.BUTTON1) {
 			Point p = new Point(e.getX(), e.getY());
 			// convertToCoordinatePoints(p);
-			if (status == LINE) {
-				point = p;
-			}
-			if (status == RECTANGLE) {
-				point = p;
-			}
-			if (status == SQUARE) {
-				point = p;
-			}
-
-			if (status == DUONG_TRON) {
-				point = p;
-			}
-			if (status == ELLIPSE) {
-				point = p;
-			}
 			point = p;
 
 		}
@@ -130,16 +105,14 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				status = 0;
 			}
 			if (status == RECTANGLE) {
-				Rectangle rect = new Rectangle(drawPlace.getImage(), point, p);
+				Rectangle rect = new Rectangle(point, p);
 				rect.drawShape(drawPlace.getImage());
 				status = 0;
 				rect.doiXung(point);
 			}
 			if (status == SQUARE) {
-				Square sq = new Square(drawPlace.getImage(), point, p);
-				sq.paint();
-				drawPlace.refreshDrawPlace(drawPlace.getImage());
-				System.out.println("released");
+				Square sq = new Square(point, p);
+				sq.drawShape(drawPlace.getImage());
 				status = 0;
 			}
 			if (status == DUONG_TRON) {
@@ -180,14 +153,15 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getButton() == MouseEvent.NOBUTTON) {
+			BufferedImage imageClone;
+			imageClone = new BufferedImage(drawPlace.getImage().getWidth(), drawPlace.getImage().getHeight(),
+					drawPlace.getImage().getType());
 			Point p = new Point(e.getX(), e.getY());
 			imageClone.setData(drawPlace.getImage().getRaster());
 			if (status == LINE) {
 				Line line = new Line(point, p);
 				line.drawShape(imageClone);
-//				System.out.println("draw");
 			}
 			if (status == DUONG_TRON) {
 				int R = Point.distance(point, p);
@@ -205,9 +179,8 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				rect.drawShape(imageClone);
 			}
 			if (status == SQUARE) {
-				Square sq = new Square(imageClone, point, p);
-				sq.paint();
-				drawPlace.refreshDrawPlace(sq.getImage());
+				Square sq = new Square(point, p);
+				sq.drawShape(imageClone);
 			}
 			System.out.println(p.toString());
 			drawPlace.refreshDrawPlace(imageClone);
@@ -221,7 +194,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			//// try {
 			//// Thread.sleep(100);
 			//// } catch (InterruptedException e1) {
-			//// // TODO Auto-generated catch block
 			//// System.out.println(e);
 			//// }
 			// System.out.println("wow");
@@ -230,7 +202,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -249,17 +220,15 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 		int fixH = (this.getHeight() - 2) % size == 0 ? (this.getHeight() - 2)
 				: (this.getHeight() - 2) - (this.getHeight() - 2) % size;
 		for (int w = 0; w <= fixW; w++) {
+			Point top = new Point(w, 0);
+			Point bot = new Point(w, fixH);
 			if (w % size == 0) {
 				Main.color = green;
-				Point top = new Point(w, 0);
-				Point bot = new Point(w, fixH);
 				Line line = new Line(top, bot);
 				line.BresLineForCoor();
 			}
 			if (w == fixW / 2) {
 				Main.color = coorColor;
-				Point top = new Point(w, 0);
-				Point bot = new Point(w, fixH);
 				Line line = new Line(top, bot);
 				line.BresLineForCoor();
 				Main.color = coorColor;

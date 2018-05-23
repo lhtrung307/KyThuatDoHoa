@@ -3,29 +3,16 @@ package kythuatdohoa;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class BresenhamLine {
+public class BresenhamLine extends Shape{
 	private Point d1 = new Point();
 	private Point d2 = new Point();
-	private BufferedImage image;
-	private ArrayList<Point> line;
 
-	public BresenhamLine(BufferedImage image, Point d1, Point d2) {
-		this.image = image;
-		this.d1 = d1;
-		this.d2 = d2;
-		line = new ArrayList<>();
-	}
-	
 	public BresenhamLine(Point d1, Point d2) {
 		this.d1 = d1;
 		this.d2 = d2;
 	}
 
-	public BufferedImage getImage() {
-		return image;
-	}
-
-	public void BresenhamLine() {
+	public void drawLine() {
 		int x, y, dx, dy, p;
 
 		dx = Math.abs(d1.getX() - d2.getX());
@@ -54,8 +41,7 @@ public class BresenhamLine {
 						y++;
 				}
 				Point dv = new Point(x, y);
-				line.add(dv);
-				Main.drawPoint(dv, image);
+				points.add(dv);
 			}
 		}else {
 			if (d1.getY() > d2.getY()) {
@@ -83,8 +69,7 @@ public class BresenhamLine {
 					p = p + 2*(dy-dx);
 				}
 				Point dv = new Point(x, y);
-				line.add(dv);
-				Main.drawPoint(dv, image);
+				points.add(dv);
 			}
 		}
 	}
@@ -120,11 +105,10 @@ public class BresenhamLine {
 				}
 				if(k <= 5) {
 					Point dv = new Point(x, y);
-					line.add(dv);
-					Main.drawPoint(dv, image);
+					points.add(dv);
 				}else {
 					Point dv = new Point(x, y);
-					line.add(dv);
+					points.add(dv);
 				}
 				if(k == 10)
 					k=0;
@@ -157,11 +141,10 @@ public class BresenhamLine {
 				}
 				if(k <= 5) {
 					Point dv = new Point(x, y);
-					line.add(dv);
-					Main.drawPoint(dv, image);
+					points.add(dv);
 				}else {
 					Point dv = new Point(x, y);
-					line.add(dv);
+					points.add(dv);
 				}
 				if(k == 10)
 					k=0;
@@ -187,11 +170,19 @@ public class BresenhamLine {
 	}
 
 	public ArrayList<Point> getLine() {
-		return line;
+		return points;
 	}
 
 	public void setLine(ArrayList<Point> line) {
-		this.line = line;
+		this.points = line;
+	}
+
+	@Override
+	public void drawShape(BufferedImage image) {
+		this.drawLine();
+		for (Point point : points) {
+			Main.drawPoint(point, image);
+		}
 	}
 	
 	

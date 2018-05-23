@@ -18,9 +18,7 @@ public class Main {
 	private DrawContainer drawContainer;
 	private JButton btnPoint;
 	private JButton btnElip;
-	private BufferedImage image;
 	
-
 	private Ellipse ellipse;
 	/**
 	 * Launch the application.
@@ -87,9 +85,7 @@ public class Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				drawContainer.setStatus(DrawContainer.RECTANGLE);
-
 			}
 		});
 		btnRect.setBounds(155, 11, 62, 23);
@@ -100,7 +96,6 @@ public class Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				drawContainer.setStatus(DrawContainer.SQUARE);
 			}
 		});
@@ -155,4 +150,5 @@ public class Main {
 	public static void drawPoint(Point point, BufferedImage image) {
 		image.setRGB(point.getX(), point.getY(), color.getRGB());
 	}
+	
 }

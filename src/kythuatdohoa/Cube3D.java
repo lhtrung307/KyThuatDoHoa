@@ -55,8 +55,8 @@ public class Cube3D {
 			temp.translateCoordinateToReal();
 			Point temp1 = new Point(node1[0], node1[1]);
 			temp1.translateCoordinateToReal();
-			BresenhamLine line = new BresenhamLine(image, temp, temp1);
-			line.BresenhamLine();
+			BresenhamLine line = new BresenhamLine(temp, temp1);
+			line.drawLine();
 		}
 	}
 	

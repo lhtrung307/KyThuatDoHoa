@@ -27,15 +27,19 @@ public class Rectangle extends Shape{
 		d3 = new Point(d2.getX(), d1.getY());
 		d4 = new Point(d1.getX(), d2.getY());
 
-		BresenhamLine line1 = new BresenhamLine(image, d1, d3);
-		BresenhamLine line2 = new BresenhamLine(image, d1, d4);
-		BresenhamLine line3 = new BresenhamLine(image, d2, d3);
-		BresenhamLine line4 = new BresenhamLine(image, d2, d4);
+		BresenhamLine line1 = new BresenhamLine(d1, d3);
+		BresenhamLine line2 = new BresenhamLine(d1, d4);
+		BresenhamLine line3 = new BresenhamLine(d2, d3);
+		BresenhamLine line4 = new BresenhamLine(d2, d4);
 
-		line1.BresenhamLine();
-		line2.BresenhamLine();
-		line3.BresenhamLine();
-		line4.BresenhamLine();
+		line1.drawLine();
+		points.addAll(line1.getPoints());
+		line2.drawLine();
+		points.addAll(line2.getPoints());
+		line3.drawLine();
+		points.addAll(line3.getPoints());
+		line4.drawLine();
+		points.addAll(line4.getPoints());
 	}
 
 	public void doiXung(Point p) {
