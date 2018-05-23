@@ -14,6 +14,7 @@ public class DuongTron extends Shape{
 		R = r;
 	}
 
+<<<<<<< HEAD
 	public int getR() {
 		return R;
 	}
@@ -38,6 +39,8 @@ public class DuongTron extends Shape{
 		this.tam = tam;
 	}
 	
+=======
+>>>>>>> 2043c6c5f79b7cfffa16c17740c948e1d584376b
 	public void Doixung(Point tam, int x, int y) {
 		Point D;
 
@@ -75,7 +78,7 @@ public class DuongTron extends Shape{
 		}
 
 	}
-
+	
 	public void duongtronMid() {
 		int x, y, d;
 		x = 0;
@@ -92,7 +95,47 @@ public class DuongTron extends Shape{
 			x = x + 1;
 		}
 	}
+	
+	public int getR() {
+		return R;
+	}
 
+	public void setR(int r) {
+		R = r;
+	}
+
+
+	public void setCircle(ArrayList<Point> circle) {
+		this.circle = circle;
+	}
+
+	public Point getTam() {
+		return tam;
+	}
+
+	public void setTam(Point tam) {
+		this.tam = tam;
+	}
+	
+	
+
+	
+
+<<<<<<< HEAD
+=======
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
+	
+	public ArrayList<Point> getCircle(){
+		return circle;
+	}
+
+>>>>>>> 2043c6c5f79b7cfffa16c17740c948e1d584376b
 	public void doiXung(Point p) {
 		int trx1, try1;
 		trx1 = (tam.getX() - p.getX());
