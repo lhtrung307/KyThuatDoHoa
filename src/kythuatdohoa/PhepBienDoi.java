@@ -19,16 +19,34 @@ public class PhepBienDoi {
 		return res;
 	}
 
-	public static double[][] scale(Point p, double sx, double sy) {
+	public static double[][] scaling(Point p, double sx, double sy) {
 		double matP[][] = { { p.getX(), p.getY(), 1 } };
 		double mat[][] = { { sx, 0, 0 }, { 0, sy, 0 }, { 0, 0, 1 } };
 		return multiMatrix(matP, mat);
 	}
-	
-	
-	
-	
-	public static Point getPointFromMatrix (double matrix[][]) {
-		return new Point((int)matrix[0][0], (int)matrix[0][1]);
+
+//	public static double[][] reflection(Point p) {
+//		double matP[][] = { { p.getX(), p.getY(), 1 } };
+//		double mat[][] = { { sx, 0, 0 }, { 0, sy, 0 }, { 0, 0, 1 } };
+//		return multiMatrix(matP, mat);
+//	}
+
+	public static double[][] translation(Point p, int xDistance, int yDistance) {
+		double matP[][] = { { p.getX(), p.getY(), 1 } };
+		double mat[][] = { { 1, 0, 0 }, { 0, 1, 0 }, { xDistance, yDistance, 1 } };
+		return multiMatrix(matP, mat);
+	}
+
+	public static double[][] rotation(Point p, int theta) {
+		double radians = Math.toRadians(theta);
+		double matP[][] = { { p.getX(), p.getY(), 1 } };
+		double sinTheta = Math.sin(radians);
+		double cosTheta = Math.cos(radians);
+		double[][] rotMatrix = { { cosTheta, -sinTheta, 0 }, { sinTheta, cosTheta, 0 }, { 0, 0, 1 } };
+		return multiMatrix(matP, rotMatrix);
+	}
+
+	public static Point getPointFromMatrix(double matrix[][]) {
+		return new Point((int) (matrix[0][0]), (int) (matrix[0][1]));
 	}
 }
