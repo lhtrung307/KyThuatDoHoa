@@ -8,11 +8,14 @@ import javax.swing.JLabel;
 import javax.swing.UIManager;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 
 public class Main {
 
@@ -65,7 +68,7 @@ public class Main {
 		frame.getContentPane().setLayout(null);
 		drawContainer = new DrawContainer();
 		drawContainer.setBounds(10, 45, SCR_HEIGHT, SCR_WIDTH);
-		drawContainer.drawCoordinate2D(color);
+		// drawContainer.drawCoordinate3D(color);
 		frame.getContentPane().add(drawContainer);
 		drawContainer.setLayout(null);
 
@@ -85,7 +88,7 @@ public class Main {
 				;
 			}
 		});
-		btnLine.setBounds(82, 11, 51, 23);
+		btnLine.setBounds(75, 11, 51, 23);
 		frame.getContentPane().add(btnLine);
 
 		JButton btnRect = new JButton("Rectangle");
@@ -98,7 +101,7 @@ public class Main {
 
 			}
 		});
-		btnRect.setBounds(136, 11, 51, 23);
+		btnRect.setBounds(130, 11, 62, 23);
 		frame.getContentPane().add(btnRect);
 
 		JButton btnSquare = new JButton("Square");
@@ -110,7 +113,11 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.SQUARE);
 			}
 		});
-		btnSquare.setBounds(197, 11, 62, 23);
+
+		btnSquare.setBounds(202, 11, 87, 23);
+
+		btnSquare.setBounds(227, 11, 62, 23);
+
 		frame.getContentPane().add(btnSquare);
 
 		JButton btnDuongtron = new JButton("DuongTron");
@@ -119,7 +126,11 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.DUONG_TRON);
 			}
 		});
+
 		btnDuongtron.setBounds(269, 11, 62, 23);
+
+		btnDuongtron.setBounds(299, 11, 83, 23);
+
 		frame.getContentPane().add(btnDuongtron);
 
 		btnElip = new JButton("elip");
@@ -128,7 +139,11 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.ELLIPSE);
 			}
 		});
+
 		btnElip.setBounds(341, 11, 73, 23);
+
+		btnElip.setBounds(392, 11, 62, 23);
+
 		frame.getContentPane().add(btnElip);
 
 		JButton btnScale = new JButton("Scale");
@@ -137,17 +152,9 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.SCALE);
 			}
 		});
-		btnScale.setBounds(424, 11, 57, 23);
-		frame.getContentPane().add(btnScale);
 
-		JButton btnUndo = new JButton("Undo");
-		btnUndo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				drawContainer.setStatus(DrawContainer.UNDO);
-			}
-		});
-		btnUndo.setBounds(491, 11, 59, 23);
-		frame.getContentPane().add(btnUndo);
+		btnScale.setBounds(464, 11, 51, 23);
+		frame.getContentPane().add(btnScale);
 
 		JButton btnColor = new JButton("Color");
 		btnColor.addActionListener(new ActionListener() {
@@ -161,17 +168,28 @@ public class Main {
 				}
 			}
 		});
-		btnColor.setBounds(551, 11, 65, 23);
+		btnColor.setBounds(630, 11, 65, 23);
 		frame.getContentPane().add(btnColor);
 
-		JButton btnColouring = new JButton("Colouring");
-		btnColouring.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				drawContainer.setStatus(DrawContainer.COLOURING);
+		btnScale.setBounds(464, 11, 70, 23);
+		frame.getContentPane().add(btnScale);
+
+		JButton btnColoring = new JButton("Coloring");
+		btnColoring.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				drawContainer.setStatus(DrawContainer.COLORING);
 			}
 		});
-		btnColouring.setBounds(625, 11, 89, 23);
-		frame.getContentPane().add(btnColouring);
+		btnColoring.setBounds(537, 11, 83, 23);
+		frame.getContentPane().add(btnColoring);
+		//
+		// JLabel lblChooseColor = new JLabel("");
+		// lblChooseColor.setBounds(544, 15, 46, 14);
+		// frame.getContentPane().add(lblChooseColor);
+		// JColorChooser chooseColor = new
+		// JColorChooser(lblChooseColor.getForeground());
+		// frame.getContentPane().add(chooseColor);
+
 	}
 
 	public static void drawPoint(Point point, BufferedImage image) {
