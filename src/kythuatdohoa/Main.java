@@ -24,6 +24,8 @@ public class Main {
 	private JButton btnElip;
 	private JButton btnScale;
 	private JButton btnCube3d;
+	private JButton btnNewButton;
+	private JButton btnRotation;
 	
 	/**
 	 * Launch the application.
@@ -56,12 +58,12 @@ public class Main {
 	private void initialize() {
 		frame = new JFrame();
 		color = new Color(0, 0, 0);
-		frame.setBounds(100, 100, 700, 800);
+		frame.setBounds(100, 100, 1000, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		drawContainer = new DrawContainer();
 		drawContainer.setBounds(10, 45, SCR_HEIGHT, SCR_WIDTH);
-//		drawContainer.drawCoordinate3D(color); // Ve Toa Do
+		drawContainer.drawCoordinate2D(color); // Ve Toa Do
 		frame.getContentPane().add(drawContainer);
 		drawContainer.setLayout(null);	
 
@@ -97,6 +99,26 @@ public class Main {
 		
 		createBtnCube3d();
 		frame.getContentPane().add(btnCube3d);
+		{
+			btnNewButton = new JButton("Translation");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					drawContainer.setStatus(DrawContainer.TRANSLATION);
+				}
+			});
+			btnNewButton.setBounds(667, 11, 70, 23);
+			frame.getContentPane().add(btnNewButton);
+		}
+		{
+			btnRotation = new JButton("Rotation");
+			btnRotation.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					drawContainer.setStatus(DrawContainer.ROTATION);
+				}
+			});
+			btnRotation.setBounds(747, 11, 62, 23);
+			frame.getContentPane().add(btnRotation);
+		}
 //		
 //		JLabel lblChooseColor = new JLabel("");
 //		lblChooseColor.setBounds(544, 15, 46, 14);
@@ -181,7 +203,7 @@ public class Main {
 		btnScale.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				drawContainer.setStatus(DrawContainer.SCALE);
+				drawContainer.setStatus(DrawContainer.SCALING);
 			}
 		});
 		btnScale.setBounds(464, 11, 70, 23);

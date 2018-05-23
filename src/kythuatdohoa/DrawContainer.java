@@ -19,9 +19,12 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	public static int ELLIPSE = 4;
 	public static int RECTANGLE = 5;
 	public static int SQUARE = 6;
-	public static int SCALE = 7;
-	public static int CUBE3D = 8;
-	public static int COLORING = 9;
+	public static int TRANSLATION = 7;
+	public static int ROTATION = 8;
+	public static int SCALING = 9;
+	public static int REFLECTION = 10;
+	public static int CUBE3D = 11;
+	public static int COLORING = 12;
 	private int status;
 	private Point point;
 	private DrawPlace drawPlace;
@@ -94,7 +97,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	public void mouseReleased(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON1) {
 			Point p = new Point(e.getX(), e.getY());
-			DrawContainer.convertToCoordinatePoints(p);
+//			DrawContainer.convertToCoordinatePoints(p);
 			if (status == LINE) {
 				Line line = new Line(point, p);
 				line.drawShape(drawPlace.getImage());
@@ -125,23 +128,47 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				ellipse = elip;
 				status = 0;
 			}
-
-			if (status == SCALE) {
+			
+			if (status == TRANSLATION) {
 				for (Point elipPoint : ellipse.getPoints()) {
 					try {
-						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scale(elipPoint, 2, 2));
+						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(elipPoint, -10, -10));
 						Main.drawPoint(temp, drawPlace.getImage());
 					} catch (Exception exc) {
 						System.out.println(exc);
 					}
 				}
-				drawPlace.refreshDrawPlace(drawPlace.getImage());
+			}
+			
+			if(status == ROTATION) {
+				for (Point elipPoint : ellipse.getPoints()) {
+					try {
+						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.rotation(elipPoint, 30));
+						Main.drawPoint(temp, drawPlace.getImage());
+					} catch (Exception exc) {
+						System.out.println(exc);
+					}
+				}
+			}
+			
+			if (status == SCALING) {
+				for (Point elipPoint : ellipse.getPoints()) {
+					try {
+						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(elipPoint, 2, 2));
+						Main.drawPoint(temp, drawPlace.getImage());
+					} catch (Exception exc) {
+						System.out.println(exc);
+					}
+				}
 				System.out.println("scale");
+			}
+			
+			if(status == REFLECTION) {
+				
 			}
 
 			if (status == COLORING) {
 				coloring(point.getX(), point.getY(), Color.RED);
-				drawPlace.refreshDrawPlace(drawPlace.getImage());
 			}
 			drawPlace.refreshDrawPlace(drawPlace.getImage());
 		}
@@ -211,32 +238,33 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 		for (int w = 0; w <= fixW; w++) {
 			Point top = new Point(w, 0);
 			Point bot = new Point(w, fixH);
-			if (w % size == 0) {
-				Main.color = green;
-				Line line = new Line(top, bot);
-				line.BresLineForCoor();
-			}
+//			if (w % size == 0) {
+//				Main.color = green;
+//				Line line = new Line(top, bot);
+//				line.drawShape(drawPlace.getImage());
+//			}
 			if (w == fixW / 2) {
 				Main.color = coorColor;
 				Line line = new Line(top, bot);
-				line.BresLineForCoor();
+				line.drawShape(drawPlace.getImage());
 				Main.color = coorColor;
 			}
+			Main.color = coorColor;
 		}
 		for (int h = 0; h <= fixH; h++) {
-			if (h % size == 0) {
-				Main.color = green;
-				Point left = new Point(0, h);
-				Point right = new Point(fixW, h);
-				Line line = new Line(left, right);
-				line.BresLineForCoor();
-			}
+//			if (h % size == 0) {
+//				Main.color = green;
+//				Point left = new Point(0, h);
+//				Point right = new Point(fixW, h);
+//				Line line = new Line(left, right);
+//				line.drawShape(drawPlace.getImage());
+//			}
 			if (h == fixH / 2) {
 				Main.color = coorColor;
 				Point left = new Point(0, h);
 				Point right = new Point(fixW, h);
 				Line line = new Line(left, right);
-				line.BresLineForCoor();
+				line.drawShape(drawPlace.getImage());
 			}
 		}
 		Main.color = coorColor;
