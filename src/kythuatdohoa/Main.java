@@ -77,7 +77,7 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.LINE);;
 			}
 		});
-		btnLine.setBounds(82, 11, 62, 23);
+		btnLine.setBounds(82, 11, 49, 23);
 		frame.getContentPane().add(btnLine);
 
 		JButton btnRect = new JButton("Rectangle");
@@ -88,7 +88,7 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.RECTANGLE);
 			}
 		});
-		btnRect.setBounds(155, 11, 62, 23);
+		btnRect.setBounds(141, 11, 62, 23);
 		frame.getContentPane().add(btnRect);
 
 		JButton btnSquare = new JButton("Square");
@@ -99,7 +99,7 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.SQUARE);
 			}
 		});
-		btnSquare.setBounds(227, 11, 62, 23);
+		btnSquare.setBounds(213, 11, 62, 23);
 		frame.getContentPane().add(btnSquare);
 
 		JButton btnDuongtron = new JButton("DuongTron");
@@ -108,7 +108,7 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.DUONG_TRON);
 			}
 		});
-		btnDuongtron.setBounds(299, 11, 83, 23);
+		btnDuongtron.setBounds(285, 11, 83, 23);
 		frame.getContentPane().add(btnDuongtron);
 
 		btnElip = new JButton("elip");
@@ -117,7 +117,7 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.ELLIPSE);
 			}
 		});
-		btnElip.setBounds(392, 11, 62, 23);
+		btnElip.setBounds(378, 11, 62, 23);
 		frame.getContentPane().add(btnElip);
 
 		JButton btnScale = new JButton("Scale");
@@ -126,7 +126,7 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.SCALE);
 			}
 		});
-		btnScale.setBounds(464, 11, 70, 23);
+		btnScale.setBounds(450, 11, 49, 23);
 		frame.getContentPane().add(btnScale);
 		
 		JButton btnColoring = new JButton("Coloring");
@@ -135,8 +135,17 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.COLORING);
 			}
 		});
-		btnColoring.setBounds(537, 11, 56, 23);
+		btnColoring.setBounds(509, 11, 49, 23);
 		frame.getContentPane().add(btnColoring);
+		
+		JButton btnCubed = new JButton("Cube3D");
+		btnCubed.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				drawContainer.setStatus(DrawContainer.CUBE3D);
+			}
+		});
+		btnCubed.setBounds(564, 11, 62, 23);
+		frame.getContentPane().add(btnCubed);
 //		
 //		JLabel lblChooseColor = new JLabel("");
 //		lblChooseColor.setBounds(544, 15, 46, 14);

@@ -26,6 +26,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	public static int SQUARE = 6;
 	public static int SCALE = 7;
 	public static int COLORING = 8;
+	public static int CUBE3D = 9;
 	private int status;
 	private Point point;
 	private DrawPlace drawPlace;
@@ -133,7 +134,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			if (status == SCALE) {
 				for (Point elipPoint : ellipse.getPoints()) {
 					try {
-						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scale(elipPoint, 2, 2));
+						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scale(elipPoint, 1.5, 1.5));
 						Main.drawPoint(temp, drawPlace.getImage());
 					} catch (Exception exc) {
 						System.out.println(exc);
@@ -147,8 +148,10 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				coloring(point.getX(), point.getY(), Color.RED);
 				drawPlace.refreshDrawPlace(drawPlace.getImage());
 			}
+			
 			drawPlace.refreshDrawPlace(drawPlace.getImage());
 		}
+		
 	}
 
 	@Override
@@ -182,8 +185,18 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				Square sq = new Square(point, p);
 				sq.drawShape(imageClone);
 			}
+			if (status == CUBE3D) {
+				 Cube3D cube = new Cube3D();
+				 cube.rotateY3D(p.getX() - point.getX());
+				 cube.rotateX3D(p.getY() - point.getY());
+				 imageClone.setData(drawPlace.getImage().getRaster());
+				 cube.setImage(imageClone);
+				 cube.drawCube();
+				 drawPlace.refreshDrawPlace(cube.getImage());
+				 System.out.println("wow");
+			}
 			System.out.println(p.toString());
-			drawPlace.refreshDrawPlace(imageClone);
+//			drawPlace.refreshDrawPlace(imageClone);
 			// Cube3D cube = new Cube3D();
 			// cube.rotateY3D(e.getX() - point.getX());
 			// cube.rotateX3D(e.getY() - point.getY());
