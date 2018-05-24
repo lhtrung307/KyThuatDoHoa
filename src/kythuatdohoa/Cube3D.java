@@ -33,11 +33,12 @@ public class Cube3D extends Shape{
 	Color edgeColor = new Color(34, 68, 204);
 	int nodeSize = 4;
 
-	 int type = BufferedImage.TYPE_INT_ARGB;
-	 BufferedImage image; //new BufferedImage(Main.SCR_HEIGHT, Main.SCR_WIDTH,
-//	 type);
-
 	public void drawCube() {
+		drawNode();
+		drawEdge();
+	}
+	
+	public void drawNode() {
 		Main.color = nodeColor;
 		for (int[] node : this.nodes) {
 			Point temp = new Point(node[0], node[1]);
@@ -46,6 +47,9 @@ public class Cube3D extends Shape{
 			elip.ellipseBre();
 			points.addAll(elip.getPoints());
 		}
+	}
+	
+	public void drawEdge() {
 		Main.color = edgeColor;
 		for (int e = 0; e < edges.length; e++) {
 			int n0 = edges[e][0];
@@ -61,26 +65,11 @@ public class Cube3D extends Shape{
 			points.addAll(line.getPoints());
 		}
 	}
-	
-	public BufferedImage getImage() {
-		return image;
-	}
-	
-	public void setImage(BufferedImage image) {
-		this.image = image;
-	}
-	
-//	public void rotate(BufferedImage image) {
-//		rotateZ3D(40);
-//		rotateY3D(40);
-//		rotateX3D(40);
-//		drawCube(image);
-//	}
 
 	public void rotateZ3D(int theta) {
-		double sinTheta = Math.sin(theta);
-		double cosTheta = Math.cos(theta);
-
+		double radians = Math.toRadians(theta);
+		double sinTheta = Math.sin(radians);
+		double cosTheta = Math.cos(radians);
 		for(int i = 0; i < nodes.length; i++) {
 			int[] node = nodes[i];
 			int x = node[0];
