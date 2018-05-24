@@ -28,7 +28,6 @@ public class BresenhamLine extends Shape{
 			y = d1.getY();
 
 			p = 2 * dy - dx;
-
 			Point dv = new Point(x, y);
 			points.add(dv);
 			while (x != d2.getX()) {
@@ -58,7 +57,6 @@ public class BresenhamLine extends Shape{
 			x = d1.getX();
 			y = d1.getY();
 			p = 2 * dy - dx;
-			
 			Point dv = new Point(x, y);
 			points.add(dv);
 			while (y < d2.getY()) {
@@ -95,7 +93,6 @@ public class BresenhamLine extends Shape{
 			y = d1.getY();
 
 			p = 2 * dy - dx;
-
 			Point dv = new Point(x, y);
 			points.add(dv);
 			while (x != d2.getX()) {
@@ -133,7 +130,6 @@ public class BresenhamLine extends Shape{
 			x = d1.getX();
 			y = d1.getY();
 			p = 2 * dy - dx;
-			
 			Point dv = new Point(x, y);
 			points.add(dv);
 			while (y < d2.getY()) {
