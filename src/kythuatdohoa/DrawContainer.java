@@ -29,6 +29,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	public static int SCALE = 7;
 
 	private int status;
+	private int numb;
 	private Point point;
 	private DrawPlace drawPlace;
 	public static int size = 20;
@@ -122,7 +123,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			if (status == TRANSLATION) {
 
 				for (Point elipPoint : ellipse.getPoints()) {
-					elipPoint.translateRealToCoordiante();
+					elipPoint.translateRealToCoordinate();
 					try {
 						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(elipPoint, -10, -10));
 						temp.translateCoordinateToReal();
@@ -149,7 +150,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				String value = JOptionPane.showInputDialog("Enter angle", "");
 				int theta = Integer.parseInt(value);
 				for (Point elipPoint : ellipse.getPoints()) {
-					elipPoint.translateRealToCoordiante();
+					elipPoint.translateRealToCoordinate();
 					try {
 						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.rotation(elipPoint, theta));
 						temp.translateCoordinateToReal();
@@ -165,7 +166,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				String value = JOptionPane.showInputDialog("Enter scale", "");
 				double scale = Double.parseDouble(value);
 				for (Point elipPoint : ellipse.getPoints()) {
-					elipPoint.translateRealToCoordiante();
+					elipPoint.translateRealToCoordinate();;
 					try {
 						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(elipPoint, scale, scale));
 						temp.translateCoordinateToReal();
@@ -212,7 +213,62 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			}
 
 			if (status == REFLECTION) {
-
+				if(numb == 1) {
+					for(Point RectanglePoint : rectangle.getPoints()) {
+						RectanglePoint.translateRealToCoordinate();
+						try {
+							Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionO(RectanglePoint));
+							temp.translateCoordinateToReal();
+							Main.drawPoint(temp, drawPlace.getImage());
+						} catch (Exception exc) {
+							System.out.println(exc);
+						}
+					}
+					
+					for(Point CirclePoint : circle.getPoints()) {
+						CirclePoint.translateRealToCoordinate();
+						try {
+							Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionO(CirclePoint));
+							temp.translateCoordinateToReal();
+							Main.drawPoint(temp, drawPlace.getImage());
+						} catch (Exception exc) {
+							System.out.println(exc);
+						}
+					}
+					
+					for(Point SquarePoint : square.getPoints()) {
+						SquarePoint.translateRealToCoordinate();
+						try {
+							Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionO(SquarePoint));
+							temp.translateCoordinateToReal();
+							Main.drawPoint(temp, drawPlace.getImage());
+						} catch (Exception exc) {
+							System.out.println(exc);
+						}
+					}
+				}else if(numb == 2) {
+					for(Point RectanglePoint : rectangle.getPoints()) {
+						RectanglePoint.translateRealToCoordinate();
+						try {
+							Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOx(RectanglePoint));
+							temp.translateCoordinateToReal();
+							Main.drawPoint(temp, drawPlace.getImage());
+						} catch (Exception exc) {
+							System.out.println(exc);
+						}
+					}
+				}else {
+					for(Point RectanglePoint : rectangle.getPoints()) {
+						RectanglePoint.translateRealToCoordinate();
+						try {
+							Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOy(RectanglePoint));
+							temp.translateCoordinateToReal();
+							Main.drawPoint(temp, drawPlace.getImage());
+						} catch (Exception exc) {
+							System.out.println(exc);
+						}
+					}
+				}
 			}
 
 			if (status == COLORING) {
@@ -287,6 +343,11 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	
+	public void setStatus(int status, int numb) {
+		this.status = status;
+		this.numb = numb;
 	}
 
 	public void drawCoordinate2D(Color coorColor) {
