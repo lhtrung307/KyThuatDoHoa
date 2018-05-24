@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -26,6 +27,7 @@ public class Main {
 	private JButton btnCube3d;
 	private JButton btnTranslation;
 	private JButton btnRotation;
+	private JComboBox boxReflection;
 	
 	/**
 	 * Launch the application.
@@ -87,6 +89,9 @@ public class Main {
 
 		createBtnScale();
 		frame.getContentPane().add(btnScale);
+		
+		createBtnReflection();
+		frame.getContentPane().add(boxReflection);
 		
 		JButton btnColoring = new JButton("Coloring");
 		btnColoring.addActionListener(new ActionListener() {
@@ -223,5 +228,17 @@ public class Main {
 			}
 		});
 		btnCube3d.setBounds(595, 11, 62, 23);
+	}
+	
+	private void createBtnReflection() {
+		int[] numb = {1,2,3};
+		String[] name = {"Doi xung tam O", "Doi xung truc Ox", "Doi xung truc Oy"};
+		boxReflection = new JComboBox<>(name);
+		boxReflection.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				drawContainer.setStatus(DrawContainer.REFLECTION, numb[boxReflection.getSelectedIndex()]);
+			}
+		});
+		boxReflection.setBounds(830, 11, 100, 23);
 	}
 }
