@@ -5,8 +5,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class DrawContainer extends JPanel implements MouseMotionListener, MouseListener {
@@ -61,7 +61,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			Point p = new Point(e.getX(), e.getY());
 			Main.drawPoint(p, drawPlace.getImage());
 			drawPlace.refreshDrawPlace(drawPlace.getImage());
-			temp = status;
 			status = 0;
 		}
 		// while(true) {
@@ -153,115 +152,91 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			// tinh tien
 			if (status == TRANSLATION) {
 
-				// ellipse
-				// for (Point elipPoint : ellipse.getPoints()) {
-				// try {
-				// Point temp =
-				// PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(elipPoint, -10, -10));
-				// Main.drawPoint(temp, drawPlace.getImage());
-				// } catch (Exception exc) {
-				// System.out.println(exc);
-				// }
-				// }
-
-				// circle
-				// for (Point circlePoint : circle.getPoints()) {
-				// try {
-				// Point temp =
-				// PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(circlePoint, -10,
-				// -10));
-				// Main.drawPoint(temp, drawPlace.getImage());
-				// } catch (Exception exc) {
-				// System.out.println(exc);
-				// }
-				// }
-
-				// rectangle
-				// for (Point rectanglePoint : rectangle.getPoints()) {
-				// try {
-				// Point temp =
-				// PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(rectanglePoint, -10,
-				// -10));
-				// Main.drawPoint(temp, drawPlace.getImage());
-				// } catch (Exception exc) {
-				// System.out.println(exc);
-				// }
-				// }
-
-				// square
-				// for (Point squarePoint : square.getPoints()) {
-				// try {
-				// Point temp =
-				// PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(squarePoint, -10,
-				// -10));
-				// Main.drawPoint(temp, drawPlace.getImage());
-				// } catch (Exception exc) {
-				// System.out.println(exc);
-				// }
-				// }
-
-				// line
-				for (Point linePoint : line1.getPoints()) {
+				for (Point elipPoint : ellipse.getPoints()) {
+					elipPoint.translateRealToCoordinate();
 					try {
-						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(linePoint, -10, -10));
+						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(elipPoint, -10, -10));
+						temp.translateCoordinateToReal();
 						Main.drawPoint(temp, drawPlace.getImage());
 					} catch (Exception exc) {
 						System.out.println(exc);
 					}
 				}
+
+				// line
+				// for (Point linePoint : line1.getPoints()) {
+				// try {
+				// Point temp =
+				// PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(linePoint, -10, -10));
+				// Main.drawPoint(temp, drawPlace.getImage());
+				// } catch (Exception exc) {
+				// System.out.println(exc);
+				// }
+				// }
 
 			}
 
 			if (status == ROTATION) {
 				for (Point elipPoint : ellipse.getPoints()) {
+					elipPoint.translateRealToCoordinate();
 					try {
-						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.rotation(elipPoint, 30));
+						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.rotation(elipPoint, -30));
+						temp.translateCoordinateToReal();
 						Main.drawPoint(temp, drawPlace.getImage());
 					} catch (Exception exc) {
 						System.out.println(exc);
 					}
 				}
+
 			}
 
 			if (status == SCALING) {
+
+				String value = JOptionPane.showInputDialog("Enter scale", "");
+				double scale = Double.parseDouble(value);
 				for (Point elipPoint : ellipse.getPoints()) {
+
 					try {
-						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(elipPoint, 1.5, 1.5));
+						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(elipPoint, scale, scale));
 						Main.drawPoint(temp, drawPlace.getImage());
 					} catch (Exception exc) {
 						System.out.println(exc);
 					}
 				}
+				status = 0;
 
-				for (Point circlePoint : circle.getPoints()) {
-					try {
-						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(circlePoint, 0.5, 0.5));
-						Main.drawPoint(temp, drawPlace.getImage());
-					} catch (Exception exc) {
-						System.out.println(exc);
-					}
-				}
-
-				for (Point RectanglePoint : rectangle.getPoints()) {
-					try {
-						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(RectanglePoint, 2, 2));
-						Main.drawPoint(temp, drawPlace.getImage());
-					} catch (Exception exc) {
-						System.out.println(exc);
-					}
-				}
-
-				for (Point LinePoint : line1.getPoints()) {
-					try {
-						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(LinePoint, 2, 2));
-						Main.drawPoint(temp, drawPlace.getImage());
-					} catch (Exception exc) {
-						System.out.println(exc);
-					}
-
-					drawPlace.refreshDrawPlace(drawPlace.getImage());
-					System.out.println("scale");
-				}
+				// for (Point circlePoint : circle.getPoints()) {
+				// try {
+				// Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(circlePoint,
+				// 0.5, 0.5));
+				// Main.drawPoint(temp, drawPlace.getImage());
+				// } catch (Exception exc) {
+				// System.out.println(exc);
+				// }
+				// }
+				//
+				// for (Point RectanglePoint : rectangle.getPoints()) {
+				// try {
+				// Point temp =
+				// PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(RectanglePoint, 2, 2));
+				// Main.drawPoint(temp, drawPlace.getImage());
+				// } catch (Exception exc) {
+				// System.out.println(exc);
+				// }
+				// }
+				//
+				// for (Point LinePoint : line1.getPoints()) {
+				// try {
+				// Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(LinePoint, 2,
+				// 2));
+				// Main.drawPoint(temp, drawPlace.getImage());
+				// } catch (Exception exc) {
+				// System.out.println(exc);
+				// }
+				//
+				// drawPlace.refreshDrawPlace(drawPlace.getImage());
+				// System.out.println("scale");
+				// }
 
 			}
 
@@ -455,7 +430,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 						}
 					}
 				}
-
 			}
 
 			if (status == COLORING) {
@@ -508,7 +482,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				cube.setImage(imageClone);
 				cube.drawCube();
 				drawPlace.refreshDrawPlace(cube.getImage());
-				System.out.println("wow");
 			}
 			System.out.println(p.toString());
 			// drawPlace.refreshDrawPlace(imageClone);
@@ -550,7 +523,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	public void setStatus(int status) {
 		this.status = status;
 	}
-
+	
 	public void setStatus(int status, int numb) {
 		this.status = status;
 		this.numb = numb;

@@ -58,7 +58,11 @@ public class PhepBienDoi {
 		return multiMatrix(matP, rotMatrix);
 	}
 
+//	public static Point getPointFromMatrix(double matrix[][]) {
+//		return new Point((int)Math.round((matrix[0][0])), (int)Math.round((matrix[0][1])));
+//	}
+	
 	public static Point getPointFromMatrix(double matrix[][]) {
-		return new Point((int) (matrix[0][0]), (int) (matrix[0][1]));
+		return new Point((int)(matrix[0][0]), (int)(matrix[0][1]));
 	}
 }

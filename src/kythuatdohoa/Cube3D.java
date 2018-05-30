@@ -3,9 +3,8 @@ package kythuatdohoa;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
+public class Cube3D extends Shape {
 
-public class Cube3D extends Shape{
-	
 	int[] node0 = { -100, -100, -100 };
 	int[] node1 = { -100, -100, 100 };
 	int[] node2 = { -100, 100, -100 };
@@ -33,11 +32,23 @@ public class Cube3D extends Shape{
 	Color edgeColor = new Color(34, 68, 204);
 	int nodeSize = 4;
 
-	 int type = BufferedImage.TYPE_INT_ARGB;
-	 BufferedImage image; //new BufferedImage(Main.SCR_HEIGHT, Main.SCR_WIDTH,
-//	 type);
+	int type = BufferedImage.TYPE_INT_ARGB;
+	BufferedImage image;
+
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	public void setImage(BufferedImage image) {
+		this.image = image;
+	}
 
 	public void drawCube() {
+		drawNode();
+		drawEdge();
+	}
+
+	public void drawNode() {
 		Main.color = nodeColor;
 		for (int[] node : this.nodes) {
 			Point temp = new Point(node[0], node[1]);
@@ -46,6 +57,9 @@ public class Cube3D extends Shape{
 			elip.ellipseBre();
 			points.addAll(elip.getPoints());
 		}
+	}
+
+	public void drawEdge() {
 		Main.color = edgeColor;
 		for (int e = 0; e < edges.length; e++) {
 			int n0 = edges[e][0];
@@ -61,32 +75,17 @@ public class Cube3D extends Shape{
 			points.addAll(line.getPoints());
 		}
 	}
-	
-	public BufferedImage getImage() {
-		return image;
-	}
-	
-	public void setImage(BufferedImage image) {
-		this.image = image;
-	}
-	
-//	public void rotate(BufferedImage image) {
-//		rotateZ3D(40);
-//		rotateY3D(40);
-//		rotateX3D(40);
-//		drawCube(image);
-//	}
 
 	public void rotateZ3D(int theta) {
-		double sinTheta = Math.sin(theta);
-		double cosTheta = Math.cos(theta);
-
-		for(int i = 0; i < nodes.length; i++) {
+		double radians = Math.toRadians(theta);
+		double sinTheta = Math.sin(radians);
+		double cosTheta = Math.cos(radians);
+		for (int i = 0; i < nodes.length; i++) {
 			int[] node = nodes[i];
 			int x = node[0];
 			int y = node[1];
-			node[0] = (int)(x * cosTheta - y * sinTheta);
-			node[1] = (int)(y * cosTheta + x * sinTheta);
+			node[0] = (int) (x * cosTheta - y * sinTheta);
+			node[1] = (int) (y * cosTheta + x * sinTheta);
 		}
 	}
 
@@ -94,12 +93,12 @@ public class Cube3D extends Shape{
 		double radians = Math.toRadians(theta);
 		double sinTheta = Math.sin(radians);
 		double cosTheta = Math.cos(radians);
-		for(int i = 0; i < nodes.length; i++) {
+		for (int i = 0; i < nodes.length; i++) {
 			int[] node = nodes[i];
 			int x = node[0];
 			int z = node[2];
-			node[0] = (int)(x * cosTheta - z * sinTheta);
-			node[2] = (int)(z * cosTheta + x * sinTheta);
+			node[0] = (int) (x * cosTheta - z * sinTheta);
+			node[2] = (int) (z * cosTheta + x * sinTheta);
 		}
 	}
 
@@ -108,12 +107,12 @@ public class Cube3D extends Shape{
 		double sinTheta = Math.sin(radians);
 		double cosTheta = Math.cos(radians);
 
-		for(int i = 0; i < nodes.length; i++) {
+		for (int i = 0; i < nodes.length; i++) {
 			int[] node = nodes[i];
 			int y = node[1];
 			int z = node[2];
-			node[1] = (int)(y * cosTheta - z * sinTheta);
-			node[2] = (int)(z * cosTheta + y * sinTheta);
+			node[1] = (int) (y * cosTheta - z * sinTheta);
+			node[2] = (int) (z * cosTheta + y * sinTheta);
 		}
 	}
 
@@ -124,8 +123,9 @@ public class Cube3D extends Shape{
 			Main.drawPoint(point, image);
 		}
 	}
-	
-//	public Point convert3Dto2D(int x,int y,int z) {
-//		return new Point((int)(x-y*(Math.sqrt(2)/2))*DrawContainer.size,(int) (z - y*(Math.sqrt(2)/2))*DrawContainer.size);
-//	}
+
+	// public Point convert3Dto2D(int x,int y,int z) {
+	// return new Point((int)(x-y*(Math.sqrt(2)/2))*DrawContainer.size,(int) (z -
+	// y*(Math.sqrt(2)/2))*DrawContainer.size);
+	// }
 }
