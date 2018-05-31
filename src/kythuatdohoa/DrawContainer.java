@@ -27,7 +27,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	public static int RECTANGLE = 5;
 	public static int SQUARE = 6;
 	public static int TRANSLATION = 7;
-	public static int ROTATION = 8;
+	public static int ROTATION = 13;
 	public static int SCALING = 9;
 	public static int REFLECTION = 10;
 	public static int CUBE3D = 11;
@@ -200,13 +200,12 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			}
 			if (status == ROTATION) {
 				for (Point elipPoint : ellipse.getPoints()) {
-
 					elipPoint.translateRealToCoordinate();
-
 					try {
 						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.rotation(elipPoint, -30));
 						temp.translateCoordinateToReal();
 						Main.drawPoint(temp, drawPlace.getImage());
+						elipPoint = temp;
 					} catch (Exception exc) {
 						System.out.println(exc);
 					}
@@ -221,16 +220,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 					shape.drawShape(drawPlace.getImage());
 				}
 				status = 0;
-				// for (Point RectanglePoint : rectangle.getPoints()) {
-				// try {
-				// Point temp =
-				// PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(RectanglePoint, 2, 2));
-				// Main.drawPoint(temp, drawPlace.getImage());
-				// } catch (Exception exc) {
-				// System.out.println(exc);
-				// }
-				// }
-				//
 			}
 
 			if (status == REFLECTION) {
@@ -263,25 +252,29 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				CubeInput cubeInput = new CubeInput();
 				cubeInput.setBounds(0, 0, 150, 150);
 				int result = showDialog(cubeInput);
-				int x = Integer.parseInt(cubeInput.getxCoor().getText());
-				int y = Integer.parseInt(cubeInput.getyCoor().getText());
-				int z = Integer.parseInt(cubeInput.getzCoor().getText());
-				int length = Integer.parseInt(cubeInput.getLength().getText());
-				Cube3D cube = new Cube3D(x, y, z, length);
-				cube.drawShape(drawPlace.getImage());
-				cubes.add(cube);
+				if(result == JOptionPane.OK_OPTION) {
+					int x = Integer.parseInt(cubeInput.getxCoor().getText());
+					int y = Integer.parseInt(cubeInput.getyCoor().getText());
+					int z = Integer.parseInt(cubeInput.getzCoor().getText());
+					int length = Integer.parseInt(cubeInput.getLength().getText());
+					Cube3D cube = new Cube3D(x, y, z, length);
+					cube.drawShape(drawPlace.getImage());
+					cubes.add(cube);
+				}
 			}
 			if (status == PYRAMID3D) {
 				CubeInput cubeInput = new CubeInput();
 				cubeInput.setBounds(0, 0, 150, 150);
 				int result = showDialog(cubeInput);
-				int x = Integer.parseInt(cubeInput.getxCoor().getText());
-				int y = Integer.parseInt(cubeInput.getyCoor().getText());
-				int z = Integer.parseInt(cubeInput.getzCoor().getText());
-				int length = Integer.parseInt(cubeInput.getLength().getText());
-				Pyramid3D pyramid = new Pyramid3D(x, y, z, length);
-				pyramid.drawShape(drawPlace.getImage());
-				this.pyramid = pyramid;
+				if(result == JOptionPane.OK_OPTION) {
+					int x = Integer.parseInt(cubeInput.getxCoor().getText());
+					int y = Integer.parseInt(cubeInput.getyCoor().getText());
+					int z = Integer.parseInt(cubeInput.getzCoor().getText());
+					int length = Integer.parseInt(cubeInput.getLength().getText());
+					Pyramid3D pyramid = new Pyramid3D(x, y, z, length);
+					pyramid.drawShape(drawPlace.getImage());
+					this.pyramid = pyramid;
+				}
 			}
 			status = 0;
 			drawPlace.refreshDrawPlace(drawPlace.getImage());
@@ -299,7 +292,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			x = Integer.parseInt(xCoor.getText());
 			y = Integer.parseInt(yCoor.getText());
 		}
-		
 		return new Point(x, y);
 	}
 	
@@ -326,7 +318,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			Point p = new Point(e.getX(), e.getY());
 			imageClone.setData(drawPlace.getImage().getRaster());
 			if (status == LINE) {
-				Line line = new Line(point, p);
+				BresenhamLine line = new BresenhamLine(point, p);
 				line.drawShape(imageClone);
 			}
 			if (status == DUONG_TRON) {
@@ -433,9 +425,9 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
         	    Point d1 = r.xoay(x11 ,y11, (int)rotatoX-320, (int)rotatoY-240, 20);
              	Point d2 = r.xoay(x22, y22, (int)rotatoX-320, (int)rotatoY-240, 20);
              	
-             	 Line line = new Line( d1, d2);
+             	BresenhamLine line = new BresenhamLine( d1, d2);
                  
-     			line.Bres_Line();
+     			line.drawLine();
 				line.drawShape(drawPlace.getImage());
 				
 				
@@ -492,10 +484,10 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
        		   Point d4 = new Point();
        		   d4 = r.xoay(x11, y22, (int)rotatoX-320, (int)rotatoY-240, goc);
 
-       		Line line1 = new Line(d1, d3);
-       		Line line2 = new Line(d1, d4);
-       		Line line3 = new Line(d2, d3);
-       		Line line4 = new Line(d2, d4);
+       		BresenhamLine line1 = new BresenhamLine(d1, d3);
+       		BresenhamLine line2 = new BresenhamLine(d1, d4);
+       		BresenhamLine line3 = new BresenhamLine(d2, d3);
+       		BresenhamLine line4 = new BresenhamLine(d2, d4);
        		
 
        		line1.drawShape(drawPlace.getImage());

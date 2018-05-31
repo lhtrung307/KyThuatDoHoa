@@ -15,6 +15,26 @@ public class Rectangle extends Shape{
 	}
 
 
+	public Point getD1() {
+		return d1;
+	}
+
+
+	public void setD1(Point d1) {
+		this.d1 = d1;
+	}
+
+
+	public Point getD2() {
+		return d2;
+	}
+
+
+	public void setD2(Point d2) {
+		this.d2 = d2;
+	}
+
+
 	public Point getDiemTren() {
 		return d3;
 	}
@@ -54,8 +74,8 @@ public class Rectangle extends Shape{
 
 	@Override
 	public void scale(double sx, double sy) {
-		d1 = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(d1, sx, sy));
-		d2 = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(d2, sx, sy));
+		this.setD1(PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(d1, sx, sy)));
+		this.setD2(PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(d2, sx, sy)));
 		points.clear();
 	}
 

@@ -105,7 +105,7 @@ public class Ellipse extends Shape{
 		points.clear();
 	}
 	
-	private void generate4Points() {
+	public void rotate(int theta) {
 		
 	}
 }
