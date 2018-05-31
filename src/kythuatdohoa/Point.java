@@ -96,26 +96,26 @@ public class Point {
 	}
 	
 	public void translateCoordinateToReal() {
-		if(this.getX()  > (Main.SCR_HEIGHT - 2) / 2) {
-			this.setX(Main.SCR_HEIGHT - 2);
+		if(this.getX()  > (Main.SCR_WIDTH - 2) / 2) {
+			this.setX(Main.SCR_WIDTH - 2);
 		}
-		else if(this.getX() < -(Main.SCR_HEIGHT - 2) / 2) {
+		else if(this.getX() < -(Main.SCR_WIDTH - 2) / 2) {
 			this.setX(0);
 		}
 		else
-			this.setX(this.getX() + (Main.SCR_HEIGHT - 2) / 2);
-		if(this.getY() > (Main.SCR_WIDTH - 2) / 2) {
-			this.setY(Main.SCR_WIDTH - 2);
-		}else if(this.getY() < -(Main.SCR_WIDTH - 2) / 2) {
+			this.setX(this.getX() + (Main.SCR_WIDTH - 2) / 2);
+		if(this.getY() > (Main.SCR_HEIGHT - 2) / 2) {
+			this.setY(Main.SCR_HEIGHT - 2);
+		}else if(this.getY() < -(Main.SCR_HEIGHT - 2) / 2) {
 			this.setY(0);
 		}
 		else
-			this.setY(this.getY() + (Main.SCR_WIDTH - 2) / 2);
+			this.setY(this.getY() + (Main.SCR_HEIGHT - 2) / 2);
 
 	}
 	
 	public void translateRealToCoordinate() {
-		this.setX(this.getX() - (Main.SCR_HEIGHT - 2) / 2);
-		this.setY(this.getY() - (Main.SCR_WIDTH - 2) / 2);
+		this.setX(this.getX() - (Main.SCR_WIDTH - 2) / 2);
+		this.setY(this.getY() - (Main.SCR_HEIGHT - 2) / 2);
 	}
 }

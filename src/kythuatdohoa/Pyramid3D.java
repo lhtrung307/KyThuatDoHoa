@@ -2,50 +2,39 @@ package kythuatdohoa;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
-
-public class Cube3D extends Shape{
+public class Pyramid3D extends Shape{
 	
-	int[] node0 = { -1, -1, -1 };
+	int[] node4 = { -1, -1, -1 };
+	int[] node3 = { 1, -1, -1 };
+	int[] node2 = { 1, -1, 1 };
 	int[] node1 = { -1, -1, 1 };
-	int[] node2 = { -1, 1, -1 };
-	int[] node3 = { -1, 1, 1 };
-	int[] node4 = { 1, -1, -1 };
-	int[] node5 = { 1, -1, 1 };
-	int[] node6 = { 1, 1, -1 };
-	int[] node7 = { 1, 1, 1 };
-	int[][] nodes = { node0, node1, node2, node3, node4, node5, node6, node7 };
+	int[] node0 = { 0, 1, 0 };
+	int[][] nodes = { node0, node1, node2, node3, node4};
 
 	int[] edge0 = { 0, 1 };
-	int[] edge1 = { 1, 3 };
-	int[] edge2 = { 3, 2 };
-	int[] edge3 = { 2, 0 };
-	int[] edge4 = { 4, 5 };
-	int[] edge5 = { 5, 7 };
-	int[] edge6 = { 7, 6 };
-	int[] edge7 = { 6, 4 };
-	int[] edge8 = { 0, 4 };
-	int[] edge9 = { 1, 5 };
-	int[] edge10 = { 2, 6 };
-	int[] edge11 = { 3, 7 };
-	int[][] edges = { edge0, edge1, edge2, edge3, edge4, edge5, edge6, edge7, edge8, edge9, edge10, edge11 };
+	int[] edge1 = { 0, 2 };
+	int[] edge2 = { 0, 3 };
+	int[] edge3 = { 0, 4 };
+	int[] edge4 = { 1, 4 };
+	int[] edge5 = { 1, 2 };
+	int[] edge6 = { 2, 3 };
+	int[] edge7 = { 3, 4 };
+	int[][] edges = { edge0, edge1, edge2, edge3, edge4, edge5, edge6, edge7};
 	Color nodeColor = new Color(40, 168, 107);
 	Color edgeColor = new Color(34, 68, 204);
 	int nodeSize = 4;
 	int x, y, z, length;
-
 	
-	
-	public Cube3D(int x, int y, int z, int length) {
+	public Pyramid3D(int x, int y, int z, int length) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		generateCubeNodes();
+		generatePyramidNodes();
 	}
 	
-	private void generateCubeNodes() {
+	private void generatePyramidNodes() {
 		for(int[] node: nodes) {
 			node[0] = node[0] * x;
 			node[1] = node[1] * y;
@@ -53,7 +42,7 @@ public class Cube3D extends Shape{
 		}
 	}
 
-	public void drawCube() {
+	public void drawPyramid() {
 		drawNode();
 		drawEdge();
 	}
@@ -128,7 +117,7 @@ public class Cube3D extends Shape{
 
 	@Override
 	public void drawShape(BufferedImage image) {
-		this.drawCube();
+		this.drawPyramid();
 		for (Point point : points) {
 			Main.drawPoint(point, image);
 		}
