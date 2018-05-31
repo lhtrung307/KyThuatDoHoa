@@ -69,36 +69,11 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 		point = new Point();
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
-
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (e.getButton() == MouseEvent.BUTTON1 && status == POINT) {
-			Point p = new Point(e.getX(), e.getY());
-			Main.drawPoint(p, drawPlace.getImage());
-			drawPlace.refreshDrawPlace(drawPlace.getImage());
-			status = 0;
-		}
 		
-		
-		// while(true) {
-		// for(int i = 1; i < 360; i++) {
-		// Cube3D cube = new Cube3D();
-		// cube.rotateY3D(i);
-		// cube.rotateX3D(i);
-		// imageClone.setData(drawPlace.getImage().getRaster());
-		// cube.setImage(imageClone);
-		// cube.drawCube();
-		// drawPlace.refreshDrawPlace(cube.getImage());
-		// try {
-		// Thread.sleep(1000);
-		// } catch (InterruptedException e1) {
-		// System.out.println(e1);
-		// }
-		// System.out.println("wow");
-		// }
-		// }
 	}
 
 	@Override
@@ -133,8 +108,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			if (status == ELLIPSE) {
 				pointRotato = p;
 			}
-			
-
 		}
 	}
 
@@ -143,6 +116,11 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 		if (e.getButton() == MouseEvent.BUTTON1) {
 			Point p = new Point(e.getX(), e.getY());
 			// DrawContainer.convertToCoordinatePoints(p);
+			if (status == POINT) {
+				Main.drawPoint(p, drawPlace.getImage());
+				drawPlace.refreshDrawPlace(drawPlace.getImage());
+				status = 0;
+			}
 			if (status == LINE) {
 				statusTemp=LINE;
 				x2=p.getX();
@@ -205,16 +183,11 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				x2=p.getX();
 				y2=p.getY();
 			}
-			
-			
 			//xoay
 			if(status == ROTATO) {
-				
-				
 				Rotato(pointRotato.getX(),pointRotato.getY(),x2,y2);
 				goc++;
 			}
-
 			// tinh tien
 			if (status == TRANSLATION) {
 				Point input = getTransInput();
@@ -231,21 +204,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 						}
 					}
 				}
-				
-
-				// line
-				// for (Point linePoint : line1.getPoints()) {
-				// try {
-				// Point temp =
-				// PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(linePoint, -10, -10));
-				// Main.drawPoint(temp, drawPlace.getImage());
-				// } catch (Exception exc) {
-				// System.out.println(exc);
-				// }
-				// }
-
 			}
-
 			if (status == ROTATION) {
 				for (Point elipPoint : ellipse.getPoints()) {
 
@@ -261,7 +220,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				}
 
 			}
-
 			if (status == SCALING) {
 
 				String value = JOptionPane.showInputDialog("Enter scale", "");
@@ -276,17 +234,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 					}
 				}
 				status = 0;
-
-				// for (Point circlePoint : circle.getPoints()) {
-				// try {
-				// Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(circlePoint,
-				// 0.5, 0.5));
-				// Main.drawPoint(temp, drawPlace.getImage());
-				// } catch (Exception exc) {
-				// System.out.println(exc);
-				// }
-				// }
-				//
 				// for (Point RectanglePoint : rectangle.getPoints()) {
 				// try {
 				// Point temp =
@@ -297,19 +244,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				// }
 				// }
 				//
-				// for (Point LinePoint : line1.getPoints()) {
-				// try {
-				// Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(LinePoint, 2,
-				// 2));
-				// Main.drawPoint(temp, drawPlace.getImage());
-				// } catch (Exception exc) {
-				// System.out.println(exc);
-				// }
-				//
-				// drawPlace.refreshDrawPlace(drawPlace.getImage());
-				// System.out.println("scale");
-				// }
-
 			}
 
 			if (status == REFLECTION) {
