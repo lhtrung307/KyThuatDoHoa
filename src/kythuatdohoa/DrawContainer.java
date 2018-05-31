@@ -51,7 +51,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	private Square square;
 	private Rectangle rectangle;
 	private Line line1;
-	private Cube3D cube;
+	private ArrayList<Cube3D> cubes;
 	private Pyramid3D pyramid;
 	int x2,y2;
 	int goc=0;
@@ -66,6 +66,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 		drawPlace.setBounds(0, 0, Main.SCR_WIDTH, Main.SCR_HEIGHT);
 		this.add(drawPlace);
 		shapes = new ArrayList<>();
+		cubes = new ArrayList<>();
 		point = new Point();
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
@@ -451,7 +452,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				int length = Integer.parseInt(cubeInput.getLength().getText());
 				Cube3D cube = new Cube3D(x, y, z, length);
 				cube.drawShape(drawPlace.getImage());
-				this.cube = cube;
+				cubes.add(cube);
 			}
 			if (status == PYRAMID3D) {
 				CubeInput cubeInput = new CubeInput();
@@ -531,10 +532,13 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				sq.drawShape(imageClone);
 			}
 			if (status == CUBE3D) {
-				Cube3D cubeClone = new Cube3D(cube.x, cube.y, cube.z, cube.length);
-				cubeClone.rotateY3D(p.getX() - point.getX());
-				cubeClone.rotateX3D(p.getY() - point.getY());
-				cubeClone.drawShape(imageClone);
+				for(Cube3D cube: cubes) {
+					Cube3D cubeClone = new Cube3D(cube.x, cube.y, cube.z, cube.length);
+					cubeClone.rotateY3D(p.getX() - point.getX());
+					cubeClone.rotateX3D(p.getY() - point.getY());
+					cubeClone.drawShape(imageClone);
+					cube = cubeClone;
+				}
 			}
 			if (status == PYRAMID3D) {
 				Pyramid3D pyramidClone = new Pyramid3D(pyramid.x, pyramid.y, pyramid.z, pyramid.length);
@@ -542,7 +546,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				pyramidClone.rotateX3D(p.getY() - point.getY());
 				pyramidClone.drawShape(imageClone);
 			}
-			System.out.println(p.toString());
 			drawPlace.refreshDrawPlace(imageClone);
 		}
 	}

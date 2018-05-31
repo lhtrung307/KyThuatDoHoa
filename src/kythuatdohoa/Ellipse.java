@@ -85,10 +85,8 @@ public class Ellipse extends Shape{
 		int trx1, try1;
 		trx1 = (tam.getX() - p.getX());
 		try1 = (tam.getY() - p.getY());
-
 		p.setX(p.getX() -  trx1);
 		p.setY(p.getY() -  try1);
-
 		Ellipse e = new Ellipse(p, bankinhNho, bankinhLon);
 		e.ellipseBre();
 	}
