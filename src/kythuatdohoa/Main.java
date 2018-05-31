@@ -11,6 +11,8 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
+import javax.swing.JTabbedPane;
+import javax.swing.JPanel;
 
 public class Main {
 	public static int SCR_HEIGHT = 642;
@@ -28,6 +30,7 @@ public class Main {
 	private JButton btnCube3d;
 	private JButton btnTranslation;
 	private JButton btnRotation;
+	private JButton btnRotato;
 	
 	/**
 	 * Launch the application.
@@ -67,7 +70,7 @@ public class Main {
 		drawContainer.setBounds(10, 45, SCR_HEIGHT, SCR_WIDTH);
 		drawContainer.drawCoordinate2D(color); // Ve Toa Do
 		frame.getContentPane().add(drawContainer);
-		drawContainer.setLayout(null);	
+		drawContainer.setLayout(null);
 
 		createBtnPoint();
 		frame.getContentPane().add(btnPoint);
@@ -108,7 +111,7 @@ public class Main {
 					drawContainer.setStatus(DrawContainer.TRANSLATION);
 				}
 			});
-			btnTranslation.setBounds(667, 11, 70, 23);
+			btnTranslation.setBounds(676, 11, 102, 23);
 			frame.getContentPane().add(btnTranslation);
 		}
 		
@@ -119,9 +122,20 @@ public class Main {
 					drawContainer.setStatus(DrawContainer.ROTATION);
 				}
 			});
-			btnRotation.setBounds(747, 11, 62, 23);
+			btnRotation.setBounds(788, 11, 87, 23);
 			frame.getContentPane().add(btnRotation);
 		}
+		{
+			btnRotato = new JButton("Rotato");
+			btnRotato.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					drawContainer.setStatus(DrawContainer.ROTATO);
+				}
+			});
+			btnRotato.setBounds(885, 11, 89, 23);
+			frame.getContentPane().add(btnRotato);
+		}
+		
 //		
 //		JLabel lblChooseColor = new JLabel("");
 //		lblChooseColor.setBounds(544, 15, 46, 14);
@@ -224,6 +238,6 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.CUBE3D);
 			}
 		});
-		btnCube3d.setBounds(595, 11, 62, 23);
+		btnCube3d.setBounds(595, 11, 71, 23);
 	}
 }

@@ -28,7 +28,8 @@ public class BresenhamLine extends Shape{
 			y = d1.getY();
 
 			p = 2 * dy - dx;
-
+			Point dv = new Point(x, y);
+			points.add(dv);
 			while (x != d2.getX()) {
 				x++;
 				if (p < 0) {
@@ -40,7 +41,7 @@ public class BresenhamLine extends Shape{
 					else
 						y++;
 				}
-				Point dv = new Point(x, y);
+				dv = new Point(x, y);
 				points.add(dv);
 			}
 		}else {
@@ -56,8 +57,9 @@ public class BresenhamLine extends Shape{
 			x = d1.getX();
 			y = d1.getY();
 			p = 2 * dy - dx;
-			
-			while (y <= d2.getY()) {
+			Point dv = new Point(x, y);
+			points.add(dv);
+			while (y < d2.getY()) {
 				y++;
 				if (p < 0) {
 					p = p + 2*dy;
@@ -68,7 +70,7 @@ public class BresenhamLine extends Shape{
 						x = x + 1;
 					p = p + 2*(dy-dx);
 				}
-				Point dv = new Point(x, y);
+				dv = new Point(x, y);
 				points.add(dv);
 			}
 		}
@@ -91,7 +93,8 @@ public class BresenhamLine extends Shape{
 			y = d1.getY();
 
 			p = 2 * dy - dx;
-
+			Point dv = new Point(x, y);
+			points.add(dv);
 			while (x != d2.getX()) {
 				x++; k++;
 				if (p < 0) {
@@ -104,10 +107,10 @@ public class BresenhamLine extends Shape{
 						y++;
 				}
 				if(k <= 5) {
-					Point dv = new Point(x, y);
+					dv = new Point(x, y);
 					points.add(dv);
 				}else {
-					Point dv = new Point(x, y);
+					dv = new Point(x, y);
 					points.add(dv);
 				}
 				if(k == 10)
@@ -127,8 +130,9 @@ public class BresenhamLine extends Shape{
 			x = d1.getX();
 			y = d1.getY();
 			p = 2 * dy - dx;
-			
-			while (y <= d2.getY()) {
+			Point dv = new Point(x, y);
+			points.add(dv);
+			while (y < d2.getY()) {
 				y++; k++;
 				if (p < 0) {
 					p = p + 2*dy;
@@ -140,10 +144,10 @@ public class BresenhamLine extends Shape{
 					p = p + 2*(dy-dx);
 				}
 				if(k <= 5) {
-					Point dv = new Point(x, y);
+					dv = new Point(x, y);
 					points.add(dv);
 				}else {
-					Point dv = new Point(x, y);
+					dv = new Point(x, y);
 					points.add(dv);
 				}
 				if(k == 10)
