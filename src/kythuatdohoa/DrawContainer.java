@@ -49,7 +49,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	private DuongTron circle;
 	private Square square;
 	private Rectangle rectangle;
-	private Line line1;
+	private BresenhamLine line1;
 	private ArrayList<Cube3D> cubes;
 	private Pyramid3D pyramid;
 	int x2,y2;
@@ -125,7 +125,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				statusTemp=LINE;
 				x2=p.getX();
 				y2=p.getY();
-				Line line = new Line(point, p);
+				BresenhamLine line = new BresenhamLine(point, p);
 				line.drawShape(drawPlace.getImage());
 				shapes.add(line);
 				line1 = line;
@@ -185,13 +185,13 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			if (status == TRANSLATION) {
 				Point input = getTransInput();
 				for (Shape shape : shapes) {
-					for (Point elipPoint : shape.getPoints()) {
-						elipPoint.translateRealToCoordinate();
+					for (Point shapePoint : shape.getPoints()) {
+						shapePoint.translateRealToCoordinate();
 						try {
-							Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(elipPoint, input.getX(), input.getY()));
+							Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(shapePoint, input.getX(), input.getY()));
 							temp.translateCoordinateToReal();
 							Main.drawPoint(temp, drawPlace.getImage());
-							elipPoint.translateCoordinateToReal();
+							shapePoint.translateCoordinateToReal();
 						} catch (Exception exc) {
 							System.out.println(exc);
 						}
@@ -214,17 +214,11 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 
 			}
 			if (status == SCALING) {
-
 				String value = JOptionPane.showInputDialog("Enter scale", "");
 				double scale = Double.parseDouble(value);
-				for (Point elipPoint : ellipse.getPoints()) {
-
-					try {
-						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(elipPoint, scale, scale));
-						Main.drawPoint(temp, drawPlace.getImage());
-					} catch (Exception exc) {
-						System.out.println(exc);
-					}
+				for (Shape shape: shapes) {
+					shape.scale(scale, scale);
+					shape.drawShape(drawPlace.getImage());
 				}
 				status = 0;
 				// for (Point RectanglePoint : rectangle.getPoints()) {

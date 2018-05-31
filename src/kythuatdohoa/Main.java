@@ -166,7 +166,9 @@ public class Main {
 	}
 
 	public static void drawPoint(Point point, BufferedImage image) {
-		image.setRGB(point.getX(), point.getY(), color.getRGB());
+		if(point.getX() < image.getWidth() && point.getY() < image.getHeight()) {
+			image.setRGB(point.getX(), point.getY(), color.getRGB());
+		}
 	}
 
 	private void createBtnPoint() {

@@ -347,4 +347,11 @@ public class Line extends Shape{
 		
 	}
 
+
+	@Override
+	public void scale(double sx, double sy) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

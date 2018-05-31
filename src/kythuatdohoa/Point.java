@@ -22,11 +22,11 @@ public class Point extends Shape{
 	}
 
 	public void setX(int x) {
-		if (x < 0) {
-			this.x = 0;
-		} else if (x > Main.SCR_WIDTH - 1) {
-			this.x = Main.SCR_WIDTH - 1;
-		}
+//		if (x < 0) {
+//			this.x = 0;
+//		} else if (x > Main.SCR_WIDTH - 1) {
+//			this.x = Main.SCR_WIDTH - 1;
+//		}
 		this.x = x;
 	}
 
@@ -35,11 +35,11 @@ public class Point extends Shape{
 	}
 
 	public void setY(int y) {
-		if (y < 0) {
-			this.y = 0;
-		} else if (y > Main.SCR_HEIGHT - 1) {
-			this.y = Main.SCR_HEIGHT - 1;
-		}
+//		if (y < 0) {
+//			this.y = 0;
+//		} else if (y > Main.SCR_HEIGHT - 1) {
+//			this.y = Main.SCR_HEIGHT - 1;
+//		}
 		this.y = y;
 	}
 
@@ -122,6 +122,12 @@ public class Point extends Shape{
 
 	@Override
 	public void drawShape(BufferedImage image) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void scale(double sx, double sy) {
 		// TODO Auto-generated method stub
 		
 	}

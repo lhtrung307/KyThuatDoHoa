@@ -132,6 +132,12 @@ public class Cube3D extends Shape {
 		}
 	}
 
+	@Override
+	public void scale(double sx, double sy) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	// public Point convert3Dto2D(int x,int y,int z) {
 	// return new Point((int)(x-y*(Math.sqrt(2)/2))*DrawContainer.size,(int) (z -
 	// y*(Math.sqrt(2)/2))*DrawContainer.size);

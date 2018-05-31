@@ -122,6 +122,12 @@ public class Pyramid3D extends Shape{
 			Main.drawPoint(point, image);
 		}
 	}
+
+	@Override
+	public void scale(double sx, double sy) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 //	public Point convert3Dto2D(int x,int y,int z) {
 //		return new Point((int)(x-y*(Math.sqrt(2)/2))*DrawContainer.size,(int) (z - y*(Math.sqrt(2)/2))*DrawContainer.size);

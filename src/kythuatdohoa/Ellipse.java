@@ -15,7 +15,6 @@ public class Ellipse extends Shape{
 
 	}
 
-
 	public void Doixung(Point tam, int x, int y) {
 		Point D;
 		D = new Point(tam.getX() + x, tam.getY() + y);
@@ -97,5 +96,16 @@ public class Ellipse extends Shape{
 		for(Point point: points) {
 			Main.drawPoint(point, image);
 		}
+	}
+
+	@Override
+	public void scale(double sx, double sy) {
+		bankinhLon = Math.round(bankinhLon * (float)sx);
+		bankinhNho = Math.round(bankinhNho * (float)sy);
+		points.clear();
+	}
+	
+	private void generate4Points() {
+		
 	}
 }
