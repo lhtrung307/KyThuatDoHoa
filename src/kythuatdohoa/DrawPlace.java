@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -40,12 +41,18 @@ public class DrawPlace extends JLabel{
 		setBGColor(BGColor);
 		drawPlaceBG = new ImageIcon(image);
 		this.setIcon(drawPlaceBG);
-		
 		this.drawCoordinate3D(Main.color);
 	}
 	
 	public void refreshDrawPlace(BufferedImage image){
 		this.setIcon(new ImageIcon(image));
+	}
+	
+	public void repaint(ArrayList<Shape> shapes) {
+		createDrawPlace();
+		for (Shape shape : shapes) {
+			shape.drawShape(image);
+		}
 	}
 	
 	public void setBGColor(Color color) {

@@ -24,9 +24,9 @@ public class Pyramid3D extends Shape{
 	Color nodeColor = new Color(40, 168, 107);
 	Color edgeColor = new Color(34, 68, 204);
 	int nodeSize = 4;
-	int x, y, z, length;
+	int x, y, z;
 	
-	public Pyramid3D(int x, int y, int z, int length) {
+	public Pyramid3D(int x, int y, int z) {
 		super();
 		this.x = x;
 		this.y = y;

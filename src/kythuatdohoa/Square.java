@@ -73,5 +73,6 @@ public class Square extends Shape{
 		d2 = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(d2, sx, sy));
 		points.clear();
 	}
+
 }
 
