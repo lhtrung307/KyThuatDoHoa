@@ -29,6 +29,7 @@ public class DuongTron extends Shape{
 		this.tam = tam;
 	}
 	
+	//ha, ve 8 diem doi xung
 	public void Doixung(Point tam, int x, int y) {
 		Point D;
 

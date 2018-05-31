@@ -39,13 +39,12 @@ public class Ellipse extends Shape{
 
 	public void ellipseBre() {
 		int x, y, dx, dy, rx, ry, p;
-		rx = bankinhNho * bankinhNho;
-		ry = bankinhLon * bankinhLon;
+		rx = bankinhNho * bankinhNho;//x^2
+		ry = bankinhLon * bankinhLon;// y^2
 		x = 0;
 		y = bankinhLon;
 		dx = 0;
 		dy = (rx << 1) * y;
-		Doixung(tam, x, y);
 		Doixung(this.tam, x, y);
 		p = (int) Math.round(ry - (rx * bankinhLon) + (0.25 * rx));
 		while (dx < dy) {
