@@ -39,7 +39,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 
 	private int statusTemp;
 
-	private int temp;
 	private int numb;
 
 	private Point point;
@@ -130,8 +129,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				shapes.add(line);
 				line1 = line;
 
-				temp = status;
-
 				status = 0;
 				
 			}
@@ -141,9 +138,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				rect.drawShape(drawPlace.getImage());
 				rectangle = rect;
 				shapes.add(rect);
-				temp = status;
 				status = 0;
-				// rect.doiXung(point);
 				x2=p.getX();
 				y2=p.getY();
 			}
@@ -153,7 +148,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				sq.drawShape(drawPlace.getImage());
 				square = sq;
 				shapes.add(sq);
-				temp = status;
 				status = 0;
 				x2=p.getX();
 				y2=p.getY();
@@ -165,7 +159,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				dTron.drawShape(drawPlace.getImage());
 				circle = dTron;
 				shapes.add(dTron);
-				temp = status;
 				status = 0;
 				x2=p.getX();
 				y2=p.getY();
@@ -178,7 +171,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				elip.drawShape(drawPlace.getImage());
 				ellipse = elip;
 				shapes.add(elip);
-				temp = status;
 				status = 0;
 				x2=p.getX();
 				y2=p.getY();
@@ -247,192 +239,23 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			}
 
 			if (status == REFLECTION) {
-				if (temp == DUONG_TRON) {
-					if (numb == 1) {
-						for (Point circlePoint : circle.getPoints()) {
-							circlePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionO(circlePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
+				for(Shape shape : shapes) {
+					for(Point shapePoint : shape.getPoints()) {
+						shapePoint.translateRealToCoordinate();
+						try {
+							Point temp;
+							if(numb == 1) {
+								temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionO(shapePoint));
+							}else if(numb == 2) {
+								temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOx(shapePoint));
+							}else {
+								temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOy(shapePoint));
 							}
-						}
-
-					} else if (numb == 2) {
-						for (Point circlePoint : circle.getPoints()) {
-							circlePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOx(circlePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					} else {
-						for (Point circlePoint : circle.getPoints()) {
-							circlePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOy(circlePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					}
-				}
-				if(temp == RECTANGLE) {
-					if(numb == 1) {
-						for(Point RectanglePoint : rectangle.getPoints()) {
-							RectanglePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionO(RectanglePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-						
-						
-					}else if(numb == 2) {
-						for(Point RectanglePoint : rectangle.getPoints()) {
-							RectanglePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOx(RectanglePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					}else {
-						for(Point RectanglePoint : rectangle.getPoints()) {
-							RectanglePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOy(RectanglePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					}
-				}
-				if(temp == ELLIPSE) {
-					if(numb == 1) {
-						for(Point ellipsePoint : ellipse.getPoints()) {
-							ellipsePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionO(ellipsePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-						
-						
-					}else if(numb == 2) {
-						for(Point ellipsePoint : ellipse.getPoints()) {
-							ellipsePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOx(ellipsePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					}else {
-						for(Point ellipsePoint : ellipse.getPoints()) {
-							ellipsePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOy(ellipsePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					}
-				}
-				if(temp == SQUARE) {
-					if(numb == 1) {
-						for(Point squarePoint : square.getPoints()) {
-							squarePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionO(squarePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-						
-						
-					}else if(numb == 2) {
-						for(Point squarePoint : square.getPoints()) {
-							squarePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOx(squarePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					}else {
-						for(Point squarePoint : square.getPoints()) {
-							squarePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOy(squarePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					}
-				}
-				if(temp == LINE) {
-					if(numb == 1) {
-						for(Point line : line1.getPoints()) {
-							line.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionO(line));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-						
-						
-					}else if(numb == 2) {
-						for(Point line : line1.getPoints()) {
-							line.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOx(line));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					}else {
-						for(Point line : line1.getPoints()) {
-							line.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOy(line));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
+							temp.translateCoordinateToReal();
+							Main.drawPoint(temp, drawPlace.getImage());
+							shapePoint.translateCoordinateToReal();
+						} catch (Exception exc) {
+							System.out.println(exc);
 						}
 					}
 				}
