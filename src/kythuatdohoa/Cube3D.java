@@ -33,8 +33,6 @@ public class Cube3D extends Shape {
 	int nodeSize = 4;
 	int x, y, z, length;
 
-	
-	
 	public Cube3D(int x, int y, int z, int length) {
 		super();
 		this.x = x;
@@ -49,17 +47,6 @@ public class Cube3D extends Shape {
 			node[1] = node[1] * y;
 			node[2] = node[2] * z;
 		}
-	}
-
-	int type = BufferedImage.TYPE_INT_ARGB;
-	BufferedImage image;
-
-	public BufferedImage getImage() {
-		return image;
-	}
-
-	public void setImage(BufferedImage image) {
-		this.image = image;
 	}
 
 	public void drawCube() {
