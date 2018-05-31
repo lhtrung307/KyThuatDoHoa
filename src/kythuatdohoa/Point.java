@@ -114,8 +114,9 @@ public class Point {
 
 	}
 	
+
 	public void translateRealToCoordinate() {
-		this.setX(this.getX() - (Main.SCR_WIDTH - 2) / 2);
-		this.setY(this.getY() - (Main.SCR_HEIGHT - 2) / 2);
+		this.setX(this.getX() - (Main.SCR_HEIGHT - 2) / 2);
+		this.setY(this.getY() - (Main.SCR_WIDTH - 2) / 2);
 	}
 }

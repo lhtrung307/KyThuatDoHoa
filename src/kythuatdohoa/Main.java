@@ -13,6 +13,8 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
+import javax.swing.JTabbedPane;
+import javax.swing.JPanel;
 
 public class Main {
 	public static int SCR_HEIGHT = 482;
@@ -29,7 +31,9 @@ public class Main {
 	private JButton btnScale;
 	private JButton btnCube3d;
 	private JButton btnTranslation;
-	private JButton btnRotation;
+//	private JButton btnRotation;
+	private JButton btnRotato;
+
 	private JComboBox boxReflection;
 
 	/**
@@ -111,9 +115,6 @@ public class Main {
 		createBtnTranslation();
 		frame.getContentPane().add(btnTranslation);
 		
-		createBtnRotation();
-		frame.getContentPane().add(btnRotation);
-		
 		JButton btnSaveImage = new JButton("Save Image");
 		btnSaveImage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -136,6 +137,26 @@ public class Main {
 		btnPyramid.setBounds(819, 11, 89, 23);
 		frame.getContentPane().add(btnPyramid);
 	
+//		{
+//			btnRotation = new JButton("Rotation");
+//			btnRotation.addActionListener(new ActionListener() {
+//				public void actionPerformed(ActionEvent e) {
+//					drawContainer.setStatus(DrawContainer.ROTATION);
+//				}
+//			});
+//			btnRotation.setBounds(788, 11, 87, 23);
+//			frame.getContentPane().add(btnRotation);
+//		}
+		{
+			btnRotato = new JButton("Rotato");
+			btnRotato.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					drawContainer.setStatus(DrawContainer.ROTATO);
+				}
+			});
+			btnRotato.setBounds(885, 11, 89, 23);
+			frame.getContentPane().add(btnRotato);
+		}
 //		JLabel lblChooseColor = new JLabel("");
 //		lblChooseColor.setBounds(544, 15, 46, 14);
 //		frame.getContentPane().add(lblChooseColor);
@@ -237,7 +258,7 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.CUBE3D);
 			}
 		});
-		btnCube3d.setBounds(595, 11, 62, 23);
+		btnCube3d.setBounds(595, 11, 71, 23);
 	}
 
 //	private void createBtnReflection() {
@@ -251,16 +272,6 @@ public class Main {
 //		});
 //		boxReflection.setBounds(830, 11, 100, 23);
 //	}
-	
-	private void createBtnRotation() {
-		btnRotation = new JButton("Rotation");
-		btnRotation.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				drawContainer.setStatus(DrawContainer.ROTATION);
-			}
-		});
-		btnRotation.setBounds(747, 11, 62, 23);
-	}
 	
 	private void createBtnTranslation() {
 		btnTranslation = new JButton("Translation");

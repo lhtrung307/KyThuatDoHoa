@@ -1,13 +1,8 @@
 package kythuatdohoa;
 
 import javax.swing.JPanel;
-import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 
 public class CubeInput extends JPanel {
 	private JTextField xCoor;
