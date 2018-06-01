@@ -97,8 +97,8 @@ public class Main {
 		createBtnScale();
 		frame.getContentPane().add(btnScale);
 
-//		createBtnReflection();
-//		frame.getContentPane().add(boxReflection);
+		createBtnReflection();
+		frame.getContentPane().add(boxReflection);
 
 		JButton btnColoring = new JButton("Coloring");
 		btnColoring.addActionListener(new ActionListener() {
@@ -166,7 +166,9 @@ public class Main {
 	}
 
 	public static void drawPoint(Point point, BufferedImage image) {
-		image.setRGB(point.getX(), point.getY(), color.getRGB());
+		if(point.getX() < image.getWidth() && point.getY() < image.getHeight()) {
+			image.setRGB(point.getX(), point.getY(), color.getRGB());
+		}
 	}
 
 	private void createBtnPoint() {
@@ -261,17 +263,17 @@ public class Main {
 		btnCube3d.setBounds(595, 11, 71, 23);
 	}
 
-//	private void createBtnReflection() {
-//		int[] numb = { 1, 2, 3 };
-//		String[] name = { "Doi xung tam O", "Doi xung truc Ox", "Doi xung truc Oy" };
-//		boxReflection = new JComboBox<String>(name);
-//		boxReflection.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				drawContainer.setStatus(DrawContainer.REFLECTION, numb[boxReflection.getSelectedIndex()]);
-//			}
-//		});
-//		boxReflection.setBounds(830, 11, 100, 23);
-//	}
+	private void createBtnReflection() {
+		int[] numb = { 1, 2, 3 };
+		String[] name = { "Doi xung tam O", "Doi xung truc Ox", "Doi xung truc Oy" };
+		boxReflection = new JComboBox<String>(name);
+		boxReflection.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				drawContainer.setStatus(DrawContainer.REFLECTION, numb[boxReflection.getSelectedIndex()]);
+			}
+		});
+		boxReflection.setBounds(830, 11, 100, 23);
+	}
 	
 	private void createBtnTranslation() {
 		btnTranslation = new JButton("Translation");

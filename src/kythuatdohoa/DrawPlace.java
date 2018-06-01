@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -40,12 +41,18 @@ public class DrawPlace extends JLabel{
 		setBGColor(BGColor);
 		drawPlaceBG = new ImageIcon(image);
 		this.setIcon(drawPlaceBG);
-		
 		this.drawCoordinate3D(Main.color);
 	}
 	
 	public void refreshDrawPlace(BufferedImage image){
 		this.setIcon(new ImageIcon(image));
+	}
+	
+	public void repaint(ArrayList<Shape> shapes) {
+		createDrawPlace();
+		for (Shape shape : shapes) {
+			shape.drawShape(image);
+		}
 	}
 	
 	public void setBGColor(Color color) {
@@ -101,7 +108,7 @@ public class DrawPlace extends JLabel{
 			// }
 			if (w == fixW / 2) {
 				Main.color = coorColor;
-				Line line = new Line(top, bot);
+				BresenhamLine line = new BresenhamLine(top, bot);
 				line.drawShape(image);
 				Main.color = coorColor;
 			}
@@ -121,7 +128,7 @@ public class DrawPlace extends JLabel{
 				Point right = new Point(fixW, h);
 				System.out.println(left.toString());
 				System.out.println(right.toString());
-				Line line = new Line(left, right);
+				BresenhamLine line = new BresenhamLine(left, right);
 				
 				line.drawShape(image);
 			}
@@ -149,7 +156,7 @@ public class DrawPlace extends JLabel{
 				Main.color = coorColor;
 				Point top = new Point(w, 0);
 				Point bot = new Point(w, fixH / 2);
-				Line line = new Line(top, bot);
+				BresenhamLine line = new BresenhamLine(top, bot);
 				line.drawShape(image);
 
 				int ww = fixW / 2;
@@ -172,7 +179,7 @@ public class DrawPlace extends JLabel{
 				Main.color = coorColor;
 				Point left = new Point(fixW / 2, h);
 				Point right = new Point(fixW, h);
-				Line line = new Line(left, right);
+				BresenhamLine line = new BresenhamLine(left, right);
 				line.drawShape(image);
 				Main.color = blue;
 			}

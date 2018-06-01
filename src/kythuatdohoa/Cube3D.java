@@ -31,9 +31,9 @@ public class Cube3D extends Shape {
 	Color nodeColor = new Color(40, 168, 107);
 	Color edgeColor = new Color(34, 68, 204);
 	int nodeSize = 4;
-	int x, y, z, length;
+	int x, y, z;
 
-	public Cube3D(int x, int y, int z, int length) {
+	public Cube3D(int x, int y, int z) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -130,6 +130,12 @@ public class Cube3D extends Shape {
 		for (Point point : points) {
 			Main.drawPoint(point, image);
 		}
+	}
+
+	@Override
+	public void scale(double sx, double sy) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	// public Point convert3Dto2D(int x,int y,int z) {

@@ -24,4 +24,6 @@ public abstract class Shape {
 	}
 	
 	public abstract void drawShape(BufferedImage image);
+	
+	public abstract void scale(double sx, double sy);
 }
