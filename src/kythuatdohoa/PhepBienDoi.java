@@ -52,7 +52,7 @@ public class PhepBienDoi {
 	
 	public static double[][] reflectionPoint(Point p, int xDistance, int yDistance) {
 		double matP[][] = { { p.getX(), p.getY(), 1 } };
-		double mat[][] = { { -1, 0, 0 }, { 0, -1, 0 }, { 2*xDistance, 2*yDistance, 1 } };
+		double mat[][] = { { 1, 0, 0 }, { 0, 1, 0 }, { 2*xDistance, 2*yDistance, 1 } };
 		return multiMatrix(matP, mat);
 	}
 

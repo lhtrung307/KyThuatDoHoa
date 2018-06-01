@@ -347,8 +347,8 @@ public class Main {
 	}
 
 	private void createBtnReflection() {
-		int[] numb = { 1, 2, 3 };
-		String[] name = { "Doi xung tam O", "Doi xung truc Ox", "Doi xung truc Oy" };
+		int[] numb = { 1, 2, 3, 4 };
+		String[] name = { "Doi xung tam O", "Doi xung truc Ox", "Doi xung truc Oy", "Doi xung diem" };
 		boxReflection = new JComboBox<String>(name);
 		boxReflection.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

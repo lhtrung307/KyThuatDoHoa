@@ -236,7 +236,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 
 			if (status == REFLECTION) {
 				Point input = null;
-				if (numb > 3) {
+				if (numb == 4) {
 					input = getTransInput();
 					input.translateRealToCoordinate();
 				}
@@ -252,7 +252,9 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 							}else if(numb == 3) {
 								temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOy(shapePoint));
 							}else if(numb == 4) {
-								temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionPoint(shapePoint, input.getX()-shapePoint.getX(), input.getY()-shapePoint.getY()));
+								int dx = input.getX()-shapePoint.getX();
+								int dy = input.getY()-shapePoint.getY();
+								temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionPoint(shapePoint, dx, dy));
 							}
 							temp.translateCoordinateToReal();
 							Main.drawPoint(temp, drawPlace.getImage());
