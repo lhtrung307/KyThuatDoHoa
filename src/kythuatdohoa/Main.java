@@ -39,7 +39,7 @@ public class Main {
 	private JComboBox comboBox;
 	private JButton btnDone;
 
-//	private JComboBox boxReflection;
+	private JComboBox boxReflection;
 
 	/**
 	 * Launch the application.
@@ -336,17 +336,17 @@ public class Main {
 		btnCube3d.setBounds(595, 11, 71, 23);
 	}
 
-//	private void createBtnReflection() {
-//		int[] numb = { 1, 2, 3 };
-//		String[] name = { "Doi xung tam O", "Doi xung truc Ox", "Doi xung truc Oy" };
-//		boxReflection = new JComboBox<String>(name);
-//		boxReflection.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				drawContainer.setStatus(DrawContainer.REFLECTION, numb[boxReflection.getSelectedIndex()]);
-//			}
-//		});
-//		boxReflection.setBounds(830, 11, 100, 23);
-//	}
+	private void createBtnReflection() {
+		int[] numb = { 1, 2, 3 };
+		String[] name = { "Doi xung tam O", "Doi xung truc Ox", "Doi xung truc Oy" };
+		boxReflection = new JComboBox<String>(name);
+		boxReflection.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				drawContainer.setStatus(DrawContainer.REFLECTION, numb[boxReflection.getSelectedIndex()]);
+			}
+		});
+		boxReflection.setBounds(830, 11, 100, 23);
+	}
 	
 	private void createBtnTranslation() {
 		btnTranslation = new JButton("Translation");
