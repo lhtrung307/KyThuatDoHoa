@@ -189,15 +189,19 @@ public class BresenhamLine extends Shape {
 
 	@Override
 	public void scale(double sx, double sy) {
-		d1 = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(d1, sx, sy));
-		d2 = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(d2, sx, sy));
+		d1 = PhepBienDoi.scaling(d1, sx, sy);
+		d2 = PhepBienDoi.scaling(d2, sx, sy);
 		points.clear();
 	}
 
 	@Override
-	public void rotation(double theta) {
-		// TODO Auto-generated method stub
-		
+	public void rotation(double theta, Point p) {
+		d1.translateRealToCoordinate();
+		this.setD1(PhepBienDoi.rotation(d1, p, theta));
+		d1.translateCoordinateToReal();
+		d2.translateRealToCoordinate();
+		this.setD2(PhepBienDoi.rotation(d2, p, theta));
+		d2.translateCoordinateToReal();
 	}
 
 }

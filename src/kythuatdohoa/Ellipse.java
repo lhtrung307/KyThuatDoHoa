@@ -89,10 +89,42 @@ public class Ellipse extends Shape{
 		Ellipse e = new Ellipse(p, bankinhNho, bankinhLon);
 		e.ellipseBre();
 	}
+	
+	private void generateSquare() {
+		Point d1 = new Point(tam.getX() + bankinhNho, tam.getY() + bankinhLon);
+		d1.translateRealToCoordinate();
+		d1 = PhepBienDoi.scaling(d1, 0.705069124, 0.705069124);
+		d1.translateCoordinateToReal();
+		Point d2 = new Point(tam.getX() - bankinhNho, tam.getY() + bankinhLon);
+		d2.translateRealToCoordinate();
+		d2 = PhepBienDoi.scaling(d2, 0.705069124, 0.705069124);
+		d2.translateCoordinateToReal();
+		Point d3 = new Point(tam.getX() + bankinhNho, tam.getY() - bankinhLon);
+		d3.translateRealToCoordinate();
+		d3 = PhepBienDoi.scaling(d3, 0.705069124, 0.705069124);
+		d3.translateCoordinateToReal();
+		Point d4 = new Point(tam.getX() - bankinhNho, tam.getY() - bankinhLon);
+		d4.translateRealToCoordinate();
+		d4 = PhepBienDoi.scaling(d4, 0.705069124, 0.705069124);
+		d4.translateCoordinateToReal();
+		BresenhamLine line1 = new BresenhamLine(d1, d2);
+		BresenhamLine line2 = new BresenhamLine(d1, d3);
+		BresenhamLine line3 = new BresenhamLine(d2, d4);
+		BresenhamLine line4 = new BresenhamLine(d3, d4);
+		line1.drawLine();
+		points.addAll(line1.getPoints());
+		line2.drawLine();
+		points.addAll(line2.getPoints());
+		line3.drawLine();
+		points.addAll(line3.getPoints());
+		line4.drawLine();
+		points.addAll(line4.getPoints());
+	}
 
 	@Override
 	public void drawShape(BufferedImage image) {
 		this.ellipseBre();
+		generateSquare();
 		for(Point point: points) {
 			Main.drawPoint(point, image);
 		}
@@ -104,14 +136,16 @@ public class Ellipse extends Shape{
 		bankinhNho = Math.round(bankinhNho * (float)sy);
 		points.clear();
 	}
-	
-	public void rotate(int theta) {
-		
-	}
 
 	@Override
-	public void rotation(double theta) {
-		// TODO Auto-generated method stub
-		
+	public void rotation(double theta, Point p) {
+		tam.translateRealToCoordinate();
+		this.setTam(PhepBienDoi.rotation(tam, p, theta));
+		tam.translateCoordinateToReal();
+		points.clear();
+	}
+
+	public void setTam(Point tam) {
+		this.tam = tam;
 	}
 }

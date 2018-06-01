@@ -15,9 +15,6 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 public class DrawContainer extends JPanel implements MouseMotionListener, MouseListener {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public static int POINT = 1;
 	public static int LINE = 2;
@@ -180,20 +177,11 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				}
 			}
 			if (status == ROTATION) {
-//				Point input = getTransInput();
+				Point input = getTransInput();
+				String value = JOptionPane.showInputDialog("Enter theta", "");
+				double theta = Double.parseDouble(value);
 				for (Shape shape : shapes) {
-//					for (Point shapePoint : shape.getPoints()) {
-//						shapePoint.translateRealToCoordinate();
-//						try {
-//							Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.rotation(shapePoint, -30));
-//							temp.translateCoordinateToReal();
-//							Main.drawPoint(temp, drawPlace.getImage());
-//							shapePoint.translateCoordinateToReal();
-//						} catch (Exception exc) {
-//							System.out.println(exc);
-//						}
-//					}
-					shape.rotation(30);
+					shape.rotation(theta, input);
 					shape.drawShape(drawPlace.getImage());
 				}
 				

@@ -111,9 +111,9 @@ public class DuongTron extends Shape{
 	}
 
 	@Override
-	public void rotation(double theta) {
+	public void rotation(double theta, Point p) {
 		tam.translateRealToCoordinate();
-		this.setTam(PhepBienDoi.getPointFromMatrix(PhepBienDoi.rotation(tam, theta)));
+		this.setTam(PhepBienDoi.rotation(tam, p, theta));
 		tam.translateCoordinateToReal();
 		points.clear();
 	}

@@ -130,7 +130,7 @@ public class Pyramid3D extends Shape{
 	}
 
 	@Override
-	public void rotation(double theta) {
+	public void rotation(double theta, Point p) {
 		// TODO Auto-generated method stub
 		
 	}

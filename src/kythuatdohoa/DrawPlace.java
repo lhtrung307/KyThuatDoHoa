@@ -41,7 +41,7 @@ public class DrawPlace extends JLabel{
 		setBGColor(BGColor);
 		drawPlaceBG = new ImageIcon(image);
 		this.setIcon(drawPlaceBG);
-		this.drawCoordinate3D(Main.color);
+		this.drawCoordinate2D(Main.color);
 	}
 	
 	public void refreshDrawPlace(BufferedImage image){

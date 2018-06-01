@@ -96,24 +96,28 @@ public class Square extends Shape {
 
 	@Override
 	public void scale(double sx, double sy) {
-		d1 = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(d1, sx, sy));
-		d2 = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(d2, sx, sy));
+		d1.translateRealToCoordinate();
+		d1 = PhepBienDoi.scaling(d1, sx, sy);
+		d1.translateCoordinateToReal();
+		d2.translateRealToCoordinate();
+		d2 = PhepBienDoi.scaling(d2, sx, sy);
+		d2.translateCoordinateToReal();
 		points.clear();
 	}
 
 	@Override
-	public void rotation(double theta) {
+	public void rotation(double theta, Point p) {
 		d1.translateRealToCoordinate();
-		this.setD1(PhepBienDoi.getPointFromMatrix(PhepBienDoi.rotation(d1, theta)));
+		this.setD1(PhepBienDoi.rotation(d1, new Point(0, 0), theta));
 		d1.translateCoordinateToReal();
 		d2.translateRealToCoordinate();
-		this.setD2(PhepBienDoi.getPointFromMatrix(PhepBienDoi.rotation(d2, theta)));
+		this.setD2(PhepBienDoi.rotation(d2, new Point(0, 0), theta));
 		d2.translateCoordinateToReal();
 		d3.translateRealToCoordinate();
-		this.setD3(PhepBienDoi.getPointFromMatrix(PhepBienDoi.rotation(d3, theta)));
+		this.setD3(PhepBienDoi.rotation(d3, new Point(0, 0), theta));
 		d3.translateCoordinateToReal();
 		d4.translateRealToCoordinate();
-		this.setD4(PhepBienDoi.getPointFromMatrix(PhepBienDoi.rotation(d4, theta)));
+		this.setD4(PhepBienDoi.rotation(d4, new Point(0, 0), theta));
 		d4.translateCoordinateToReal();
 		points.clear();
 	}

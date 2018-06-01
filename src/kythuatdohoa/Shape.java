@@ -27,5 +27,5 @@ public abstract class Shape {
 	
 	public abstract void scale(double sx, double sy);
 
-	public abstract void rotation(double theta);
+	public abstract void rotation(double theta, Point p);
 }

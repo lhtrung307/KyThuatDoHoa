@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 public class Point extends Shape{
-	private int x;
-	private int y;
+	public int x;
+	public int y;
 
 	public Point(int x, int y) {
 		setX(x);
@@ -133,8 +133,8 @@ public class Point extends Shape{
 	}
 
 	@Override
-	public void rotation(double theta) {
-		// TODO Auto-generated method stub
+	public void rotation(double theta, Point p) {
+		
 		
 	}
 }
