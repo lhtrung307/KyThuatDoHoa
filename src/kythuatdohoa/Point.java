@@ -3,7 +3,7 @@ package kythuatdohoa;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-public class Point extends Shape{
+public class Point extends Shape<Point>{
 	public int x;
 	public int y;
 
@@ -119,6 +119,10 @@ public class Point extends Shape{
 		this.setX(this.getX() - (Main.SCR_WIDTH - 2) / 2);
 		this.setY(this.getY() - (Main.SCR_HEIGHT - 2) / 2);
 	}
+	
+	public Point clone() {
+		return new Point(x, y);
+	}
 
 	@Override
 	public void drawShape(BufferedImage image) {
@@ -133,7 +137,8 @@ public class Point extends Shape{
 	}
 
 	@Override
-	public void rotation(double theta, Point p) {
+	public Point rotation(double theta, Point p) {
+		return null;
 		
 		
 	}

@@ -3,7 +3,7 @@ package kythuatdohoa;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public abstract class Shape {
+public abstract class Shape<T> {
 	protected ArrayList<Point> points;
 
 	public Shape(ArrayList<Point> points) {
@@ -27,5 +27,5 @@ public abstract class Shape {
 	
 	public abstract void scale(double sx, double sy);
 
-	public abstract void rotation(double theta, Point p);
+	public abstract T rotation(double theta, Point p);
 }

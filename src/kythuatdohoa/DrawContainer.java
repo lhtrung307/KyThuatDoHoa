@@ -162,14 +162,11 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			// tinh tien
 			if (status == TRANSLATION) {
 				Point input = getTransInput();
-				for (Shape shape : shapes) {
+				for (Shape<Shape> shape : shapes) {
 					for (Point shapePoint : shape.getPoints()) {
-						shapePoint.translateRealToCoordinate();
 						try {
-							Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(shapePoint, input.getX(), input.getY()));
-							temp.translateCoordinateToReal();
+							Point temp = PhepBienDoi.translation(shapePoint, input.getX(), input.getY());
 							Main.drawPoint(temp, drawPlace.getImage());
-							shapePoint.translateCoordinateToReal();
 						} catch (Exception exc) {
 							System.out.println(exc);
 						}
@@ -181,8 +178,8 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				String value = JOptionPane.showInputDialog("Enter theta", "");
 				double theta = Double.parseDouble(value);
 				for (Shape shape : shapes) {
-					shape.rotation(theta, input);
-					shape.drawShape(drawPlace.getImage());
+						Shape shapeRot = (Shape) shape.rotation(theta, input);
+						shape.drawShape(drawPlace.getImage());
 				}
 				
 			}
@@ -202,7 +199,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 					input = getTransInput();
 					input.translateRealToCoordinate();
 				}
-				for(Shape shape : shapes) {
+				for(Shape<Shape> shape : shapes) {
 					for(Point shapePoint : shape.getPoints()) {
 						shapePoint.translateRealToCoordinate();
 						try {

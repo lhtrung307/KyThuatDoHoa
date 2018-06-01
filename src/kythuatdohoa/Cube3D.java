@@ -3,7 +3,7 @@ package kythuatdohoa;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-public class Cube3D extends Shape {
+public class Cube3D extends Shape<Cube3D> {
 	
 	int[] node0 = { -1, -1, -1 };
 	int[] node1 = { -1, -1, 1 };
@@ -139,9 +139,8 @@ public class Cube3D extends Shape {
 	}
 
 	@Override
-	public void rotation(double theta, Point p) {
-		// TODO Auto-generated method stub
-		
+	public Cube3D rotation(double theta, Point p) {
+		return null;
 	}
 
 	// public Point convert3Dto2D(int x,int y,int z) {

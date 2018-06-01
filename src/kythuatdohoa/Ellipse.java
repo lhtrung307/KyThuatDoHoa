@@ -2,7 +2,7 @@ package kythuatdohoa;
 
 import java.awt.image.BufferedImage;
 
-public class Ellipse extends Shape{
+public class Ellipse extends Shape<Ellipse>{
 	private Point tam = new Point();
 	private int bankinhNho;
 	private int bankinhLon;
@@ -90,41 +90,29 @@ public class Ellipse extends Shape{
 		e.ellipseBre();
 	}
 	
-	private void generateSquare() {
-		Point d1 = new Point(tam.getX() + bankinhNho, tam.getY() + bankinhLon);
-		d1.translateRealToCoordinate();
-		d1 = PhepBienDoi.scaling(d1, 0.705069124, 0.705069124);
-		d1.translateCoordinateToReal();
-		Point d2 = new Point(tam.getX() - bankinhNho, tam.getY() + bankinhLon);
-		d2.translateRealToCoordinate();
-		d2 = PhepBienDoi.scaling(d2, 0.705069124, 0.705069124);
-		d2.translateCoordinateToReal();
-		Point d3 = new Point(tam.getX() + bankinhNho, tam.getY() - bankinhLon);
-		d3.translateRealToCoordinate();
-		d3 = PhepBienDoi.scaling(d3, 0.705069124, 0.705069124);
-		d3.translateCoordinateToReal();
-		Point d4 = new Point(tam.getX() - bankinhNho, tam.getY() - bankinhLon);
-		d4.translateRealToCoordinate();
+	private void generateRect() {
+		Point d4 = new Point(tam.getX() + bankinhNho, tam.getY() + bankinhLon);
 		d4 = PhepBienDoi.scaling(d4, 0.705069124, 0.705069124);
-		d4.translateCoordinateToReal();
-		BresenhamLine line1 = new BresenhamLine(d1, d2);
-		BresenhamLine line2 = new BresenhamLine(d1, d3);
-		BresenhamLine line3 = new BresenhamLine(d2, d4);
-		BresenhamLine line4 = new BresenhamLine(d3, d4);
-		line1.drawLine();
-		points.addAll(line1.getPoints());
-		line2.drawLine();
-		points.addAll(line2.getPoints());
-		line3.drawLine();
-		points.addAll(line3.getPoints());
-		line4.drawLine();
-		points.addAll(line4.getPoints());
+		d4 = PhepBienDoi.translation(d4, tam.x, tam.y);
+		Point d3 = new Point(tam.getX() - bankinhNho, tam.getY() + bankinhLon);
+		d3 = PhepBienDoi.scaling(d3, 0.705069124, 0.705069124);
+		d3 = PhepBienDoi.translation(d3, tam.x, tam.y);
+		Point d2 = new Point(tam.getX() + bankinhNho, tam.getY() - bankinhLon);
+		d2 = PhepBienDoi.scaling(d2, 0.705069124, 0.705069124);
+		d2 = PhepBienDoi.translation(d2, tam.x, tam.y);
+		Point d1 = new Point(tam.getX() - bankinhNho, tam.getY() - bankinhLon);
+		d1 = PhepBienDoi.scaling(d1, 0.705069124, 0.705069124);
+		d1 = PhepBienDoi.translation(d4, tam.x, tam.y);
+		Rectangle rect = new Rectangle(d1, d2, d3, d4);
+		rect.paint();
+		
+		points.addAll(rect.getPoints());
 	}
 
 	@Override
 	public void drawShape(BufferedImage image) {
 		this.ellipseBre();
-		generateSquare();
+		generateRect();
 		for(Point point: points) {
 			Main.drawPoint(point, image);
 		}
@@ -138,11 +126,9 @@ public class Ellipse extends Shape{
 	}
 
 	@Override
-	public void rotation(double theta, Point p) {
-		tam.translateRealToCoordinate();
-		this.setTam(PhepBienDoi.rotation(tam, p, theta));
-		tam.translateCoordinateToReal();
-		points.clear();
+	public Ellipse rotation(double theta, Point p) {
+		Point tamClone = PhepBienDoi.rotation(this.tam, p, theta).clone();
+		return new Ellipse(tamClone, bankinhNho, bankinhLon);
 	}
 
 	public void setTam(Point tam) {

@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import kythuatdohoa.Point;
 
-public class DuongTron extends Shape{
+public class DuongTron extends Shape<DuongTron>{
 	private Point tam = new Point();
 	private int R;
 
@@ -111,11 +111,9 @@ public class DuongTron extends Shape{
 	}
 
 	@Override
-	public void rotation(double theta, Point p) {
-		tam.translateRealToCoordinate();
-		this.setTam(PhepBienDoi.rotation(tam, p, theta));
-		tam.translateCoordinateToReal();
-		points.clear();
+	public DuongTron rotation(double theta, Point p) {
+		Point tamClone = PhepBienDoi.rotation(tam, p, theta).clone();
+		return new DuongTron(tamClone, R);
 	}
 
 }

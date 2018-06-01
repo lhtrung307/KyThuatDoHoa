@@ -3,7 +3,7 @@ package kythuatdohoa;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class BresenhamLine extends Shape {
+public class BresenhamLine extends Shape<BresenhamLine> {
 	private Point d1 = new Point();
 	private Point d2 = new Point();
 
@@ -195,13 +195,10 @@ public class BresenhamLine extends Shape {
 	}
 
 	@Override
-	public void rotation(double theta, Point p) {
-		d1.translateRealToCoordinate();
-		this.setD1(PhepBienDoi.rotation(d1, p, theta));
-		d1.translateCoordinateToReal();
-		d2.translateRealToCoordinate();
-		this.setD2(PhepBienDoi.rotation(d2, p, theta));
-		d2.translateCoordinateToReal();
+	public BresenhamLine rotation(double theta, Point p) {
+		Point d1 = PhepBienDoi.rotation(this.d1, p, theta).clone();
+		Point d2 = PhepBienDoi.rotation(this.d2, p, theta).clone();
+		return new BresenhamLine(d1, d2);
 	}
 
 }
