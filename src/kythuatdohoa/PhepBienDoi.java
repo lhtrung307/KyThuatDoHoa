@@ -49,7 +49,7 @@ public class PhepBienDoi {
 		return multiMatrix(matP, mat);
 	}
 
-	public static double[][] rotation(Point p, int theta) {
+	public static double[][] rotation(Point p, double theta) {
 		double radians = Math.toRadians(theta);
 		double matP[][] = { { p.getX(), p.getY(), 1 } };
 		double sinTheta = Math.sin(radians);

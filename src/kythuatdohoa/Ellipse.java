@@ -108,4 +108,10 @@ public class Ellipse extends Shape{
 	public void rotate(int theta) {
 		
 	}
+
+	@Override
+	public void rotation(double theta) {
+		// TODO Auto-generated method stub
+		
+	}
 }

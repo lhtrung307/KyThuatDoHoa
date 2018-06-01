@@ -131,4 +131,10 @@ public class Point extends Shape{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void rotation(double theta) {
+		// TODO Auto-generated method stub
+		
+	}
 }
