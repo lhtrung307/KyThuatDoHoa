@@ -239,17 +239,24 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			}
 
 			if (status == REFLECTION) {
+				Point input = null;
+				if (numb > 3) {
+					input = getTransInput();
+					input.translateRealToCoordinate();
+				}
 				for(Shape shape : shapes) {
 					for(Point shapePoint : shape.getPoints()) {
 						shapePoint.translateRealToCoordinate();
 						try {
-							Point temp;
+							Point temp = null;
 							if(numb == 1) {
 								temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionO(shapePoint));
 							}else if(numb == 2) {
 								temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOx(shapePoint));
-							}else {
+							}else if(numb == 3) {
 								temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOy(shapePoint));
+							}else if(numb == 4) {
+								temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionPoint(shapePoint, input.getX()-shapePoint.getX(), input.getY()-shapePoint.getY()));
 							}
 							temp.translateCoordinateToReal();
 							Main.drawPoint(temp, drawPlace.getImage());
