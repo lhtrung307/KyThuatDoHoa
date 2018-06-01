@@ -19,11 +19,15 @@ public class PhepBienDoi {
 		return res;
 	}
 
-	public static Point scaling(Point p, double sx, double sy) {
+	public static Point scaling(Point p, double sx, double sy, Point p1) {
 		p.translateRealToCoordinate();
+		p.x -= p1.x;
+		p.y -= p1.y;
 		double matP[][] = { { p.getX(), p.getY(), 1 } };
 		double mat[][] = { { sx, 0, 0 }, { 0, sy, 0 }, { 0, 0, 1 } };
-		p = getPointFromMatrix(multiMatrix(matP, mat));
+		Point newPoint = getPointFromMatrix(multiMatrix(matP, mat));
+		p.x = newPoint.x + p1.x;
+		p.y = newPoint.y + p1.y;
 		p.translateCoordinateToReal();
 		return p;
 	}

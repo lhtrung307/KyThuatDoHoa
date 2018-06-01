@@ -138,8 +138,6 @@ public class Point extends Shape<Point>{
 
 	@Override
 	public Point rotation(double theta, Point p) {
-		return null;
-		
-		
+		return PhepBienDoi.rotation(this, p, theta);
 	}
 }

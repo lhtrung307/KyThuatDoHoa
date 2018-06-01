@@ -32,7 +32,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	public static int ROTATO = 13;
 
 	private int status;
-
+	private ArrayList<Point> scalePoints;
 	private int statusTemp;
 
 	private int numb;
@@ -58,6 +58,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 		shapes = new ArrayList<>();
 		cubes = new ArrayList<>();
 		point = new Point();
+		scalePoints = new ArrayList<>();
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
 	}
@@ -179,7 +180,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				double theta = Double.parseDouble(value);
 				for (Shape shape : shapes) {
 						Shape shapeRot = (Shape) shape.rotation(theta, input);
-						shape.drawShape(drawPlace.getImage());
+						shapeRot.drawShape(drawPlace.getImage());
 				}
 				
 			}
@@ -190,6 +191,10 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 					shape.scale(scale, scale);
 					shape.drawShape(drawPlace.getImage());
 				}
+//				for (Point temp : scalePoints) {
+//					temp = PhepBienDoi.scaling(temp, scale, scale);
+//					Main.drawPoint(temp, drawPlace.getImage());
+//				}
 				status = 0;
 			}
 
@@ -253,6 +258,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				}
 			}
 			status = 0;
+			scalePoints.addAll(shapes.get(shapes.size()-1).getPoints());
 			drawPlace.refreshDrawPlace(drawPlace.getImage());
 //			drawPlace.repaint(shapes);
 		}

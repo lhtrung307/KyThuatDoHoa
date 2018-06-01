@@ -189,8 +189,8 @@ public class BresenhamLine extends Shape<BresenhamLine> {
 
 	@Override
 	public void scale(double sx, double sy) {
-		d1 = PhepBienDoi.scaling(d1, sx, sy);
-		d2 = PhepBienDoi.scaling(d2, sx, sy);
+		d1 = PhepBienDoi.scaling(d1, sx, sy, new Point(0, 0));
+		d2 = PhepBienDoi.scaling(d2, sx, sy, new Point(0, 0));
 		points.clear();
 	}
 
