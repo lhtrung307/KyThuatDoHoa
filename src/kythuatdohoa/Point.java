@@ -95,6 +95,11 @@ public class Point extends Shape{
 		return "t";
 	}
 	
+	////////////////////////////////////////////
+	public String getPoint(){
+		 return ("("+ this.x+" ; "+this.y+")");
+	 }
+	
 	public void translateCoordinateToReal() {
 		if(this.getX()  > (Main.SCR_WIDTH - 2) / 2) {
 			this.setX(Main.SCR_WIDTH - 2);

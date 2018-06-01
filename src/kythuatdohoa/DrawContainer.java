@@ -20,6 +20,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	public static int POINT = 1;
 	public static int LINE = 2;
 	public static int DUONG_TRON = 3;
@@ -34,6 +35,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	public static int COLORING = 12;
 	public static int PYRAMID3D = 14;
 	public static int ROTATO = 13;
+	public static Color color;
 
 	private int status;
 
@@ -52,8 +54,8 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	private BresenhamLine line1;
 	private ArrayList<Cube3D> cubes;
 	private Pyramid3D pyramid;
-	int x2,y2;
-	int goc=0;
+	int x2, y2;
+	int goc = 0;
 	String valueX;
 	String valueY;
 	double rotatoX;
@@ -73,7 +75,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
+
 	}
 
 	@Override
@@ -124,9 +126,9 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				drawPlace.drawCoordinate2D(Color.black);
 			}
 			if (status == LINE) {
-				statusTemp=LINE;
-				x2=p.getX();
-				y2=p.getY();
+				statusTemp = LINE;
+				x2 = p.getX();
+				y2 = p.getY();
 				BresenhamLine line = new BresenhamLine(point, p);
 				line.drawShape(drawPlace.getImage());
 				shapes.add(line);
@@ -135,47 +137,47 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				status = 0;
 				drawPlace.drawCoordinate3D(Color.white);
 				drawPlace.drawCoordinate2D(Color.black);
-				
+
 			}
 			if (status == RECTANGLE) {
-				statusTemp=RECTANGLE;
+				statusTemp = RECTANGLE;
 				Rectangle rect = new Rectangle(point, p);
 				rect.drawShape(drawPlace.getImage());
 				rectangle = rect;
 				shapes.add(rect);
 				status = 0;
-				x2=p.getX();
-				y2=p.getY();
+				x2 = p.getX();
+				y2 = p.getY();
 				drawPlace.drawCoordinate3D(Color.white);
 				drawPlace.drawCoordinate2D(Color.black);
 			}
 			if (status == SQUARE) {
-				statusTemp=SQUARE;
+				statusTemp = SQUARE;
 				Square sq = new Square(point, p);
 				sq.drawShape(drawPlace.getImage());
 				square = sq;
 				shapes.add(sq);
 				status = 0;
-				x2=p.getX();
-				y2=p.getY();
+				x2 = p.getX();
+				y2 = p.getY();
 				drawPlace.drawCoordinate3D(Color.white);
 				drawPlace.drawCoordinate2D(Color.black);
 			}
 			if (status == DUONG_TRON) {
-				statusTemp=DUONG_TRON;
+				statusTemp = DUONG_TRON;
 				int R = Point.distance(point, p);
 				DuongTron dTron = new DuongTron(point, R);
 				dTron.drawShape(drawPlace.getImage());
 				circle = dTron;
 				shapes.add(dTron);
 				status = 0;
-				x2=p.getX();
-				y2=p.getY();
+				x2 = p.getX();
+				y2 = p.getY();
 				drawPlace.drawCoordinate3D(Color.white);
 				drawPlace.drawCoordinate2D(Color.black);
 			}
 			if (status == ELLIPSE) {
-				statusTemp=ELLIPSE;
+				statusTemp = ELLIPSE;
 				int bankinhNho = Point.distance(point, new Point(p.getX(), point.getY()));
 				int bankinhLon = Point.distance(point, new Point(point.getX(), p.getY()));
 				Ellipse elip = new Ellipse(point, bankinhNho, bankinhLon);
@@ -183,14 +185,14 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				ellipse = elip;
 				shapes.add(elip);
 				status = 0;
-				x2=p.getX();
-				y2=p.getY();
+				x2 = p.getX();
+				y2 = p.getY();
 				drawPlace.drawCoordinate3D(Color.white);
 				drawPlace.drawCoordinate2D(Color.black);
 			}
-			//xoay
-			if(status == ROTATO) {
-				Rotato(pointRotato.getX(),pointRotato.getY(),x2,y2);
+			// xoay
+			if (status == ROTATO) {
+				Rotato(pointRotato.getX(), pointRotato.getY(), x2, y2);
 				goc++;
 			}
 			// tinh tien
@@ -200,7 +202,8 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 					for (Point shapePoint : shape.getPoints()) {
 						shapePoint.translateRealToCoordinate();
 						try {
-							Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(shapePoint, input.getX(), input.getY()));
+							Point temp = PhepBienDoi.getPointFromMatrix(
+									PhepBienDoi.translation(shapePoint, input.getX(), input.getY()));
 							temp.translateCoordinateToReal();
 							Main.drawPoint(temp, drawPlace.getImage());
 							shapePoint.translateCoordinateToReal();
@@ -227,7 +230,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			if (status == SCALING) {
 				String value = JOptionPane.showInputDialog("Enter scale", "");
 				double scale = Double.parseDouble(value);
-				for (Shape shape: shapes) {
+				for (Shape shape : shapes) {
 					shape.scale(scale, scale);
 					shape.drawShape(drawPlace.getImage());
 				}
@@ -235,16 +238,16 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			}
 
 			if (status == REFLECTION) {
-				for(Shape shape : shapes) {
-					for(Point shapePoint : shape.getPoints()) {
+				for (Shape shape : shapes) {
+					for (Point shapePoint : shape.getPoints()) {
 						shapePoint.translateRealToCoordinate();
 						try {
 							Point temp;
-							if(numb == 1) {
+							if (numb == 1) {
 								temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionO(shapePoint));
-							}else if(numb == 2) {
+							} else if (numb == 2) {
 								temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOx(shapePoint));
-							}else {
+							} else {
 								temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOy(shapePoint));
 							}
 							temp.translateCoordinateToReal();
@@ -258,13 +261,15 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			}
 
 			if (status == COLORING) {
-				coloring(point.getX(), point.getY(), Color.RED);
+
+				coloring(point.getX(), point.getY(), Main.color);
+
 			}
 			if (status == CUBE3D) {
 				CubeInput cubeInput = new CubeInput();
 				cubeInput.setBounds(0, 0, 150, 150);
 				int result = showDialog(cubeInput);
-				if(result == JOptionPane.OK_OPTION) {
+				if (result == JOptionPane.OK_OPTION) {
 					int x = Integer.parseInt(cubeInput.getxCoor().getText());
 					int y = Integer.parseInt(cubeInput.getyCoor().getText());
 					int z = Integer.parseInt(cubeInput.getzCoor().getText());
@@ -274,15 +279,15 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 					cubes.add(cube);
 					drawPlace.drawCoordinate2D(Color.white);
 					drawPlace.drawCoordinate3D(Color.black);
-					
+
 				}
-				
+
 			}
 			if (status == PYRAMID3D) {
 				CubeInput cubeInput = new CubeInput();
 				cubeInput.setBounds(0, 0, 150, 150);
 				int result = showDialog(cubeInput);
-				if(result == JOptionPane.OK_OPTION) {
+				if (result == JOptionPane.OK_OPTION) {
 					int x = Integer.parseInt(cubeInput.getxCoor().getText());
 					int y = Integer.parseInt(cubeInput.getyCoor().getText());
 					int z = Integer.parseInt(cubeInput.getzCoor().getText());
@@ -292,7 +297,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 					this.pyramid = pyramid;
 					drawPlace.drawCoordinate2D(Color.white);
 					drawPlace.drawCoordinate3D(Color.black);
-					
+
 				}
 			}
 			status = 0;
@@ -307,13 +312,13 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 		int result = showDialog(getCoor);
 		int x = 0;
 		int y = 0;
-		if(result == JOptionPane.OK_OPTION ) {
+		if (result == JOptionPane.OK_OPTION) {
 			x = Integer.parseInt(xCoor.getText());
 			y = Integer.parseInt(yCoor.getText());
 		}
 		return new Point(x, y);
 	}
-	
+
 	private JPanel createGetCoorPanel(JTextField xCoor, JTextField yCoor) {
 		JPanel getCoor = new JPanel();
 		getCoor.add(new JLabel("X: "));
@@ -322,9 +327,9 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 		getCoor.add(yCoor);
 		return getCoor;
 	}
-	
+
 	private int showDialog(JPanel getCoor) {
-		UIManager.put("OptionPane.minimumSize",new Dimension(200,200));
+		UIManager.put("OptionPane.minimumSize", new Dimension(200, 200));
 		return JOptionPane.showConfirmDialog(null, getCoor, "hello", JOptionPane.OK_CANCEL_OPTION);
 	}
 
@@ -360,7 +365,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				sq.drawShape(imageClone);
 			}
 			if (status == CUBE3D) {
-				for(Cube3D cube: cubes) {
+				for (Cube3D cube : cubes) {
 					Cube3D cubeClone = new Cube3D(cube.x, cube.y, cube.z, cube.length);
 					cubeClone.rotateY3D(p.getX() - point.getX());
 					cubeClone.rotateX3D(p.getY() - point.getY());
@@ -390,13 +395,12 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
+
 	public void setStatus(int status, int numb) {
 		this.status = status;
 		this.numb = numb;
 	}
 
-	
 	public DrawPlace getDrawPlace() {
 		return drawPlace;
 	}
@@ -419,116 +423,95 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 		}
 		// Main.color = Color.BLACK;
 	}
-	
-	int i=0;
-	public void Rotato(int x11, int y11, int x22, int y22)  {
-    		
-		
-			if(i==0) {
-				
-					 valueX = JOptionPane.showInputDialog("Enter X", "");
-					 valueY = JOptionPane.showInputDialog("Enter Y", "");
-					 rotatoX = Double.parseDouble(valueX);
-				     rotatoY = Double.parseDouble(valueY);
-				     i=1;
-				
-			}
-           //Line
-		   Rotation r = new Rotation();
-		   
-				 
-			
-           if(status==ROTATO && statusTemp==LINE) {
-        	   
-        	  
-        	    Point d1 = r.xoay(x11 ,y11, (int)rotatoX-320, (int)rotatoY-240, 20);
-             	Point d2 = r.xoay(x22, y22, (int)rotatoX-320, (int)rotatoY-240, 20);
-             	
-             	BresenhamLine line = new BresenhamLine( d1, d2);
-                 
-     			line.drawLine();
-				line.drawShape(drawPlace.getImage());
-				
-				
-	       		
-    			 //cap nhat lai diem tiep theo
-                pointRotato.setX(d1.getX());
-                pointRotato.setY(d1.getY());
-                x2=d2.getX();
-                y2=d2.getY();
-           }
-           
-           
-           //Duong tron
-          
-           if(status==ROTATO && statusTemp==DUONG_TRON) {
-        	   
-        	   Point d1 = r.xoay(x11, y11, (int)rotatoX-320, (int)rotatoY-240, 20);
-               Point d2 = r.xoay(x22, y22,(int)rotatoX-320, (int)rotatoY-240, 20);
-          
-               int R = Point.distance(d1, d2); 
-               DuongTron dTron = new DuongTron(d1, R);
-               System.out.println(d2.getX() + " - " + d2.getY());
-               this.setVisible(false);
-               dTron.drawShape(drawPlace.getImage());
-               this.setVisible(true);
-               
-          		
-               
-               //cap nhat lai diem tiep theo
-               pointRotato.setX(d1.getX());
-               pointRotato.setY(d1.getY());
-               x2=d2.getX();
-               y2=d2.getY();
-     			
-           }
-          
-			
-          
-			
-			//Hinh chu nhat
-           if(status==ROTATO && statusTemp==RECTANGLE) {
-        	  
-        	
-        	   
-        	   Point d1 = new Point();
-        	   d1 = r.xoay(x11, y11, (int)rotatoX-320, (int)rotatoY-240, goc);
-        	   
-               Point d2 = new Point();
-               d2 = r.xoay(x22, y22, (int)rotatoX-320, (int)rotatoY-240, goc);
-               
-               Point d3 = new Point();
-               d3 = r.xoay(x22, y11, (int)rotatoX-320, (int)rotatoY-240, goc);
-               
-       		   Point d4 = new Point();
-       		   d4 = r.xoay(x11, y22, (int)rotatoX-320, (int)rotatoY-240, goc);
 
-       		BresenhamLine line1 = new BresenhamLine(d1, d3);
-       		BresenhamLine line2 = new BresenhamLine(d1, d4);
-       		BresenhamLine line3 = new BresenhamLine(d2, d3);
-       		BresenhamLine line4 = new BresenhamLine(d2, d4);
-       		
+	int i = 0;
 
-       		line1.drawShape(drawPlace.getImage());
-       		line2.drawShape(drawPlace.getImage());
-       		line3.drawShape(drawPlace.getImage());
-       		line4.drawShape(drawPlace.getImage());
-       		
-       		
-    
-			//cap nhat lai diem tiep theo
-          //  pointRotato.setX(d1.getX());
-          //  pointRotato.setY(d1.getY());
-          //  x2=d2.getX();
-           // y2=d2.getY();
-   
-					
-           }
-           
-          
-          
+	public void Rotato(int x11, int y11, int x22, int y22) {
+
+		if (i == 0) {
+
+			valueX = JOptionPane.showInputDialog("Enter X", "");
+			valueY = JOptionPane.showInputDialog("Enter Y", "");
+			rotatoX = Double.parseDouble(valueX);
+			rotatoY = Double.parseDouble(valueY);
+			i = 1;
+
+		}
+		// Line
+		Rotation r = new Rotation();
+
+		if (status == ROTATO && statusTemp == LINE) {
+
+			Point d1 = r.xoay(x11, y11, (int) rotatoX - 320, (int) rotatoY - 240, 20);
+			Point d2 = r.xoay(x22, y22, (int) rotatoX - 320, (int) rotatoY - 240, 20);
+
+			BresenhamLine line = new BresenhamLine(d1, d2);
+
+			line.drawLine();
+			line.drawShape(drawPlace.getImage());
+
+			// cap nhat lai diem tiep theo
+			pointRotato.setX(d1.getX());
+			pointRotato.setY(d1.getY());
+			x2 = d2.getX();
+			y2 = d2.getY();
+		}
+
+		// Duong tron
+
+		if (status == ROTATO && statusTemp == DUONG_TRON) {
+
+			Point d1 = r.xoay(x11, y11, (int) rotatoX - 320, (int) rotatoY - 240, 20);
+			Point d2 = r.xoay(x22, y22, (int) rotatoX - 320, (int) rotatoY - 240, 20);
+
+			int R = Point.distance(d1, d2);
+			DuongTron dTron = new DuongTron(d1, R);
+			System.out.println(d2.getX() + " - " + d2.getY());
+			this.setVisible(false);
+			dTron.drawShape(drawPlace.getImage());
+			this.setVisible(true);
+
+			// cap nhat lai diem tiep theo
+			pointRotato.setX(d1.getX());
+			pointRotato.setY(d1.getY());
+			x2 = d2.getX();
+			y2 = d2.getY();
+
+		}
+
+		// Hinh chu nhat
+		if (status == ROTATO && statusTemp == RECTANGLE) {
+
+			Point d1 = new Point();
+			d1 = r.xoay(x11, y11, (int) rotatoX - 320, (int) rotatoY - 240, goc);
+
+			Point d2 = new Point();
+			d2 = r.xoay(x22, y22, (int) rotatoX - 320, (int) rotatoY - 240, goc);
+
+			Point d3 = new Point();
+			d3 = r.xoay(x22, y11, (int) rotatoX - 320, (int) rotatoY - 240, goc);
+
+			Point d4 = new Point();
+			d4 = r.xoay(x11, y22, (int) rotatoX - 320, (int) rotatoY - 240, goc);
+
+			BresenhamLine line1 = new BresenhamLine(d1, d3);
+			BresenhamLine line2 = new BresenhamLine(d1, d4);
+			BresenhamLine line3 = new BresenhamLine(d2, d3);
+			BresenhamLine line4 = new BresenhamLine(d2, d4);
+
+			line1.drawShape(drawPlace.getImage());
+			line2.drawShape(drawPlace.getImage());
+			line3.drawShape(drawPlace.getImage());
+			line4.drawShape(drawPlace.getImage());
+
+			// cap nhat lai diem tiep theo
+			// pointRotato.setX(d1.getX());
+			// pointRotato.setY(d1.getY());
+			// x2=d2.getX();
+			// y2=d2.getY();
+
+		}
+
 	}
-	
-	
-	
+
 }

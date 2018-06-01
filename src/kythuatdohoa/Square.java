@@ -69,8 +69,12 @@ public class Square extends Shape{
 
 	@Override
 	public void scale(double sx, double sy) {
+		d1.translateRealToCoordinate();	
 		d1 = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(d1, sx, sy));
+		d1.translateCoordinateToReal();
+		d2.translateRealToCoordinate();
 		d2 = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(d2, sx, sy));
+		d2.translateCoordinateToReal();
 		points.clear();
 	}
 }

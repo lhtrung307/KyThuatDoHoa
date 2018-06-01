@@ -97,11 +97,11 @@ public class Ellipse extends Shape{
 		}
 	}
 
-	@Override
 	public void scale(double sx, double sy) {
 		bankinhLon = Math.round(bankinhLon * (float)sx);
 		bankinhNho = Math.round(bankinhNho * (float)sy);
 		points.clear();
+	
 	}
 	
 	public void rotate(int theta) {

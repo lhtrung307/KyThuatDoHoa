@@ -194,4 +194,10 @@ public class BresenhamLine extends Shape {
 		points.clear();
 	}
 
+//	@Override
+//	public void rotation(double theta) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+
 }

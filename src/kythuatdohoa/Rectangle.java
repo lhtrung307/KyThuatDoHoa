@@ -72,7 +72,6 @@ public class Rectangle extends Shape{
 	}
 
 
-	@Override
 	public void scale(double sx, double sy) {
 		this.setD1(PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(d1, sx, sy)));
 		this.setD2(PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(d2, sx, sy)));
