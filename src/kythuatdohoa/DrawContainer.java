@@ -27,7 +27,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	public static int RECTANGLE = 5;
 	public static int SQUARE = 6;
 	public static int TRANSLATION = 7;
-	public static int ROTATION = 8;
+	public static int ROTATION = 13;
 	public static int SCALING = 9;
 	public static int REFLECTION = 10;
 	public static int CUBE3D = 11;
@@ -39,7 +39,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 
 	private int statusTemp;
 
-	private int temp;
 	private int numb;
 
 	private Point point;
@@ -50,8 +49,8 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	private DuongTron circle;
 	private Square square;
 	private Rectangle rectangle;
-	private Line line1;
-	private Cube3D cube;
+	private BresenhamLine line1;
+	private ArrayList<Cube3D> cubes;
 	private Pyramid3D pyramid;
 	int x2,y2;
 	int goc=0;
@@ -66,6 +65,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 		drawPlace.setBounds(0, 0, Main.SCR_WIDTH, Main.SCR_HEIGHT);
 		this.add(drawPlace);
 		shapes = new ArrayList<>();
+		cubes = new ArrayList<>();
 		point = new Point();
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
@@ -112,34 +112,29 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	}
 
 	@Override
-	
 	public void mouseReleased(MouseEvent e) {
-		
 		if (e.getButton() == MouseEvent.BUTTON1) {
 			Point p = new Point(e.getX(), e.getY());
 			// DrawContainer.convertToCoordinatePoints(p);
-			
 			if (status == POINT) {
 				Main.drawPoint(p, drawPlace.getImage());
 				drawPlace.refreshDrawPlace(drawPlace.getImage());
 				status = 0;
 				drawPlace.drawCoordinate3D(Color.white);
-				drawPlace.drawCoordinate2D(Color.BLACK);
+				drawPlace.drawCoordinate2D(Color.black);
 			}
 			if (status == LINE) {
 				statusTemp=LINE;
 				x2=p.getX();
 				y2=p.getY();
-				Line line = new Line(point, p);
+				BresenhamLine line = new BresenhamLine(point, p);
 				line.drawShape(drawPlace.getImage());
 				shapes.add(line);
 				line1 = line;
 
-				temp = status;
-
 				status = 0;
 				drawPlace.drawCoordinate3D(Color.white);
-				drawPlace.drawCoordinate2D(Color.BLACK);
+				drawPlace.drawCoordinate2D(Color.black);
 				
 			}
 			if (status == RECTANGLE) {
@@ -148,13 +143,11 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				rect.drawShape(drawPlace.getImage());
 				rectangle = rect;
 				shapes.add(rect);
-				temp = status;
 				status = 0;
-				// rect.doiXung(point);
 				x2=p.getX();
 				y2=p.getY();
 				drawPlace.drawCoordinate3D(Color.white);
-				drawPlace.drawCoordinate2D(Color.BLACK);
+				drawPlace.drawCoordinate2D(Color.black);
 			}
 			if (status == SQUARE) {
 				statusTemp=SQUARE;
@@ -162,12 +155,11 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				sq.drawShape(drawPlace.getImage());
 				square = sq;
 				shapes.add(sq);
-				temp = status;
 				status = 0;
 				x2=p.getX();
 				y2=p.getY();
 				drawPlace.drawCoordinate3D(Color.white);
-				drawPlace.drawCoordinate2D(Color.BLACK);
+				drawPlace.drawCoordinate2D(Color.black);
 			}
 			if (status == DUONG_TRON) {
 				statusTemp=DUONG_TRON;
@@ -176,12 +168,11 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				dTron.drawShape(drawPlace.getImage());
 				circle = dTron;
 				shapes.add(dTron);
-				temp = status;
 				status = 0;
 				x2=p.getX();
 				y2=p.getY();
 				drawPlace.drawCoordinate3D(Color.white);
-				drawPlace.drawCoordinate2D(Color.BLACK);
+				drawPlace.drawCoordinate2D(Color.black);
 			}
 			if (status == ELLIPSE) {
 				statusTemp=ELLIPSE;
@@ -191,12 +182,11 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				elip.drawShape(drawPlace.getImage());
 				ellipse = elip;
 				shapes.add(elip);
-				temp = status;
 				status = 0;
 				x2=p.getX();
 				y2=p.getY();
 				drawPlace.drawCoordinate3D(Color.white);
-				drawPlace.drawCoordinate2D(Color.BLACK);
+				drawPlace.drawCoordinate2D(Color.black);
 			}
 			//xoay
 			if(status == ROTATO) {
@@ -207,13 +197,13 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			if (status == TRANSLATION) {
 				Point input = getTransInput();
 				for (Shape shape : shapes) {
-					for (Point elipPoint : shape.getPoints()) {
-						elipPoint.translateRealToCoordinate();
+					for (Point shapePoint : shape.getPoints()) {
+						shapePoint.translateRealToCoordinate();
 						try {
-							Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(elipPoint, input.getX(), input.getY()));
+							Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.translation(shapePoint, input.getX(), input.getY()));
 							temp.translateCoordinateToReal();
 							Main.drawPoint(temp, drawPlace.getImage());
-							elipPoint.translateCoordinateToReal();
+							shapePoint.translateCoordinateToReal();
 						} catch (Exception exc) {
 							System.out.println(exc);
 						}
@@ -222,13 +212,12 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			}
 			if (status == ROTATION) {
 				for (Point elipPoint : ellipse.getPoints()) {
-
 					elipPoint.translateRealToCoordinate();
-
 					try {
 						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.rotation(elipPoint, -30));
 						temp.translateCoordinateToReal();
 						Main.drawPoint(temp, drawPlace.getImage());
+						elipPoint = temp;
 					} catch (Exception exc) {
 						System.out.println(exc);
 					}
@@ -236,218 +225,33 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 
 			}
 			if (status == SCALING) {
-
 				String value = JOptionPane.showInputDialog("Enter scale", "");
 				double scale = Double.parseDouble(value);
-				for (Point elipPoint : ellipse.getPoints()) {
-
-					try {
-						Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(elipPoint, scale, scale));
-						Main.drawPoint(temp, drawPlace.getImage());
-					} catch (Exception exc) {
-						System.out.println(exc);
-					}
+				for (Shape shape: shapes) {
+					shape.scale(scale, scale);
+					shape.drawShape(drawPlace.getImage());
 				}
 				status = 0;
-				// for (Point RectanglePoint : rectangle.getPoints()) {
-				// try {
-				// Point temp =
-				// PhepBienDoi.getPointFromMatrix(PhepBienDoi.scaling(RectanglePoint, 2, 2));
-				// Main.drawPoint(temp, drawPlace.getImage());
-				// } catch (Exception exc) {
-				// System.out.println(exc);
-				// }
-				// }
-				//
 			}
 
 			if (status == REFLECTION) {
-				if (temp == DUONG_TRON) {
-					if (numb == 1) {
-						for (Point circlePoint : circle.getPoints()) {
-							circlePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionO(circlePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
+				for(Shape shape : shapes) {
+					for(Point shapePoint : shape.getPoints()) {
+						shapePoint.translateRealToCoordinate();
+						try {
+							Point temp;
+							if(numb == 1) {
+								temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionO(shapePoint));
+							}else if(numb == 2) {
+								temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOx(shapePoint));
+							}else {
+								temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOy(shapePoint));
 							}
-						}
-
-					} else if (numb == 2) {
-						for (Point circlePoint : circle.getPoints()) {
-							circlePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOx(circlePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					} else {
-						for (Point circlePoint : circle.getPoints()) {
-							circlePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOy(circlePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					}
-				}
-				if(temp == RECTANGLE) {
-					if(numb == 1) {
-						for(Point RectanglePoint : rectangle.getPoints()) {
-							RectanglePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionO(RectanglePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-						
-						
-					}else if(numb == 2) {
-						for(Point RectanglePoint : rectangle.getPoints()) {
-							RectanglePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOx(RectanglePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					}else {
-						for(Point RectanglePoint : rectangle.getPoints()) {
-							RectanglePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOy(RectanglePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					}
-				}
-				if(temp == ELLIPSE) {
-					if(numb == 1) {
-						for(Point ellipsePoint : ellipse.getPoints()) {
-							ellipsePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionO(ellipsePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-						
-						
-					}else if(numb == 2) {
-						for(Point ellipsePoint : ellipse.getPoints()) {
-							ellipsePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOx(ellipsePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					}else {
-						for(Point ellipsePoint : ellipse.getPoints()) {
-							ellipsePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOy(ellipsePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					}
-				}
-				if(temp == SQUARE) {
-					if(numb == 1) {
-						for(Point squarePoint : square.getPoints()) {
-							squarePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionO(squarePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-						
-						
-					}else if(numb == 2) {
-						for(Point squarePoint : square.getPoints()) {
-							squarePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOx(squarePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					}else {
-						for(Point squarePoint : square.getPoints()) {
-							squarePoint.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOy(squarePoint));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					}
-				}
-				if(temp == LINE) {
-					if(numb == 1) {
-						for(Point line : line1.getPoints()) {
-							line.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionO(line));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-						
-						
-					}else if(numb == 2) {
-						for(Point line : line1.getPoints()) {
-							line.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOx(line));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
-						}
-					}else {
-						for(Point line : line1.getPoints()) {
-							line.translateRealToCoordinate();
-							try {
-								Point temp = PhepBienDoi.getPointFromMatrix(PhepBienDoi.reflectionOy(line));
-								temp.translateCoordinateToReal();
-								Main.drawPoint(temp, drawPlace.getImage());
-							} catch (Exception exc) {
-								System.out.println(exc);
-							}
+							temp.translateCoordinateToReal();
+							Main.drawPoint(temp, drawPlace.getImage());
+							shapePoint.translateCoordinateToReal();
+						} catch (Exception exc) {
+							System.out.println(exc);
 						}
 					}
 				}
@@ -460,29 +264,36 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				CubeInput cubeInput = new CubeInput();
 				cubeInput.setBounds(0, 0, 150, 150);
 				int result = showDialog(cubeInput);
-				int x = Integer.parseInt(cubeInput.getxCoor().getText());
-				int y = Integer.parseInt(cubeInput.getyCoor().getText());
-				int z = Integer.parseInt(cubeInput.getzCoor().getText());
-				int length = Integer.parseInt(cubeInput.getLength().getText());
-				Cube3D cube = new Cube3D(x, y, z, length);
-				cube.drawShape(drawPlace.getImage());
-				this.cube = cube;
-				drawPlace.drawCoordinate2D(Color.white);
-				drawPlace.drawCoordinate3D(Color.BLUE);
+				if(result == JOptionPane.OK_OPTION) {
+					int x = Integer.parseInt(cubeInput.getxCoor().getText());
+					int y = Integer.parseInt(cubeInput.getyCoor().getText());
+					int z = Integer.parseInt(cubeInput.getzCoor().getText());
+					int length = Integer.parseInt(cubeInput.getLength().getText());
+					Cube3D cube = new Cube3D(x, y, z, length);
+					cube.drawShape(drawPlace.getImage());
+					cubes.add(cube);
+					drawPlace.drawCoordinate2D(Color.white);
+					drawPlace.drawCoordinate3D(Color.black);
+					
+				}
+				
 			}
 			if (status == PYRAMID3D) {
 				CubeInput cubeInput = new CubeInput();
 				cubeInput.setBounds(0, 0, 150, 150);
 				int result = showDialog(cubeInput);
-				int x = Integer.parseInt(cubeInput.getxCoor().getText());
-				int y = Integer.parseInt(cubeInput.getyCoor().getText());
-				int z = Integer.parseInt(cubeInput.getzCoor().getText());
-				int length = Integer.parseInt(cubeInput.getLength().getText());
-				Pyramid3D pyramid = new Pyramid3D(x, y, z, length);
-				pyramid.drawShape(drawPlace.getImage());
-				this.pyramid = pyramid;
-				drawPlace.drawCoordinate2D(Color.white);
-				drawPlace.drawCoordinate3D(Color.BLUE);
+				if(result == JOptionPane.OK_OPTION) {
+					int x = Integer.parseInt(cubeInput.getxCoor().getText());
+					int y = Integer.parseInt(cubeInput.getyCoor().getText());
+					int z = Integer.parseInt(cubeInput.getzCoor().getText());
+					int length = Integer.parseInt(cubeInput.getLength().getText());
+					Pyramid3D pyramid = new Pyramid3D(x, y, z, length);
+					pyramid.drawShape(drawPlace.getImage());
+					this.pyramid = pyramid;
+					drawPlace.drawCoordinate2D(Color.white);
+					drawPlace.drawCoordinate3D(Color.black);
+					
+				}
 			}
 			status = 0;
 			drawPlace.refreshDrawPlace(drawPlace.getImage());
@@ -500,7 +311,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			x = Integer.parseInt(xCoor.getText());
 			y = Integer.parseInt(yCoor.getText());
 		}
-		
 		return new Point(x, y);
 	}
 	
@@ -527,7 +337,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			Point p = new Point(e.getX(), e.getY());
 			imageClone.setData(drawPlace.getImage().getRaster());
 			if (status == LINE) {
-				Line line = new Line(point, p);
+				BresenhamLine line = new BresenhamLine(point, p);
 				line.drawShape(imageClone);
 			}
 			if (status == DUONG_TRON) {
@@ -550,10 +360,13 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				sq.drawShape(imageClone);
 			}
 			if (status == CUBE3D) {
-				Cube3D cubeClone = new Cube3D(cube.x, cube.y, cube.z, cube.length);
-				cubeClone.rotateY3D(p.getX() - point.getX());
-				cubeClone.rotateX3D(p.getY() - point.getY());
-				cubeClone.drawShape(imageClone);
+				for(Cube3D cube: cubes) {
+					Cube3D cubeClone = new Cube3D(cube.x, cube.y, cube.z, cube.length);
+					cubeClone.rotateY3D(p.getX() - point.getX());
+					cubeClone.rotateX3D(p.getY() - point.getY());
+					cubeClone.drawShape(imageClone);
+					cube = cubeClone;
+				}
 			}
 			if (status == PYRAMID3D) {
 				Pyramid3D pyramidClone = new Pyramid3D(pyramid.x, pyramid.y, pyramid.z, pyramid.length);
@@ -561,7 +374,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				pyramidClone.rotateX3D(p.getY() - point.getY());
 				pyramidClone.drawShape(imageClone);
 			}
-			System.out.println(p.toString());
 			drawPlace.refreshDrawPlace(imageClone);
 		}
 	}
@@ -632,9 +444,9 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
         	    Point d1 = r.xoay(x11 ,y11, (int)rotatoX-320, (int)rotatoY-240, 20);
              	Point d2 = r.xoay(x22, y22, (int)rotatoX-320, (int)rotatoY-240, 20);
              	
-             	 Line line = new Line( d1, d2);
+             	BresenhamLine line = new BresenhamLine( d1, d2);
                  
-     			line.Bres_Line();
+     			line.drawLine();
 				line.drawShape(drawPlace.getImage());
 				
 				
@@ -691,10 +503,10 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
        		   Point d4 = new Point();
        		   d4 = r.xoay(x11, y22, (int)rotatoX-320, (int)rotatoY-240, goc);
 
-       		Line line1 = new Line(d1, d3);
-       		Line line2 = new Line(d1, d4);
-       		Line line3 = new Line(d2, d3);
-       		Line line4 = new Line(d2, d4);
+       		BresenhamLine line1 = new BresenhamLine(d1, d3);
+       		BresenhamLine line2 = new BresenhamLine(d1, d4);
+       		BresenhamLine line3 = new BresenhamLine(d2, d3);
+       		BresenhamLine line4 = new BresenhamLine(d2, d4);
        		
 
        		line1.drawShape(drawPlace.getImage());

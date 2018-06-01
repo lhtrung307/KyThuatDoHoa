@@ -3,7 +3,7 @@ package kythuatdohoa;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-public class Point {
+public class Point extends Shape{
 	private int x;
 	private int y;
 
@@ -22,11 +22,11 @@ public class Point {
 	}
 
 	public void setX(int x) {
-		if (x < 0) {
-			this.x = 0;
-		} else if (x > Main.SCR_WIDTH - 1) {
-			this.x = Main.SCR_WIDTH - 1;
-		}
+//		if (x < 0) {
+//			this.x = 0;
+//		} else if (x > Main.SCR_WIDTH - 1) {
+//			this.x = Main.SCR_WIDTH - 1;
+//		}
 		this.x = x;
 	}
 
@@ -35,11 +35,11 @@ public class Point {
 	}
 
 	public void setY(int y) {
-		if (y < 0) {
-			this.y = 0;
-		} else if (y > Main.SCR_HEIGHT - 1) {
-			this.y = Main.SCR_HEIGHT - 1;
-		}
+//		if (y < 0) {
+//			this.y = 0;
+//		} else if (y > Main.SCR_HEIGHT - 1) {
+//			this.y = Main.SCR_HEIGHT - 1;
+//		}
 		this.y = y;
 	}
 
@@ -116,7 +116,19 @@ public class Point {
 	
 
 	public void translateRealToCoordinate() {
-		this.setX(this.getX() - (Main.SCR_HEIGHT - 2) / 2);
-		this.setY(this.getY() - (Main.SCR_WIDTH - 2) / 2);
+		this.setX(this.getX() - (Main.SCR_WIDTH - 2) / 2);
+		this.setY(this.getY() - (Main.SCR_HEIGHT - 2) / 2);
+	}
+
+	@Override
+	public void drawShape(BufferedImage image) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void scale(double sx, double sy) {
+		// TODO Auto-generated method stub
+		
 	}
 }

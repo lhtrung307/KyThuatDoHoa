@@ -105,4 +105,10 @@ public class DuongTron extends Shape{
 		}
 	}
 
+	@Override
+	public void scale(double sx, double sy) {
+		R = Math.round(R * (float)sx);
+		points.clear();
+	}
+
 }
