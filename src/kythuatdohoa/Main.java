@@ -15,6 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
+import java.awt.SystemColor;
+import java.awt.Font;
 
 public class Main {
 	public static int SCR_HEIGHT = 482;
@@ -31,10 +33,13 @@ public class Main {
 	private JButton btnScale;
 	private JButton btnCube3d;
 	private JButton btnTranslation;
-//	private JButton btnRotation;
+	// private JButton btnRotation;
 	private JButton btnRotato;
+	private JButton btnSuperdupership;
+	private JButton btnDone;
 
 	private JComboBox boxReflection;
+	private JComboBox comboBox;
 
 	/**
 	 * Launch the application.
@@ -71,8 +76,8 @@ public class Main {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		drawContainer = new DrawContainer();
-		drawContainer.setBackground(Color.WHITE);
-		drawContainer.setBounds(10, 45, SCR_WIDTH, SCR_HEIGHT);
+		drawContainer.setBackground(SystemColor.menu);
+		drawContainer.setBounds(10, 45, 700, 700);
 		frame.getContentPane().add(drawContainer);
 		drawContainer.setLayout(null);
 
@@ -111,14 +116,14 @@ public class Main {
 
 		createBtnCube3d();
 		frame.getContentPane().add(btnCube3d);
-		
+
 		createBtnTranslation();
 		frame.getContentPane().add(btnTranslation);
-		
+
 		JButton btnSaveImage = new JButton("Save Image");
 		btnSaveImage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(!drawContainer.getDrawPlace().isSaveImage()) {
+				if (!drawContainer.getDrawPlace().isSaveImage()) {
 					JOptionPane.showConfirmDialog(btnSaveImage, null, "Saved", JOptionPane.OK_OPTION);
 				} else {
 					JOptionPane.showConfirmDialog(btnSaveImage, null, "Error! Try again!", JOptionPane.OK_OPTION);
@@ -127,26 +132,26 @@ public class Main {
 		});
 		btnSaveImage.setBounds(563, 538, 89, 23);
 		frame.getContentPane().add(btnSaveImage);
-		
+
 		JButton btnPyramid = new JButton("Pyramid");
 		btnPyramid.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				drawContainer.setStatus(DrawContainer.PYRAMID3D);
 			}
 		});
-		btnPyramid.setBounds(819, 11, 89, 23);
+		btnPyramid.setBounds(810, 11, 77, 23);
 		frame.getContentPane().add(btnPyramid);
-	
-//		{
-//			btnRotation = new JButton("Rotation");
-//			btnRotation.addActionListener(new ActionListener() {
-//				public void actionPerformed(ActionEvent e) {
-//					drawContainer.setStatus(DrawContainer.ROTATION);
-//				}
-//			});
-//			btnRotation.setBounds(788, 11, 87, 23);
-//			frame.getContentPane().add(btnRotation);
-//		}
+
+		// {
+		// btnRotation = new JButton("Rotation");
+		// btnRotation.addActionListener(new ActionListener() {
+		// public void actionPerformed(ActionEvent e) {
+		// drawContainer.setStatus(DrawContainer.ROTATION);
+		// }
+		// });
+		// btnRotation.setBounds(788, 11, 87, 23);
+		// frame.getContentPane().add(btnRotation);
+		// }
 		{
 			btnRotato = new JButton("Rotato");
 			btnRotato.addActionListener(new ActionListener() {
@@ -154,19 +159,97 @@ public class Main {
 					drawContainer.setStatus(DrawContainer.ROTATO);
 				}
 			});
-			btnRotato.setBounds(885, 11, 89, 23);
+			btnRotato.setBounds(897, 11, 77, 23);
 			frame.getContentPane().add(btnRotato);
 		}
-//		JLabel lblChooseColor = new JLabel("");
-//		lblChooseColor.setBounds(544, 15, 46, 14);
-//		frame.getContentPane().add(lblChooseColor);
-//		JColorChooser chooseColor = new
-//		JColorChooser(lblChooseColor.getForeground());
-//		frame.getContentPane().add(chooseColor);
+
+		JButton btnSuperDuperShape = new JButton("SuperDuperShape");
+		btnSuperDuperShape.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				drawContainer.setStatus(DrawContainer.SUPER_DUPER_SHAPE);
+			}
+		});
+		btnSuperDuperShape.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		btnSuperDuperShape.setBounds(720, 120, 242, 100);
+		frame.getContentPane().add(btnSuperDuperShape);
+		{
+			btnSuperdupership = new JButton("SuperDuperShip");
+			btnSuperdupership.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					drawContainer.setStatus(DrawContainer.SUPER_DUPER_SHIP);
+				}
+			});
+			btnSuperdupership.setFont(new Font("Tahoma", Font.PLAIN, 26));
+			btnSuperdupership.setBounds(720, 250, 242, 100);
+			frame.getContentPane().add(btnSuperdupership);
+		}
+		{
+			comboBox = new JComboBox();
+			comboBox.setBounds(759, 55, 71, 20);
+			comboBox.addItem("Green");
+			comboBox.addItem("Red");
+			comboBox.addItem("Black");
+			comboBox.addItem("Blue");
+			comboBox.addItem("Yellow");
+			comboBox.addItem("Pink");
+			comboBox.addItem("Orange");
+			comboBox.addItem("White");
+			comboBox.setSelectedItem(null);
+			frame.getContentPane().add(comboBox);
+		}
+		{
+			btnDone = new JButton("Done");
+			btnDone.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					String value = (String) comboBox.getSelectedItem();
+					if (value == "Blue") {
+						drawContainer.setStatus(DrawContainer.COLORING);
+						color = Color.BLUE;
+
+					}
+					if (value == "Red") {
+						drawContainer.setStatus(DrawContainer.COLORING);
+						color = Color.red;
+					}
+					if (value == "Black") {
+						drawContainer.setStatus(DrawContainer.COLORING);
+						color = Color.BLACK;
+					}
+
+					if (value == "Green") {
+						drawContainer.setStatus(DrawContainer.COLORING);
+						color = Color.GREEN;
+					}
+					if (value == "Yellow") {
+						drawContainer.setStatus(DrawContainer.COLORING);
+						color = Color.YELLOW;
+					}
+
+					if (value == "Pink") {
+						drawContainer.setStatus(DrawContainer.COLORING);
+						color = Color.PINK;
+					}
+
+					if (value == "Orange") {
+						drawContainer.setStatus(DrawContainer.COLORING);
+						color = Color.ORANGE;
+					}
+
+					if (value == "White") {
+						drawContainer.setStatus(DrawContainer.COLORING);
+						color = Color.WHITE;
+					}
+
+				}
+			});
+			btnDone.setBounds(852, 54, 89, 23);
+			frame.getContentPane().add(btnDone);
+		}
 	}
 
 	public static void drawPoint(Point point, BufferedImage image) {
-		if(point.getX() < image.getWidth() && point.getY() < image.getHeight()) {
+		if (point.getX() < image.getWidth() && point.getY() < image.getHeight()) {
 			image.setRGB(point.getX(), point.getY(), color.getRGB());
 		}
 	}
@@ -260,7 +343,7 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.CUBE3D);
 			}
 		});
-		btnCube3d.setBounds(595, 11, 71, 23);
+		btnCube3d.setBounds(603, 11, 88, 23);
 	}
 
 	private void createBtnReflection() {
@@ -272,9 +355,9 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.REFLECTION, numb[boxReflection.getSelectedIndex()]);
 			}
 		});
-		boxReflection.setBounds(830, 11, 100, 23);
+		boxReflection.setBounds(759, 90, 100, 23);
 	}
-	
+
 	private void createBtnTranslation() {
 		btnTranslation = new JButton("Translation");
 		btnTranslation.addActionListener(new ActionListener() {
@@ -282,6 +365,6 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.TRANSLATION);
 			}
 		});
-		btnTranslation.setBounds(667, 11, 70, 23);
+		btnTranslation.setBounds(701, 11, 99, 23);
 	}
 }
