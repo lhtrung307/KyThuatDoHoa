@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 public class Point extends Shape{
-	private int x;
-	private int y;
+	public int x;
+	public int y;
 
 	public Point(int x, int y) {
 		setX(x);
@@ -95,11 +95,6 @@ public class Point extends Shape{
 		return "t";
 	}
 	
-	////////////////////////////////////////////
-	public String getPoint(){
-		 return ("("+ this.x+" ; "+this.y+")");
-	 }
-	
 	public void translateCoordinateToReal() {
 		if(this.getX()  > (Main.SCR_WIDTH - 2) / 2) {
 			this.setX(Main.SCR_WIDTH - 2);
@@ -134,6 +129,12 @@ public class Point extends Shape{
 	@Override
 	public void scale(double sx, double sy) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void rotation(double theta, Point p) {
+		
 		
 	}
 }

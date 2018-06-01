@@ -13,11 +13,9 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-import java.nio.channels.ShutdownChannelGroupException;
-
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
-import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 
 public class Main {
 	public static int SCR_HEIGHT = 482;
@@ -34,12 +32,13 @@ public class Main {
 	private JButton btnScale;
 	private JButton btnCube3d;
 	private JButton btnTranslation;
-//	private JButton btnRotation;
+	 private JButton btnRotation;
 	private JButton btnRotato;
-	private JComboBox comboBox;
 	private JButton btnDone;
+	private JComboBox comboBox;
+	private JButton btnNewButton;
 
-	private JComboBox boxReflection;
+	 private JComboBox boxReflection;
 
 	/**
 	 * Launch the application.
@@ -102,8 +101,8 @@ public class Main {
 		createBtnScale();
 		frame.getContentPane().add(btnScale);
 
-//		createBtnReflection();
-//		frame.getContentPane().add(boxReflection);
+		 createBtnReflection();
+		 frame.getContentPane().add(boxReflection);
 
 		JButton btnColoring = new JButton("Coloring");
 		btnColoring.addActionListener(new ActionListener() {
@@ -116,14 +115,14 @@ public class Main {
 
 		createBtnCube3d();
 		frame.getContentPane().add(btnCube3d);
-		
+
 		createBtnTranslation();
 		frame.getContentPane().add(btnTranslation);
-		
+
 		JButton btnSaveImage = new JButton("Save Image");
 		btnSaveImage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(!drawContainer.getDrawPlace().isSaveImage()) {
+				if (!drawContainer.getDrawPlace().isSaveImage()) {
 					JOptionPane.showConfirmDialog(btnSaveImage, null, "Saved", JOptionPane.OK_OPTION);
 				} else {
 					JOptionPane.showConfirmDialog(btnSaveImage, null, "Error! Try again!", JOptionPane.OK_OPTION);
@@ -132,26 +131,26 @@ public class Main {
 		});
 		btnSaveImage.setBounds(563, 538, 89, 23);
 		frame.getContentPane().add(btnSaveImage);
-		
+
 		JButton btnPyramid = new JButton("Pyramid");
 		btnPyramid.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				drawContainer.setStatus(DrawContainer.PYRAMID3D);
 			}
 		});
-		btnPyramid.setBounds(747, 11, 70, 23);
+		btnPyramid.setBounds(747, 11, 62, 23);
 		frame.getContentPane().add(btnPyramid);
-	
-//		{
-//			btnRotation = new JButton("Rotation");
-//			btnRotation.addActionListener(new ActionListener() {
-//				public void actionPerformed(ActionEvent e) {
-//					drawContainer.setStatus(DrawContainer.ROTATION);
-//				}
-//			});
-//			btnRotation.setBounds(788, 11, 87, 23);
-//			frame.getContentPane().add(btnRotation);
-//		}
+
+		 {
+		 btnRotation = new JButton("Rotation");
+		 btnRotation.addActionListener(new ActionListener() {
+		 public void actionPerformed(ActionEvent e) {
+		 drawContainer.setStatus(DrawContainer.ROTATION);
+		 }
+		 });
+		 btnRotation.setBounds(788, 11, 87, 23);
+		 frame.getContentPane().add(btnRotation);
+		 }
 		{
 			btnRotato = new JButton("Rotato");
 			btnRotato.addActionListener(new ActionListener() {
@@ -159,12 +158,12 @@ public class Main {
 					drawContainer.setStatus(DrawContainer.ROTATO);
 				}
 			});
-			btnRotato.setBounds(827, 11, 70, 23);
+			btnRotato.setBounds(819, 11, 70, 23);
 			frame.getContentPane().add(btnRotato);
 		}
 		{
 			comboBox = new JComboBox();
-			comboBox.setBounds(907, 12, 56, 20);
+			comboBox.setBounds(893, 12, 62, 20);
 			frame.getContentPane().add(comboBox);
 			comboBox.addItem("Green");
 			comboBox.addItem("Red");
@@ -178,68 +177,59 @@ public class Main {
 			frame.getContentPane().add(comboBox);
 		}
 		{
-			btnDone = new JButton("Done");
-		
-			
-			btnDone.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
+			btnNewButton = new JButton("Done");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					String value = (String) comboBox.getSelectedItem();
-					if(value == "Blue") {
+					if (value == "Blue") {
 						drawContainer.setStatus(DrawContainer.COLORING);
 						color = Color.BLUE;
-						
+
 					}
-					if(value == "Red") {
+					if (value == "Red") {
 						drawContainer.setStatus(DrawContainer.COLORING);
 						color = Color.red;
 					}
-					if(value == "Black") {
+					if (value == "Black") {
 						drawContainer.setStatus(DrawContainer.COLORING);
-						color =Color.BLACK;
+						color = Color.BLACK;
 					}
-					
-					if(value == "Green") {
+
+					if (value == "Green") {
 						drawContainer.setStatus(DrawContainer.COLORING);
 						color = Color.GREEN;
 					}
-					if(value == "Yellow") {
+					if (value == "Yellow") {
 						drawContainer.setStatus(DrawContainer.COLORING);
 						color = Color.YELLOW;
 					}
-					
-					if(value == "Pink") {
+
+					if (value == "Pink") {
 						drawContainer.setStatus(DrawContainer.COLORING);
 						color = Color.PINK;
 					}
-					
-					if(value == "Orange") {
+
+					if (value == "Orange") {
 						drawContainer.setStatus(DrawContainer.COLORING);
 						color = Color.ORANGE;
 					}
-					
-					if(value == "White") {
+
+					if (value == "White") {
 						drawContainer.setStatus(DrawContainer.COLORING);
 						color = Color.WHITE;
 					}
-					
-					
-							
+
 				}
+
 			});
-			btnDone.setBounds(885, 43, 89, 23);
-			frame.getContentPane().add(btnDone);
+			btnNewButton.setBounds(893, 45, 62, 23);
+			frame.getContentPane().add(btnNewButton);
 		}
-		
-//		JLabel lblChooseColor = new JLabel("");
-//		lblChooseColor.setBounds(544, 15, 46, 14);
-//		frame.getContentPane().add(lblChooseColor);
-//		JColorChooser chooseColor = new
-//		JColorChooser(lblChooseColor.getForeground());
-//		frame.getContentPane().add(chooseColor);
 	}
 
+	
 	public static void drawPoint(Point point, BufferedImage image) {
-		if(point.getX() < image.getWidth() && point.getY() < image.getHeight()) {
+		if (point.getX() < image.getWidth() && point.getY() < image.getHeight()) {
 			image.setRGB(point.getX(), point.getY(), color.getRGB());
 		}
 	}
@@ -336,18 +326,19 @@ public class Main {
 		btnCube3d.setBounds(595, 11, 71, 23);
 	}
 
-	private void createBtnReflection() {
-		int[] numb = { 1, 2, 3 };
-		String[] name = { "Doi xung tam O", "Doi xung truc Ox", "Doi xung truc Oy" };
-		boxReflection = new JComboBox<String>(name);
-		boxReflection.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				drawContainer.setStatus(DrawContainer.REFLECTION, numb[boxReflection.getSelectedIndex()]);
-			}
-		});
-		boxReflection.setBounds(830, 11, 100, 23);
-	}
-	
+	 private void createBtnReflection() {
+	 int[] numb = { 1, 2, 3 };
+	 String[] name = { "Doi xung tam O", "Doi xung truc Ox", "Doi xung truc Oy" };
+	 boxReflection = new JComboBox<String>(name);
+	 boxReflection.addActionListener(new ActionListener() {
+	 public void actionPerformed(ActionEvent arg0) {
+	 drawContainer.setStatus(DrawContainer.REFLECTION,
+	 numb[boxReflection.getSelectedIndex()]);
+	 }
+	 });
+	 boxReflection.setBounds(830, 11, 100, 23);
+	 }
+
 	private void createBtnTranslation() {
 		btnTranslation = new JButton("Translation");
 		btnTranslation.addActionListener(new ActionListener() {

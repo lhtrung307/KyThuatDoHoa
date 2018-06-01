@@ -29,7 +29,6 @@ public class DuongTron extends Shape{
 		this.tam = tam;
 	}
 	
-	//ha, ve 8 diem doi xung
 	public void Doixung(Point tam, int x, int y) {
 		Point D;
 
@@ -105,8 +104,17 @@ public class DuongTron extends Shape{
 		}
 	}
 
+	@Override
 	public void scale(double sx, double sy) {
 		R = Math.round(R * (float)sx);
+		points.clear();
+	}
+
+	@Override
+	public void rotation(double theta, Point p) {
+		tam.translateRealToCoordinate();
+		this.setTam(PhepBienDoi.rotation(tam, p, theta));
+		tam.translateCoordinateToReal();
 		points.clear();
 	}
 
