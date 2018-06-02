@@ -4,16 +4,16 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class CubeInput extends JPanel {
+public class ThreeDInput extends JPanel {
 	private JTextField xCoor;
 	private JTextField yCoor;
 	private JTextField zCoor;
-	private JTextField length;
+//	private JTextField length;
 
 	/**
 	 * Create the panel.
 	 */
-	public CubeInput() {
+	public ThreeDInput() {
 		setLayout(null);
 		
 		JLabel lblX = new JLabel("X: ");
@@ -47,10 +47,10 @@ public class CubeInput extends JPanel {
 		lblLength.setBounds(10, 106, 50, 20);
 		add(lblLength);
 		
-		length = new JTextField();
-		length.setBounds(62, 106, 50, 20);
-		length.setColumns(4);
-		add(length);
+//		length = new JTextField();
+//		length.setBounds(62, 106, 50, 20);
+//		length.setColumns(4);
+//		add(length);
 
 	}
 
@@ -66,8 +66,8 @@ public class CubeInput extends JPanel {
 		return zCoor;
 	}
 
-	public JTextField getLength() {
-		return length;
-	}
+//	public JTextField getLength() {
+//		return length;
+//	}
 
 }

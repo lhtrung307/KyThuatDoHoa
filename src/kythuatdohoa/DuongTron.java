@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import kythuatdohoa.Point;
 
-public class DuongTron extends Shape{
+public class DuongTron extends Shape<DuongTron>{
 	private Point tam = new Point();
 	private int R;
 
@@ -74,9 +74,9 @@ public class DuongTron extends Shape{
 		d = 1 - R;
 		while (x <= y) {
 			Doixung(tam, x, y);
-			if (d < 0)
+			if (d < 0)//diem MidPoint nam trong duong tron
 				d += 2 * x + 3;
-			else {
+			else {//diem nam ngoai duong tron
 				d += 2 * (x - y) + 5;
 				y = y - 1;
 			}
@@ -111,11 +111,9 @@ public class DuongTron extends Shape{
 	}
 
 	@Override
-	public void rotation(double theta, Point p) {
-		tam.translateRealToCoordinate();
-		this.setTam(PhepBienDoi.rotation(tam, p, theta));
-		tam.translateCoordinateToReal();
-		points.clear();
+	public DuongTron rotation(double theta, Point p) {
+		Point tamClone = PhepBienDoi.rotation(tam, p, theta).clone();
+		return new DuongTron(tamClone, R);
 	}
 
 }

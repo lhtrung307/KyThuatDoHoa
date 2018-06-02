@@ -3,7 +3,7 @@ package kythuatdohoa;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-public class Pyramid3D extends Shape{
+public class Pyramid3D extends Shape<Pyramid3D>{
 	
 	int[] node4 = { -1, -1, -1 };
 	int[] node3 = { 1, -1, -1 };
@@ -130,9 +130,8 @@ public class Pyramid3D extends Shape{
 	}
 
 	@Override
-	public void rotation(double theta, Point p) {
-		// TODO Auto-generated method stub
-		
+	public Pyramid3D rotation(double theta, Point p) {
+		return null;
 	}
 	
 //	public Point convert3Dto2D(int x,int y,int z) {

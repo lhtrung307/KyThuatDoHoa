@@ -1,8 +1,9 @@
 package kythuatdohoa;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
-public class Square extends Shape {
+public class Square extends Shape<Square> {
 	private Point d1 = new Point();
 	private Point d2 = new Point();
 	private Point d3, d4;
@@ -14,6 +15,16 @@ public class Square extends Shape {
 		d2.setX(d3.getX());
 		d2.setY(d4.getY());
 	}
+	
+	public Square(Point d1, Point d2, Point d3, Point d4) {
+		super();
+		this.d1 = d1;
+		this.d2 = d2;
+		this.d3 = d3;
+		this.d4 = d4;
+	}
+
+
 
 	public Point getD1() {
 		return d1;
@@ -106,19 +117,11 @@ public class Square extends Shape {
 	}
 
 	@Override
-	public void rotation(double theta, Point p) {
-		d1.translateRealToCoordinate();
-		this.setD1(PhepBienDoi.rotation(d1, new Point(0, 0), theta));
-		d1.translateCoordinateToReal();
-		d2.translateRealToCoordinate();
-		this.setD2(PhepBienDoi.rotation(d2, new Point(0, 0), theta));
-		d2.translateCoordinateToReal();
-		d3.translateRealToCoordinate();
-		this.setD3(PhepBienDoi.rotation(d3, new Point(0, 0), theta));
-		d3.translateCoordinateToReal();
-		d4.translateRealToCoordinate();
-		this.setD4(PhepBienDoi.rotation(d4, new Point(0, 0), theta));
-		d4.translateCoordinateToReal();
-		points.clear();
+	public Square rotation(double theta, Point p) {
+		Point d1 = PhepBienDoi.rotation(this.d1, p, theta).clone();
+		Point d2 = PhepBienDoi.rotation(this.d2, p, theta).clone();
+		Point d3 = PhepBienDoi.rotation(this.d3, p, theta).clone();
+		Point d4 = PhepBienDoi.rotation(this.d4, p, theta).clone();
+		return new Square(d1, d2, d3, d4);
 	}
 }

@@ -20,9 +20,11 @@ public class PhepBienDoi {
 	}
 
 	public static Point scaling(Point p, double sx, double sy) {
+		p.translateRealToCoordinate();
 		double matP[][] = { { p.getX(), p.getY(), 1 } };
 		double mat[][] = { { sx, 0, 0 }, { 0, sy, 0 }, { 0, 0, 1 } };
 		p = getPointFromMatrix(multiMatrix(matP, mat));
+		p.translateCoordinateToReal();
 		return p;
 	}
 
@@ -50,14 +52,18 @@ public class PhepBienDoi {
 		return multiMatrix(matP, mat);
 	}
 
-	public static double[][] translation(Point p, int xDistance, int yDistance) {
+	public static Point translation(Point p, int xDistance, int yDistance) {
+		p.translateRealToCoordinate();
 		double matP[][] = { { p.getX(), p.getY(), 1 } };
 		double mat[][] = { { 1, 0, 0 }, { 0, 1, 0 }, { xDistance, yDistance, 1 } };
-		return multiMatrix(matP, mat);
+		p = getPointFromMatrix(multiMatrix(matP, mat));
+		p.translateCoordinateToReal();
+		return p;
 	}
 
 	public static Point rotation(Point p, Point p1, double theta) {
 		double radians = Math.toRadians(theta);
+		p.translateRealToCoordinate();
 		p.x -= p1.x;
 		p.y -= p1.y;
 		double matP[][] = { { p.getX(), p.getY(), 1 } };
@@ -67,6 +73,7 @@ public class PhepBienDoi {
 		Point newPoint = getPointFromMatrix(multiMatrix(matP, rotMatrix));
 		p.x = newPoint.x + p1.x;
 		p.y = newPoint.y + p1.y;
+		p.translateCoordinateToReal();
 		return p;
 	}
 
