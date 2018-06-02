@@ -101,18 +101,9 @@ public class Main {
 
 		createBtnScale();
 		frame.getContentPane().add(btnScale);
-
+		
 		createBtnReflection();
 		frame.getContentPane().add(boxReflection);
-
-		JButton btnColoring = new JButton("Coloring");
-		btnColoring.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				drawContainer.setStatus(DrawContainer.COLORING);
-			}
-		});
-		btnColoring.setBounds(537, 11, 56, 23);
-		frame.getContentPane().add(btnColoring);
 
 		createBtnCube3d();
 		frame.getContentPane().add(btnCube3d);
@@ -139,7 +130,7 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.PYRAMID3D);
 			}
 		});
-		btnPyramid.setBounds(810, 11, 77, 23);
+		btnPyramid.setBounds(613, 11, 83, 23);
 		frame.getContentPane().add(btnPyramid);
 
 		// {
@@ -173,7 +164,7 @@ public class Main {
 			}
 		});
 		btnSuperDuperShape.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		btnSuperDuperShape.setBounds(720, 120, 242, 100);
+		btnSuperDuperShape.setBounds(720, 190, 242, 61);
 		frame.getContentPane().add(btnSuperDuperShape);
 		{
 			btnSuperdupership = new JButton("SuperDuperShip");
@@ -186,12 +177,12 @@ public class Main {
 				}
 			});
 			btnSuperdupership.setFont(new Font("Tahoma", Font.PLAIN, 26));
-			btnSuperdupership.setBounds(720, 250, 242, 100);
+			btnSuperdupership.setBounds(720, 262, 242, 52);
 			frame.getContentPane().add(btnSuperdupership);
 		}
 		{
 			comboBox = new JComboBox();
-			comboBox.setBounds(759, 55, 71, 20);
+			comboBox.setBounds(720, 157, 88, 20);
 			comboBox.addItem("Green");
 			comboBox.addItem("Red");
 			comboBox.addItem("Black");
@@ -248,7 +239,7 @@ public class Main {
 
 				}
 			});
-			btnDone.setBounds(852, 54, 89, 23);
+			btnDone.setBounds(865, 156, 97, 23);
 			frame.getContentPane().add(btnDone);
 		}
 	}
@@ -267,7 +258,7 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.POINT);
 			}
 		});
-		btnPoint.setBounds(10, 11, 62, 23);
+		btnPoint.setBounds(10, 11, 70, 23);
 	}
 
 	private void createBtnLine() {
@@ -279,7 +270,7 @@ public class Main {
 				;
 			}
 		});
-		btnLine.setBounds(82, 11, 49, 23);
+		btnLine.setBounds(90, 11, 70, 23);
 	}
 
 	private void createBtnRect() {
@@ -292,7 +283,7 @@ public class Main {
 			}
 		});
 
-		btnRect.setBounds(141, 11, 62, 23);
+		btnRect.setBounds(170, 11, 83, 23);
 	}
 
 	private void createBtnSquare() {
@@ -305,7 +296,7 @@ public class Main {
 			}
 		});
 
-		btnSquare.setBounds(213, 11, 62, 23);
+		btnSquare.setBounds(263, 11, 77, 23);
 	}
 
 	private void createBtnCircle() {
@@ -316,7 +307,7 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.DUONG_TRON);
 			}
 		});
-		btnCircle.setBounds(299, 11, 83, 23);
+		btnCircle.setBounds(350, 11, 88, 23);
 	}
 
 	private void createBtnElip() {
@@ -327,7 +318,7 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.ELLIPSE);
 			}
 		});
-		btnElip.setBounds(392, 11, 62, 23);
+		btnElip.setBounds(448, 11, 62, 23);
 	}
 
 	private void createBtnScale() {
@@ -339,7 +330,7 @@ public class Main {
 			}
 		});
 
-		btnScale.setBounds(464, 11, 70, 23);
+		btnScale.setBounds(707, 11, 70, 23);
 	}
 
 	private void createBtnCube3d() {
@@ -353,7 +344,7 @@ public class Main {
 				drawContainer.getDrawPlace().drawCoordinate3D(Color.BLACK);
 			}
 		});
-		btnCube3d.setBounds(603, 11, 88, 23);
+		btnCube3d.setBounds(520, 11, 83, 23);
 	}
 
 	private void createBtnReflection() {
@@ -365,7 +356,7 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.REFLECTION, numb[boxReflection.getSelectedIndex()]);
 			}
 		});
-		boxReflection.setBounds(759, 90, 100, 23);
+		boxReflection.setBounds(720, 90, 100, 23);
 	}
 
 	private void createBtnTranslation() {
@@ -375,6 +366,6 @@ public class Main {
 				drawContainer.setStatus(DrawContainer.TRANSLATION);
 			}
 		});
-		btnTranslation.setBounds(701, 11, 99, 23);
+		btnTranslation.setBounds(787, 11, 99, 23);
 	}
 }

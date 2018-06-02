@@ -74,6 +74,42 @@ public class Ellipse extends Shape<Ellipse> {
 			Doixung(tam, x, y);
 		}
 
+		// float p, a2, b2;
+		// int x, y;// b ban kinh lon
+		// a2 = bankinhNho * bankinhNho;
+		// b2 = bankinhLon * bankinhLon;
+		// x = 0;
+		// y = bankinhLon;
+		//
+		// p = 2 * (b2 / a2) - (2 * bankinhLon) + 1;
+		//
+		// // ve nhanh thu 1 tu tren xuong
+		//
+		// while ((b2 / a2) * x <= y) {
+		// Doixung(tam, x, y);
+		// if (p < 0) {
+		// p = p + 2 * (b2 / a2) * (2 * x + 3);
+		// } else {
+		// p = p - 4 * y + 2 * (b2 / a2) * (2 * x + 3);
+		// y--;
+		// }
+		// x++;
+		// }
+		// // ve nhanh thu 2 tu duoi len
+		// y = 0;
+		// x = bankinhNho;
+		// p = 2 * (a2 / b2) - 2 * bankinhNho + 1;
+		// while ((a2 / b2) * y <= x) {
+		// Doixung(tam, x, y);
+		// if (p < 0) {
+		// p = p + 2 * (a2 / b2) * (2 * y + 3);
+		// } else {
+		// p = p - 4 * x + 2 * ((float) a2 / b2) * (2 * y + 3);
+		// x = x - 1;
+		// }
+		// y = y + 1;
+		// }
+
 	}
 
 	public Point getPoint() {
@@ -110,7 +146,6 @@ public class Ellipse extends Shape<Ellipse> {
 	@Override
 	public void drawShape(BufferedImage image) {
 		this.ellipseBre();
-//		generateRect();
 		for (Point point : points) {
 			Main.drawPoint(point, image);
 		}

@@ -74,9 +74,9 @@ public class DuongTron extends Shape<DuongTron>{
 		d = 1 - R;
 		while (x <= y) {
 			Doixung(tam, x, y);
-			if (d < 0)
+			if (d < 0)//diem MidPoint nam trong duong tron
 				d += 2 * x + 3;
-			else {
+			else {//diem nam ngoai duong tron
 				d += 2 * (x - y) + 5;
 				y = y - 1;
 			}
