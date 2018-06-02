@@ -46,7 +46,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 	private Point pointRotato;
 	private DrawPlace drawPlace;
 	private ArrayList<Shape> shapes;
-	private ArrayList<Cube3D> cubes;
+	private Cube3D cube;
 	private Pyramid3D pyramid;
 	int x2,y2;
 	int goc=0;
@@ -61,15 +61,30 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 		drawPlace.setBounds(0, 0, Main.SCR_WIDTH, Main.SCR_HEIGHT);
 		this.add(drawPlace);
 		shapes = new ArrayList<>();
-		cubes = new ArrayList<>();
 		point = new Point();
 		shapesSize = 0;
 		scalePoints = new ArrayList<>();
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
 		lblMouseCoor = new JLabel("");
-		lblMouseCoor.setBounds(10, 538, 46, 14);
+		lblMouseCoor.setBounds(10, 538, 60, 20);
 		this.add(lblMouseCoor);
+	}
+	
+	public ArrayList<Shape> getShapes() {
+		return shapes;
+	}
+
+	public void setShapes(ArrayList<Shape> shapes) {
+		this.shapes = shapes;
+	}
+
+	public ArrayList<Point> getScalePoints() {
+		return scalePoints;
+	}
+
+	public void setScalePoints(ArrayList<Point> scalePoints) {
+		this.scalePoints = scalePoints;
 	}
 
 	@Override
@@ -238,7 +253,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				Point input = null;
 				if (numb == 4) {
 					input = getTransInput();
-					input.translateRealToCoordinate();
+//					input.translateRealToCoordinate();
 				}
 				for(Shape<Shape> shape : shapes) {
 					for(Point shapePoint : shape.getPoints()) {
@@ -270,12 +285,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				coloring(point.getX(), point.getY(), Main.color);
 			}
 			if (status == CUBE3D) {
-				drawPlace.drawCoordinate2D(Color.WHITE);
-				shapes.clear();
-				drawPlace.repaint(shapes);
-				drawPlace.drawCoordinate3D(Color.BLACK);
 				ThreeDInput cubeInput = new ThreeDInput();
-				cubeInput.setBounds(0, 0, 150, 150);
 				int result = showDialog(cubeInput);
 				if(result == JOptionPane.OK_OPTION) {
 					int x = Integer.parseInt(cubeInput.getxCoor().getText());
@@ -283,7 +293,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 					int z = Integer.parseInt(cubeInput.getzCoor().getText());
 					Cube3D cube = new Cube3D(x, y, z);
 					cube.drawShape(drawPlace.getImage());
-					cubes.add(cube);
+					this.cube = cube;
 				}
 			}
 			if (status == PYRAMID3D) {
@@ -375,13 +385,12 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				sq.drawShape(imageClone);
 			}
 			if (status == CUBE3D) {
-				for(Cube3D cube: cubes) {
-					Cube3D cubeClone = new Cube3D(cube.x, cube.y, cube.z);
-					cubeClone.rotateY3D(p.getX() - point.getX());
-					cubeClone.rotateX3D(p.getY() - point.getY());
-					cubeClone.drawShape(imageClone);
-					cube = cubeClone;
-				}
+				Cube3D cubeClone = new Cube3D(cube.x, cube.y, cube.z);
+				cubeClone.rotateY3D(p.getX() - point.getX());
+				cubeClone.rotateX3D(p.getY() - point.getY());
+				cubeClone.drawShape(imageClone);
+				cube = cubeClone;
+				System.out.println("rotate");
 			}
 			if (status == PYRAMID3D) {
 				Pyramid3D pyramidClone = new Pyramid3D(pyramid.x, pyramid.y, pyramid.z);
@@ -402,6 +411,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 		if(p.y > drawPlace.getHeight()) {
 			p.y = drawPlace.getHeight() - 2;
 		}
+		p.translateRealToCoordinate();
 		lblMouseCoor.setText(p.toString());
 	}
 

@@ -166,8 +166,10 @@ public class Main {
 		JButton btnSuperDuperShape = new JButton("SuperDuperShape");
 		btnSuperDuperShape.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
 				drawContainer.setStatus(DrawContainer.SUPER_DUPER_SHAPE);
+//				drawContainer.getShapes().clear();
+//				drawContainer.getScalePoints().clear();
+//				drawContainer.getDrawPlace().repaint(drawContainer.getShapes());
 			}
 		});
 		btnSuperDuperShape.setFont(new Font("Tahoma", Font.PLAIN, 26));
@@ -178,6 +180,9 @@ public class Main {
 			btnSuperdupership.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					drawContainer.setStatus(DrawContainer.SUPER_DUPER_SHIP);
+//					drawContainer.getShapes().clear();
+//					drawContainer.getScalePoints().clear();
+//					drawContainer.getDrawPlace().repaint(drawContainer.getShapes());
 				}
 			});
 			btnSuperdupership.setFont(new Font("Tahoma", Font.PLAIN, 26));
@@ -249,7 +254,8 @@ public class Main {
 	}
 
 	public static void drawPoint(Point point, BufferedImage image) {
-		if (point.getX() < image.getWidth() && point.getY() < image.getHeight()) {
+		if (point.getX() < image.getWidth() && point.getX() > 0 
+				&& point.getY() < image.getHeight() && point.getY() > 0) {
 			image.setRGB(point.getX(), point.getY(), color.getRGB());
 		}
 	}
@@ -341,6 +347,10 @@ public class Main {
 		btnCube3d.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				drawContainer.setStatus(DrawContainer.CUBE3D);
+				drawContainer.getDrawPlace().drawCoordinate2D(Color.WHITE);
+				drawContainer.getShapes().clear();
+				drawContainer.getDrawPlace().repaint(drawContainer.getShapes());
+				drawContainer.getDrawPlace().drawCoordinate3D(Color.BLACK);
 			}
 		});
 		btnCube3d.setBounds(603, 11, 88, 23);
