@@ -1,7 +1,6 @@
 package kythuatdohoa;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 
 public class Rectangle extends Shape<Rectangle>{
@@ -90,8 +89,8 @@ public class Rectangle extends Shape<Rectangle>{
 
 	@Override
 	public void scale(double sx, double sy) {
-		this.setD1(PhepBienDoi.scaling(d1, sx, sy));
-		this.setD2(PhepBienDoi.scaling(d2, sx, sy));
+		this.setD1(PhepBienDoi.scaling(d1, sx, sy, new Point(0, 0)));
+		this.setD2(PhepBienDoi.scaling(d2, sx, sy, new Point(0, 0)));
 		points.clear();
 	}
 	

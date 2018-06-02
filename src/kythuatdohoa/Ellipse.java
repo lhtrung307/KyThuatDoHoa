@@ -1,6 +1,7 @@
 package kythuatdohoa;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Ellipse extends Shape<Ellipse> {
 	private Point tam = new Point();
@@ -126,18 +127,16 @@ public class Ellipse extends Shape<Ellipse> {
 	}
 
 	private void generateRect() {
-		Point d4 = new Point(tam.getX() + bankinhNho, tam.getY() + bankinhLon);
-		d4 = PhepBienDoi.scaling(d4, 0.705069124, 0.705069124);
-		d4 = PhepBienDoi.translation(d4, tam.x, tam.y);
+		Point d2 = new Point(tam.getX() + bankinhNho, tam.getY() + bankinhLon);
 		Point d3 = new Point(tam.getX() - bankinhNho, tam.getY() + bankinhLon);
-		d3 = PhepBienDoi.scaling(d3, 0.705069124, 0.705069124);
-		d3 = PhepBienDoi.translation(d3, tam.x, tam.y);
-		Point d2 = new Point(tam.getX() + bankinhNho, tam.getY() - bankinhLon);
-		d2 = PhepBienDoi.scaling(d2, 0.705069124, 0.705069124);
-		d2 = PhepBienDoi.translation(d2, tam.x, tam.y);
+		Point d4 = new Point(tam.getX() + bankinhNho, tam.getY() - bankinhLon);
 		Point d1 = new Point(tam.getX() - bankinhNho, tam.getY() - bankinhLon);
-		d1 = PhepBienDoi.scaling(d1, 0.705069124, 0.705069124);
-		d1 = PhepBienDoi.translation(d4, tam.x, tam.y);
+		tam.translateRealToCoordinate();
+		d1 = PhepBienDoi.scaling(d1, 0.705069124, 0.705069124, tam);
+		d2 = PhepBienDoi.scaling(d2, 0.705069124, 0.705069124, tam);
+		d3 = PhepBienDoi.scaling(d3, 0.705069124, 0.705069124, tam);
+		d4 = PhepBienDoi.scaling(d4, 0.705069124, 0.705069124, tam);
+		tam.translateCoordinateToReal();
 		Rectangle rect = new Rectangle(d1, d2, d3, d4);
 		rect.paint();
 
@@ -147,7 +146,6 @@ public class Ellipse extends Shape<Ellipse> {
 	@Override
 	public void drawShape(BufferedImage image) {
 		this.ellipseBre();
-		// generateRect();
 		for (Point point : points) {
 			Main.drawPoint(point, image);
 		}
@@ -162,8 +160,12 @@ public class Ellipse extends Shape<Ellipse> {
 
 	@Override
 	public Ellipse rotation(double theta, Point p) {
-		Point tamClone = PhepBienDoi.rotation(this.tam, p, theta).clone();
-		return new Ellipse(tamClone, bankinhNho, bankinhLon);
+		// Point tamClone = PhepBienDoi.rotation(this.tam, p, theta).clone();
+		for (Point point : points) {
+			point = point.rotation(theta, p);
+//			points.add(temp);
+		}
+		return this;
 	}
 
 	public void setTam(Point tam) {
