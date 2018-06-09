@@ -128,6 +128,10 @@ public class Main {
 		btnPyramid.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				drawContainer.setStatus(DrawContainer.PYRAMID3D);
+				drawContainer.getDrawPlace().drawCoordinate2D(Color.WHITE);
+				drawContainer.getShapes().clear();
+				drawContainer.getDrawPlace().repaint(drawContainer.getShapes());
+				drawContainer.getDrawPlace().drawCoordinate3D(Color.BLACK);
 			}
 		});
 		btnPyramid.setBounds(613, 11, 83, 23);
@@ -267,7 +271,6 @@ public class Main {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				drawContainer.setStatus(DrawContainer.LINE);
-				;
 			}
 		});
 		btnLine.setBounds(90, 11, 70, 23);

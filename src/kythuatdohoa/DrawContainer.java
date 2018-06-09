@@ -113,7 +113,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			if (status == LINE) {
 				drawPlace.drawCoordinate3D(Color.WHITE);
 				drawPlace.drawCoordinate2D(Color.BLACK);
-				statusTemp=LINE;
 				BresenhamLine line = new BresenhamLine(point, p);
 				line.drawShape(drawPlace.getImage());
 				shapes.add(line);
@@ -121,7 +120,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			if (status == RECTANGLE) {
 				drawPlace.drawCoordinate3D(Color.WHITE);
 				drawPlace.drawCoordinate2D(Color.BLACK);
-				statusTemp=RECTANGLE;
 				Rectangle rect = new Rectangle(point, p);
 				rect.drawShape(drawPlace.getImage());
 				shapes.add(rect);
@@ -129,7 +127,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			if (status == SQUARE) {
 				drawPlace.drawCoordinate3D(Color.WHITE);
 				drawPlace.drawCoordinate2D(Color.BLACK);
-				statusTemp=SQUARE;
 				Square sq = new Square(point, p);
 				sq.drawShape(drawPlace.getImage());
 				shapes.add(sq);
@@ -137,7 +134,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			if (status == DUONG_TRON) {
 				drawPlace.drawCoordinate3D(Color.WHITE);
 				drawPlace.drawCoordinate2D(Color.BLACK);
-				statusTemp=DUONG_TRON;
 				int R = Point.distance(point, p);
 				DuongTron dTron = new DuongTron(point, R);
 				dTron.drawShape(drawPlace.getImage());
@@ -146,7 +142,6 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 			if (status == ELLIPSE) {
 				drawPlace.drawCoordinate3D(Color.WHITE);
 				drawPlace.drawCoordinate2D(Color.BLACK);
-				statusTemp=ELLIPSE;
 				int bankinhNho = Point.distance(point, new Point(p.getX(), point.getY()));
 				int bankinhLon = Point.distance(point, new Point(point.getX(), p.getY()));
 				Ellipse elip = new Ellipse(point, bankinhNho, bankinhLon);
@@ -173,8 +168,8 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				for (Shape<Shape> shape : shapes) {
 					for (Point shapePoint : shape.getPoints()) {
 						try {
-							Point temp = PhepBienDoi.translation(shapePoint, input.getX(), input.getY());
-							Main.drawPoint(temp, drawPlace.getImage());
+							shapePoint = PhepBienDoi.translation(shapePoint, input.getX(), input.getY());
+							Main.drawPoint(shapePoint, drawPlace.getImage());
 						} catch (Exception exc) {
 							System.out.println(exc);
 						}
@@ -252,10 +247,7 @@ public class DrawContainer extends JPanel implements MouseMotionListener, MouseL
 				}
 			}
 			if (status == PYRAMID3D) {
-				drawPlace.drawCoordinate2D(Color.WHITE);
-				shapes.clear();
-				drawPlace.repaint(shapes);
-				drawPlace.drawCoordinate3D(Color.BLACK);
+				
 				ThreeDInput cubeInput = new ThreeDInput();
 				cubeInput.setBounds(0, 0, 150, 150);
 				int result = showDialog(cubeInput);
